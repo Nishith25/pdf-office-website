@@ -41,16 +41,16 @@ export default function FAQ({
   return (
     <section
       id="faq"
-      className="scroll-mt-24 border-y border-[#ECEEF3] bg-[#FAFBFD] px-4 py-20 sm:px-6 sm:py-28"
+      className="scroll-mt-24 border-y border-[#ECEEF3] bg-[#FAFBFD] px-4 py-12 sm:px-6 sm:py-14"
     >
-      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.62fr_1.38fr] lg:gap-12">
         <motion.div
           initial={
             reduceMotion
               ? false
               : {
                   opacity: 0,
-                  y: 28,
+                  y: 18,
                 }
           }
           whileInView={{
@@ -59,48 +59,47 @@ export default function FAQ({
           }}
           viewport={{
             once: true,
-            amount: 0.25,
-          }}
-          transition={{
-            duration: 0.6,
-            ease: "easeOut",
           }}
         >
-          <div className="flex h-11 w-11 items-center justify-center rounded-[15px] bg-[#E7EDFF]">
-            <HelpCircle className="h-5 w-5 text-[#4F6FFF]" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-[12px] bg-[#E7EDFF]">
+            <HelpCircle className="h-4 w-4 text-[#4F6FFF]" />
           </div>
 
-          <p className="mt-6 text-sm font-semibold text-[#4F6FFF]">
+          <p className="mt-4 text-xs font-semibold text-[#4F6FFF]">
             {eyebrow}
           </p>
 
-          <h2 className="mt-4 max-w-md text-4xl font-semibold leading-[1] tracking-[-0.055em] text-[#111318] sm:text-5xl">
+          <h2 className="mt-2 max-w-md text-3xl font-semibold leading-[1.05] tracking-[-0.05em] text-[#111318] sm:text-4xl">
             {title}
           </h2>
 
-          <p className="mt-5 max-w-sm text-base leading-7 text-[#747C8F]">
+          <p className="mt-3 max-w-sm text-sm leading-6 text-[#747C8F]">
             {description}
           </p>
         </motion.div>
 
-        <div className="space-y-3">
+        <div className="space-y-2">
           {items.map(
             (
               item,
               index,
             ) => {
               const open =
-                openItem === index;
+                openItem ===
+                index;
 
               return (
                 <motion.div
-                  key={item.question}
+                  key={
+                    item.question
+                  }
                   initial={
                     reduceMotion
                       ? false
                       : {
-                          opacity: 0,
-                          y: 16,
+                          opacity:
+                            0,
+                          y: 10,
                         }
                   }
                   whileInView={{
@@ -110,14 +109,7 @@ export default function FAQ({
                   viewport={{
                     once: true,
                   }}
-                  transition={{
-                    duration: 0.4,
-                    delay:
-                      reduceMotion
-                        ? 0
-                        : index * 0.045,
-                  }}
-                  className={`overflow-hidden rounded-[20px] border transition-colors ${
+                  className={`overflow-hidden rounded-[15px] border transition-colors ${
                     open
                       ? "border-[#CED8FF] bg-[#F2F5FF]"
                       : "border-[#E6E8EE] bg-white"
@@ -132,21 +124,23 @@ export default function FAQ({
                           : index,
                       )
                     }
-                    className="flex min-h-[76px] w-full items-center justify-between gap-5 px-5 py-5 text-left sm:px-6"
+                    className="flex min-h-[58px] w-full items-center justify-between gap-4 px-4 py-3 text-left sm:px-5"
                   >
-                    <span className="text-base font-semibold tracking-[-0.025em] text-[#191E31] sm:text-lg">
-                      {item.question}
+                    <span className="text-sm font-semibold tracking-[-0.02em] text-[#191E31] sm:text-base">
+                      {
+                        item.question
+                      }
                     </span>
 
                     <div
-                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
                         open
                           ? "bg-[#DDE5FF] text-[#4F6FFF]"
                           : "bg-[#F3F4F7] text-[#666D7B]"
                       }`}
                     >
                       <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-300 ${
+                        className={`h-3.5 w-3.5 transition-transform duration-300 ${
                           open
                             ? "rotate-180"
                             : ""
@@ -163,8 +157,10 @@ export default function FAQ({
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <p className="max-w-2xl px-5 pb-6 text-sm leading-7 text-[#6F778A] sm:px-6 sm:text-base">
-                        {item.answer}
+                      <p className="max-w-2xl px-4 pb-4 text-xs leading-6 text-[#6F778A] sm:px-5 sm:text-sm">
+                        {
+                          item.answer
+                        }
                       </p>
                     </div>
                   </div>

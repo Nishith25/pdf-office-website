@@ -18,41 +18,37 @@ const steps = [
   {
     icon: FileText,
     title: "Open document",
-    description: "Choose the PDF you want to sign.",
+    description: "Choose your PDF.",
   },
   {
     icon: PenLine,
     title: "Add signature",
-    description: "Place your signature where it belongs.",
+    description: "Place your signature.",
   },
   {
     icon: Send,
     title: "Save & share",
-    description: "Keep or share the completed document.",
+    description: "Export the signed PDF.",
   },
 ];
 
 export default function ESignShowcase() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion =
+    useReducedMotion();
 
   return (
     <section
       id="esign"
-      className="scroll-mt-24 relative overflow-hidden border-y border-[#ECEEF3] bg-[#F7FCF9] px-4 py-20 sm:px-6 sm:py-28 lg:py-32"
+      className="scroll-mt-24 relative overflow-hidden border-y border-[#ECEEF3] bg-[#F7FCF9] px-4 py-12 sm:px-6 sm:py-14 lg:py-16"
     >
-      <div className="pointer-events-none absolute -left-24 top-10 h-80 w-80 rounded-full bg-[#18B865]/[0.07] blur-[100px]" />
-
-      <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-[#4F6FFF]/[0.05] blur-[100px]" />
-
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-        {/* Copy */}
+      <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
         <motion.div
           initial={
             reduceMotion
               ? false
               : {
                   opacity: 0,
-                  y: 28,
+                  y: 18,
                 }
           }
           whileInView={{
@@ -61,161 +57,124 @@ export default function ESignShowcase() {
           }}
           viewport={{
             once: true,
-            amount: 0.25,
-          }}
-          transition={{
-            duration: 0.65,
-            ease: "easeOut",
           }}
         >
-          <div className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-[#DDF8E6]">
-            <FileSignature className="h-5 w-5 text-[#16A957]" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-[13px] bg-[#DDF8E6]">
+            <FileSignature className="h-4 w-4 text-[#16A957]" />
           </div>
 
-          <p className="mt-6 text-sm font-semibold text-[#16A957]">
+          <p className="mt-4 text-xs font-semibold text-[#16A957]">
             eSign
           </p>
 
-          <h2 className="mt-4 max-w-xl text-4xl font-semibold leading-[1] tracking-[-0.055em] text-[#111318] sm:text-5xl lg:text-6xl">
+          <h2 className="mt-2 max-w-xl text-3xl font-semibold leading-[1.05] tracking-[-0.05em] text-[#111318] sm:text-4xl lg:text-5xl">
             Sign PDFs without printing them.
           </h2>
 
-          <p className="mt-6 max-w-xl text-base leading-8 text-[#727A8C] sm:text-lg">
+          <p className="mt-4 max-w-lg text-sm leading-6 text-[#727A8C] sm:text-base">
             Add a digital signature directly from your phone and keep
-            document workflows moving without printing, scanning and
-            repeating the process.
+            the entire document workflow digital.
           </p>
 
-          <div className="mt-7 space-y-3">
+          <div className="mt-5 grid gap-2">
             {[
-              "Add signatures directly to documents",
-              "Keep your workflow completely digital",
-              "Save and share completed PDFs",
-            ].map((item) => (
-              <div
-                key={item}
-                className="flex items-center gap-3"
-              >
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#DDF8E6]">
-                  <Check className="h-3.5 w-3.5 text-[#16A957]" />
-                </div>
+              "Add signatures directly",
+              "Keep workflows digital",
+              "Save and share PDFs",
+            ].map(
+              (item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2.5"
+                >
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#DDF8E6]">
+                    <Check className="h-3 w-3 text-[#16A957]" />
+                  </div>
 
-                <p className="text-sm font-medium text-[#535B6D]">
-                  {item}
-                </p>
-              </div>
-            ))}
+                  <p className="text-xs font-medium text-[#535B6D]">
+                    {item}
+                  </p>
+                </div>
+              ),
+            )}
           </div>
         </motion.div>
 
-        {/* Document visual */}
         <motion.div
           initial={
             reduceMotion
               ? false
               : {
                   opacity: 0,
-                  x: 30,
-                  y: 15,
+                  x: 24,
                 }
           }
           whileInView={{
             opacity: 1,
             x: 0,
-            y: 0,
           }}
           viewport={{
             once: true,
-            amount: 0.18,
           }}
-          transition={{
-            duration: 0.7,
-            ease: "easeOut",
-          }}
-          className="rounded-[32px] border border-[#DDEBE2] bg-white p-5 shadow-[0_24px_70px_rgba(30,63,45,0.08)] sm:p-8"
+          className="rounded-[24px] border border-[#DDEBE2] bg-white p-5 shadow-[0_18px_50px_rgba(30,63,45,0.06)]"
         >
-          <div className="grid gap-6 sm:grid-cols-[1fr_0.8fr] sm:items-center">
-            {/* Document */}
-            <div className="relative mx-auto w-full max-w-[310px]">
-              <div className="rounded-[22px] border border-[#E3E8E5] bg-white p-6 shadow-[0_18px_50px_rgba(35,50,43,0.08)]">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="h-3 w-24 rounded-full bg-[#DDE2E5]" />
-                    <div className="mt-2 h-2 w-16 rounded-full bg-[#ECEFF1]" />
-                  </div>
-
-                  <ShieldCheck className="h-5 w-5 text-[#18A95B]" />
+          <div className="grid gap-4 sm:grid-cols-[0.9fr_1.1fr] sm:items-center">
+            <div className="mx-auto w-full max-w-[220px] rounded-[18px] border border-[#E3E8E5] bg-white p-5 shadow-sm">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="h-2.5 w-20 rounded-full bg-[#DDE2E5]" />
+                  <div className="mt-2 h-1.5 w-12 rounded-full bg-[#ECEFF1]" />
                 </div>
 
-                <div className="mt-8 space-y-3">
-                  <div className="h-2 w-full rounded-full bg-[#ECEFF1]" />
-                  <div className="h-2 w-[90%] rounded-full bg-[#ECEFF1]" />
-                  <div className="h-2 w-full rounded-full bg-[#ECEFF1]" />
-                  <div className="h-2 w-[72%] rounded-full bg-[#ECEFF1]" />
+                <ShieldCheck className="h-4 w-4 text-[#18A95B]" />
+              </div>
+
+              <div className="mt-5 space-y-2">
+                <div className="h-1.5 w-full rounded bg-[#ECEFF1]" />
+                <div className="h-1.5 w-[85%] rounded bg-[#ECEFF1]" />
+                <div className="h-1.5 w-full rounded bg-[#ECEFF1]" />
+              </div>
+
+              <div className="mt-6">
+                <p className="text-[8px] uppercase tracking-[0.12em] text-[#9AA0AA]">
+                  Signature
+                </p>
+
+                <div className="mt-3 rotate-[-5deg] border-b-2 border-[#18A957] pb-1 font-serif text-lg italic text-[#148947]">
+                  Signature
                 </div>
+              </div>
 
-                <div className="mt-9">
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.12em] text-[#9AA0AA]">
-                    Signature
-                  </p>
+              <div className="mt-5 flex items-center justify-between border-t border-[#EDF0EE] pt-3">
+                <p className="text-[8px] text-[#9A9FA8]">
+                  Signed digitally
+                </p>
 
-                  <motion.div
-                    initial={
-                      reduceMotion
-                        ? false
-                        : {
-                            width: 0,
-                          }
-                    }
-                    whileInView={{
-                      width: "100%",
-                    }}
-                    viewport={{
-                      once: true,
-                    }}
-                    transition={{
-                      duration: 1,
-                      delay: 0.3,
-                      ease: "easeOut",
-                    }}
-                    className="mt-5 max-w-[150px] overflow-hidden"
-                  >
-                    <div className="w-[150px] rotate-[-5deg] border-b-2 border-[#18A957] pb-2 font-serif text-2xl italic text-[#148947]">
-                      Signature
-                    </div>
-                  </motion.div>
-                </div>
-
-                <div className="mt-8 flex items-center justify-between border-t border-[#EDF0EE] pt-4">
-                  <p className="text-[9px] text-[#9A9FA8]">
-                    Signed digitally
-                  </p>
-
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#DDF8E6]">
-                    <Check className="h-3.5 w-3.5 text-[#18A957]" />
-                  </div>
-                </div>
+                <Check className="h-3.5 w-3.5 text-[#18A957]" />
               </div>
             </div>
 
-            {/* Steps */}
-            <div className="space-y-3">
+            <div className="grid gap-2">
               {steps.map(
                 (
                   step,
                   index,
                 ) => {
-                  const Icon = step.icon;
+                  const Icon =
+                    step.icon;
 
                   return (
                     <motion.div
-                      key={step.title}
+                      key={
+                        step.title
+                      }
                       initial={
                         reduceMotion
                           ? false
                           : {
-                              opacity: 0,
-                              x: 18,
+                              opacity:
+                                0,
+                              x: 12,
                             }
                       }
                       whileInView={{
@@ -226,25 +185,27 @@ export default function ESignShowcase() {
                         once: true,
                       }}
                       transition={{
-                        duration: 0.4,
                         delay:
-                          reduceMotion
-                            ? 0
-                            : index * 0.09,
+                          index *
+                          0.07,
                       }}
-                      className="flex gap-3 rounded-[18px] bg-[#F5FBF7] p-4"
+                      className="flex gap-3 rounded-[14px] bg-[#F5FBF7] p-3"
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[13px] bg-[#DFF7E7]">
-                        <Icon className="h-4 w-4 text-[#18A957]" />
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[11px] bg-[#DFF7E7]">
+                        <Icon className="h-3.5 w-3.5 text-[#18A957]" />
                       </div>
 
                       <div>
-                        <p className="text-sm font-semibold text-[#262B38]">
-                          {step.title}
+                        <p className="text-xs font-semibold text-[#262B38]">
+                          {
+                            step.title
+                          }
                         </p>
 
-                        <p className="mt-1 text-[10px] leading-5 text-[#7B8391]">
-                          {step.description}
+                        <p className="mt-0.5 text-[9px] text-[#7B8391]">
+                          {
+                            step.description
+                          }
                         </p>
                       </div>
                     </motion.div>

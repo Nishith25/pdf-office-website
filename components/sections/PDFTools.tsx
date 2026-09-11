@@ -145,20 +145,19 @@ export default function PDFTools({
 
   return (
     <section
-  id="tools"
-  className="scroll-mt-24 relative overflow-hidden bg-white px-4 py-20 sm:px-6 sm:py-28 lg:py-32"
->
-      <div className="pointer-events-none absolute left-1/2 top-[160px] h-[480px] w-[480px] -translate-x-1/2 rounded-full bg-[#4F6FFF]/[0.035] blur-[120px]" />
+      id="tools"
+      className="scroll-mt-24 relative overflow-hidden bg-white px-4 py-12 sm:px-6 sm:py-14 lg:py-16"
+    >
+      <div className="pointer-events-none absolute left-1/2 top-[120px] h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-[#4F6FFF]/[0.03] blur-[110px]" />
 
       <div className="relative mx-auto max-w-7xl">
-        {/* Heading */}
         <motion.div
           initial={
             reduceMotion
               ? false
               : {
                   opacity: 0,
-                  y: 28,
+                  y: 18,
                 }
           }
           whileInView={{
@@ -170,32 +169,31 @@ export default function PDFTools({
             amount: 0.25,
           }}
           transition={{
-            duration: 0.65,
+            duration: 0.5,
             ease: "easeOut",
           }}
           className="mx-auto max-w-3xl text-center"
         >
-          <p className="text-sm font-semibold text-[#4F6FFF]">
+          <p className="text-xs font-semibold text-[#4F6FFF]">
             {eyebrow}
           </p>
 
-          <h2 className="mt-4 text-4xl font-semibold leading-[1] tracking-[-0.055em] text-[#111318] sm:text-5xl lg:text-6xl">
+          <h2 className="mt-3 text-3xl font-semibold leading-[1.05] tracking-[-0.05em] text-[#111318] sm:text-4xl lg:text-5xl">
             {title}
           </h2>
 
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#747C8F] sm:text-lg">
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-[#747C8F] sm:text-base">
             {description}
           </p>
         </motion.div>
 
-        {/* App-style tools panel */}
         <motion.div
           initial={
             reduceMotion
               ? false
               : {
                   opacity: 0,
-                  y: 34,
+                  y: 22,
                 }
           }
           whileInView={{
@@ -207,30 +205,29 @@ export default function PDFTools({
             amount: 0.08,
           }}
           transition={{
-            duration: 0.7,
+            duration: 0.55,
             ease: "easeOut",
           }}
-          className="mt-14 rounded-[30px] border border-[#E8EAF0] bg-[#FCFCFD] p-4 shadow-[0_20px_65px_rgba(31,38,65,0.055)] sm:p-7 lg:p-9"
+          className="mt-8 rounded-[24px] border border-[#E8EAF0] bg-[#FCFCFD] p-4 shadow-[0_16px_45px_rgba(31,38,65,0.045)] sm:p-5"
         >
-          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mb-5 flex items-center justify-between gap-4">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.13em] text-[#999EAB]">
+              <p className="text-[9px] font-bold uppercase tracking-[0.13em] text-[#999EAB]">
                 All tools
               </p>
 
-              <p className="mt-2 text-xl font-semibold tracking-[-0.035em] text-[#1C2130]">
+              <p className="mt-1 text-base font-semibold tracking-[-0.03em] text-[#1C2130]">
                 Everything you need for PDFs.
               </p>
             </div>
 
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#E4E7ED] bg-white px-4 py-2 text-xs font-medium text-[#626A7B]">
-              <Upload className="h-3.5 w-3.5 text-[#4F6FFF]" />
-
+            <div className="hidden items-center gap-2 rounded-full border border-[#E4E7ED] bg-white px-3 py-2 text-[10px] font-medium text-[#626A7B] sm:inline-flex">
+              <Upload className="h-3 w-3 text-[#4F6FFF]" />
               Import or create
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
             {items.map(
               (
                 tool,
@@ -252,11 +249,9 @@ export default function PDFTools({
                       reduceMotion
                         ? false
                         : {
-                            opacity:
-                              0,
-                            y: 18,
-                            scale:
-                              0.97,
+                            opacity: 0,
+                            y: 12,
+                            scale: 0.98,
                           }
                     }
                     whileInView={{
@@ -266,39 +261,37 @@ export default function PDFTools({
                     }}
                     viewport={{
                       once: true,
-                      amount: 0.25,
                     }}
                     transition={{
-                      duration:
-                        0.4,
+                      duration: 0.3,
                       delay:
                         reduceMotion
                           ? 0
                           : index *
-                            0.035,
+                            0.025,
                     }}
                     whileHover={
                       reduceMotion
                         ? undefined
                         : {
-                            y: -5,
+                            y: -3,
                           }
                     }
-                    className="group min-h-[165px] rounded-[22px] border border-white p-4 shadow-[0_8px_25px_rgba(34,41,66,0.035)]"
+                    className="group min-h-[112px] rounded-[17px] border border-white p-3 shadow-[0_6px_18px_rgba(34,41,66,0.03)]"
                     style={{
                       backgroundColor:
                         style.bg,
                     }}
                   >
                     <div
-                      className="flex h-12 w-12 items-center justify-center rounded-[16px]"
+                      className="flex h-9 w-9 items-center justify-center rounded-[11px]"
                       style={{
                         backgroundColor:
                           style.iconBg,
                       }}
                     >
                       <Icon
-                        className="h-5 w-5"
+                        className="h-4 w-4"
                         style={{
                           color:
                             style.color,
@@ -306,11 +299,11 @@ export default function PDFTools({
                       />
                     </div>
 
-                    <h3 className="mt-6 text-sm font-semibold tracking-[-0.025em] text-[#202534] sm:text-base">
+                    <h3 className="mt-3 text-xs font-semibold tracking-[-0.02em] text-[#202534] sm:text-sm">
                       {tool.name}
                     </h3>
 
-                    <p className="mt-1 text-[10px] leading-4 text-[#858C9B]">
+                    <p className="mt-1 text-[8px] text-[#858C9B]">
                       PDF Office
                     </p>
                   </motion.article>
@@ -319,26 +312,6 @@ export default function PDFTools({
             )}
           </div>
         </motion.div>
-
-        {/* Bottom message */}
-        <div className="mt-8 flex flex-col items-center justify-between gap-5 rounded-[24px] bg-[#F3F6FF] px-5 py-6 sm:flex-row sm:px-7">
-          <div>
-            <p className="text-sm font-semibold text-[#202536]">
-              Scan, edit, convert and organize.
-            </p>
-
-            <p className="mt-1 text-xs leading-5 text-[#747C8D]">
-              One workspace instead of multiple document apps.
-            </p>
-          </div>
-
-          <a
-            href="#scanner"
-            className="inline-flex min-h-10 items-center rounded-full bg-[#4F6FFF] px-5 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#405FE6]"
-          >
-            Explore scanner
-          </a>
-        </div>
       </div>
     </section>
   );
