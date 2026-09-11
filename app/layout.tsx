@@ -6,6 +6,9 @@ import type {
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+  "https://pdf-office-website.vercel.app",
+),
   title: {
     default:
       "PDF Office – Doc Scanner",
