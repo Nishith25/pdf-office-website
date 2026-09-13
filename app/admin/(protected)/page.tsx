@@ -2,13 +2,19 @@ import Link from "next/link";
 
 import {
   ArrowRight,
+  Clock3,
   FileText,
   HelpCircle,
   LayoutDashboard,
+  Search,
   Settings2,
   Sparkles,
   Wrench,
 } from "lucide-react";
+
+import {
+  getRecentActivity,
+} from "../../../lib/repositories/activity";
 
 import {
   getFaqs,
@@ -24,11 +30,15 @@ export default async function AdminDashboardPage() {
     sections,
     tools,
     faqs,
+    activity,
   ] =
     await Promise.all([
       getHomepageSections(),
       getTools(),
       getFaqs(),
+      getRecentActivity(
+        6,
+      ),
     ]);
 
   const activeSections =
@@ -53,23 +63,32 @@ export default async function AdminDashboardPage() {
     {
       label:
         "Active sections",
+
       value:
         activeSections,
+
       icon:
         LayoutDashboard,
     },
+
     {
       label:
-        "PDF tools",
+        "Visible PDF tools",
+
       value:
         visibleTools,
-      icon: Wrench,
+
+      icon:
+        Wrench,
     },
+
     {
       label:
-        "FAQs",
+        "Visible FAQs",
+
       value:
         visibleFaqs,
+
       icon:
         HelpCircle,
     },
@@ -77,7 +96,6 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className="mx-auto max-w-[1250px]">
-      {/* Page heading */}
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#3157E7]">
@@ -89,8 +107,8 @@ export default async function AdminDashboardPage() {
           </h1>
 
           <p className="mt-2 max-w-xl text-sm leading-6 text-[#757C89]">
-            Manage PDF Office website content and keep the public site
-            current without editing the codebase.
+            Manage PDF Office website content from one controlled
+            workspace.
           </p>
         </div>
 
@@ -103,13 +121,13 @@ export default async function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* Metrics */}
       <div className="mt-8 grid gap-3 sm:grid-cols-3">
         {metrics.map(
           ({
             label,
             value,
-            icon: Icon,
+            icon:
+              Icon,
           }) => (
             <div
               key={
@@ -139,9 +157,7 @@ export default async function AdminDashboardPage() {
         )}
       </div>
 
-      {/* Main grid */}
-      <div className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-        {/* Quick actions */}
+      <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_0.9fr]">
         <section className="rounded-[18px] border border-[#E4E6EA] bg-white p-5 sm:p-6">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-[#EEF2FF]">
@@ -160,134 +176,196 @@ export default async function AdminDashboardPage() {
           </div>
 
           <div className="mt-5 divide-y divide-[#ECEEF1]">
-            <Link
-              href="/admin/homepage"
-              className="group flex items-center justify-between py-4 first:pt-0"
-            >
-              <div className="flex items-center gap-3">
-                <FileText className="h-4 w-4 text-[#767E8C]" />
+            {[
+              {
+                href:
+                  "/admin/homepage",
 
-                <div>
-                  <p className="text-xs font-semibold text-[#323744]">
-                    Edit homepage
-                  </p>
+                label:
+                  "Edit homepage",
 
-                  <p className="mt-1 text-[9px] text-[#9298A3]">
-                    Hero and public website sections
-                  </p>
-                </div>
-              </div>
+                description:
+                  "Hero and primary page sections",
 
-              <ArrowRight className="h-4 w-4 text-[#A1A6B0] transition group-hover:translate-x-1 group-hover:text-[#3157E7]" />
-            </Link>
+                icon:
+                  FileText,
+              },
 
-            <Link
-              href="/admin/tools"
-              className="group flex items-center justify-between py-4"
-            >
-              <div className="flex items-center gap-3">
-                <Wrench className="h-4 w-4 text-[#767E8C]" />
+              {
+                href:
+                  "/admin/tools",
 
-                <div>
-                  <p className="text-xs font-semibold text-[#323744]">
-                    Manage PDF tools
-                  </p>
+                label:
+                  "Manage PDF tools",
 
-                  <p className="mt-1 text-[9px] text-[#9298A3]">
-                    Edit, reorder and control visibility
-                  </p>
-                </div>
-              </div>
+                description:
+                  "Visibility, featured status and order",
 
-              <ArrowRight className="h-4 w-4 text-[#A1A6B0] transition group-hover:translate-x-1 group-hover:text-[#3157E7]" />
-            </Link>
+                icon:
+                  Wrench,
+              },
 
-            <Link
-              href="/admin/settings"
-              className="group flex items-center justify-between py-4 pb-0"
-            >
-              <div className="flex items-center gap-3">
-                <Settings2 className="h-4 w-4 text-[#767E8C]" />
+              {
+                href:
+                  "/admin/faq",
 
-                <div>
-                  <p className="text-xs font-semibold text-[#323744]">
-                    Site settings
-                  </p>
+                label:
+                  "Manage FAQs",
 
-                  <p className="mt-1 text-[9px] text-[#9298A3]">
-                    Brand, links and global configuration
-                  </p>
-                </div>
-              </div>
+                description:
+                  "Add and edit public questions",
 
-              <ArrowRight className="h-4 w-4 text-[#A1A6B0] transition group-hover:translate-x-1 group-hover:text-[#3157E7]" />
-            </Link>
+                icon:
+                  HelpCircle,
+              },
+
+              {
+                href:
+                  "/admin/seo",
+
+                label:
+                  "Edit SEO",
+
+                description:
+                  "Search and social metadata",
+
+                icon:
+                  Search,
+              },
+
+              {
+                href:
+                  "/admin/settings",
+
+                label:
+                  "Site settings",
+
+                description:
+                  "Brand, links and security",
+
+                icon:
+                  Settings2,
+              },
+            ].map(
+              ({
+                href,
+                label,
+                description,
+                icon:
+                  Icon,
+              }) => (
+                <Link
+                  key={
+                    href
+                  }
+                  href={
+                    href
+                  }
+                  className="group flex items-center justify-between py-4 first:pt-0 last:pb-0"
+                >
+                  <div className="flex items-center gap-3">
+                    <Icon className="h-4 w-4 text-[#767E8C]" />
+
+                    <div>
+                      <p className="text-xs font-semibold text-[#323744]">
+                        {
+                          label
+                        }
+                      </p>
+
+                      <p className="mt-1 text-[9px] text-[#9298A3]">
+                        {
+                          description
+                        }
+                      </p>
+                    </div>
+                  </div>
+
+                  <ArrowRight className="h-4 w-4 text-[#A1A6B0] transition group-hover:translate-x-1 group-hover:text-[#3157E7]" />
+                </Link>
+              ),
+            )}
           </div>
         </section>
 
-        {/* Status */}
         <section className="rounded-[18px] border border-[#E4E6EA] bg-white p-5 sm:p-6">
-          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#9298A3]">
-            Content status
-          </p>
-
-          <div className="mt-5 space-y-4">
-            <div>
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-medium text-[#555C69]">
-                  Sections
-                </span>
-
-                <span className="font-semibold text-[#222631]">
-                  {activeSections}
-                </span>
-              </div>
-
-              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#EEF0F3]">
-                <div className="h-full w-full rounded-full bg-[#3157E7]" />
-              </div>
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-[#F4F5F7]">
+              <Clock3 className="h-4 w-4 text-[#69717E]" />
             </div>
 
             <div>
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-medium text-[#555C69]">
-                  Tools
-                </span>
+              <h2 className="text-sm font-semibold text-[#222631]">
+                Recent changes
+              </h2>
 
-                <span className="font-semibold text-[#222631]">
-                  {visibleTools}
-                </span>
-              </div>
-
-              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#EEF0F3]">
-                <div className="h-full w-full rounded-full bg-[#7087E7]" />
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-medium text-[#555C69]">
-                  FAQs
-                </span>
-
-                <span className="font-semibold text-[#222631]">
-                  {visibleFaqs}
-                </span>
-              </div>
-
-              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#EEF0F3]">
-                <div className="h-full w-full rounded-full bg-[#98A7DF]" />
-              </div>
+              <p className="mt-0.5 text-[10px] text-[#8B919C]">
+                Latest admin activity
+              </p>
             </div>
           </div>
 
-          <div className="mt-6 rounded-[12px] bg-[#F6F7F9] p-4">
-            <p className="text-[10px] leading-5 text-[#737A87]">
-              Content changes will eventually be managed completely
-              from this workspace. The current live site remains
-              untouched while the CMS migration is completed.
-            </p>
-          </div>
+          {activity.length >
+          0 ? (
+            <div className="mt-5 divide-y divide-[#ECEEF1]">
+              {activity.map(
+                (
+                  item,
+                  index,
+                ) => (
+                  <div
+                    key={`${item.createdAt.toISOString()}-${index}`}
+                    className="py-3.5 first:pt-0 last:pb-0"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="text-[11px] font-semibold text-[#3C424E]">
+                          {
+                            item.action
+                          }
+                        </p>
+
+                        <p className="mt-1 text-[9px] text-[#9298A3]">
+                          {
+                            item.targetName
+                          }
+                        </p>
+                      </div>
+
+                      <time className="shrink-0 text-right text-[8px] leading-4 text-[#A0A5AE]">
+                        {item.createdAt.toLocaleString(
+                          "en-IN",
+                          {
+                            day:
+                              "2-digit",
+
+                            month:
+                              "short",
+
+                            hour:
+                              "2-digit",
+
+                            minute:
+                              "2-digit",
+                          },
+                        )}
+                      </time>
+                    </div>
+                  </div>
+                ),
+              )}
+            </div>
+          ) : (
+            <div className="mt-5 rounded-[12px] border border-dashed border-[#DDE0E5] bg-[#FAFAFB] px-4 py-8 text-center">
+              <p className="text-[10px] font-medium text-[#777E8A]">
+                No activity recorded yet.
+              </p>
+
+              <p className="mt-1 text-[9px] text-[#A0A5AE]">
+                Saved CMS changes will appear here.
+              </p>
+            </div>
+          )}
         </section>
       </div>
     </div>

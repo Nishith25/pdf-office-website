@@ -7,15 +7,25 @@ import {
 } from "../db/database";
 
 export type AdminDocument = {
-  key: "primary";
-  email: string;
-  passwordHash: string;
-  createdAt: Date;
-  updatedAt: Date;
+  key:
+    "primary";
+
+  email:
+    string;
+
+  passwordHash:
+    string;
+
+  createdAt:
+    Date;
+
+  updatedAt:
+    Date;
 };
 
 export function normalizeAdminEmail(
-  email: string,
+  email:
+    string,
 ): string {
   return email
     .trim()
@@ -23,25 +33,66 @@ export function normalizeAdminEmail(
 }
 
 export async function findAdminByEmail(
-  email: string,
+  email:
+    string,
 ): Promise<
   WithId<AdminDocument> | null
 > {
   const database =
     await getDatabase();
 
-  const normalizedEmail =
-    normalizeAdminEmail(
-      email,
-    );
-
   return database
     .collection<AdminDocument>(
       "admin",
     )
     .findOne({
-      key: "primary",
+      key:
+        "primary",
+
       email:
-        normalizedEmail,
+        normalizeAdminEmail(
+          email,
+        ),
     });
+}
+
+export async function updateAdminPassword(
+  email:
+    string,
+
+  passwordHash:
+    string,
+): Promise<boolean> {
+  const database =
+    await getDatabase();
+
+  const result =
+    await database
+      .collection<AdminDocument>(
+        "admin",
+      )
+      .updateOne(
+        {
+          key:
+            "primary",
+
+          email:
+            normalizeAdminEmail(
+              email,
+            ),
+        },
+        {
+          $set: {
+            passwordHash,
+
+            updatedAt:
+              new Date(),
+          },
+        },
+      );
+
+  return (
+    result.matchedCount ===
+    1
+  );
 }

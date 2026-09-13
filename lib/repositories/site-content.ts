@@ -81,16 +81,13 @@ export async function getHomepageSections(): Promise<
       })
       .toArray();
 
-  const sections =
+  return sortByOrder(
     documents.map(
       (document) =>
         siteSectionSchema.parse(
           document,
         ),
-    );
-
-  return sortByOrder(
-    sections,
+    ),
   );
 }
 
@@ -111,16 +108,13 @@ export async function getTools(): Promise<
       })
       .toArray();
 
-  const tools =
+  return sortByOrder(
     documents.map(
       (document) =>
         toolSchema.parse(
           document,
         ),
-    );
-
-  return sortByOrder(
-    tools,
+    ),
   );
 }
 
@@ -141,16 +135,13 @@ export async function getFaqs(): Promise<
       })
       .toArray();
 
-  const faqs =
+  return sortByOrder(
     documents.map(
       (document) =>
         faqSchema.parse(
           document,
         ),
-    );
-
-  return sortByOrder(
-    faqs,
+    ),
   );
 }
 
@@ -185,7 +176,7 @@ export async function saveHomepageSections(
   const database =
     await getDatabase();
 
-  const validatedSections =
+  const validated =
     sections.map(
       (section) =>
         siteSectionSchema.parse(
@@ -194,7 +185,7 @@ export async function saveHomepageSections(
     );
 
   if (
-    validatedSections.length ===
+    validated.length ===
     0
   ) {
     return;
@@ -208,7 +199,7 @@ export async function saveHomepageSections(
       "site_sections",
     )
     .bulkWrite(
-      validatedSections.map(
+      validated.map(
         (section) => ({
           updateOne: {
             filter: {
@@ -229,5 +220,132 @@ export async function saveHomepageSections(
           },
         }),
       ),
+    );
+}
+
+export async function saveTools(
+  tools:
+    readonly ToolItem[],
+): Promise<void> {
+  if (
+    tools.length ===
+    0
+  ) {
+    return;
+  }
+
+  const database =
+    await getDatabase();
+
+  const validated =
+    tools.map(
+      (tool) =>
+        toolSchema.parse(
+          tool,
+        ),
+    );
+
+  const now =
+    new Date();
+
+  await database
+    .collection(
+      "tools",
+    )
+    .bulkWrite(
+      validated.map(
+        (tool) => ({
+          updateOne: {
+            filter: {
+              type:
+                tool.type,
+            },
+
+            update: {
+              $set: {
+                ...tool,
+
+                updatedAt:
+                  now,
+              },
+            },
+
+            upsert: true,
+          },
+        }),
+      ),
+    );
+}
+
+export async function saveHomePage(
+  page:
+    SitePage,
+): Promise<void> {
+  const database =
+    await getDatabase();
+
+  const validated =
+    sitePageSchema.parse(
+      page,
+    );
+
+  await database
+    .collection(
+      "site_pages",
+    )
+    .updateOne(
+      {
+        slug:
+          "home",
+      },
+      {
+        $set: {
+          ...validated,
+
+          updatedAt:
+            new Date(),
+        },
+      },
+      {
+        upsert: true,
+      },
+    );
+}
+
+export async function saveSiteSettings(
+  settings:
+    SiteSettings,
+): Promise<void> {
+  const database =
+    await getDatabase();
+
+  const validated =
+    siteSettingsSchema.parse(
+      settings,
+    );
+
+  await database
+    .collection(
+      "site_settings",
+    )
+    .updateOne(
+      {
+        key:
+          "global",
+      },
+      {
+        $set: {
+          ...validated,
+
+          key:
+            "global",
+
+          updatedAt:
+            new Date(),
+        },
+      },
+      {
+        upsert: true,
+      },
     );
 }

@@ -28,8 +28,7 @@ import AdminTextarea from "../forms/AdminTextarea";
 import MediaPickerField from "../media/MediaPickerField";
 
 type SeoEditorProps = {
-  initialValue:
-    SeoEditorInput;
+  initialValue: SeoEditorInput;
 };
 
 export default function SeoEditor({
@@ -39,7 +38,7 @@ export default function SeoEditor({
     value,
     setValue,
   ] =
-    useState(
+    useState<SeoEditorInput>(
       initialValue,
     );
 
@@ -76,6 +75,7 @@ export default function SeoEditor({
         />
       )}
 
+      {/* Search metadata */}
       <section className="rounded-[16px] border border-[#E2E4E8] bg-white">
         <div className="flex items-start gap-3 border-b border-[#ECEEF1] px-5 py-4">
           <div className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-[#F0F3FF]">
@@ -172,6 +172,7 @@ export default function SeoEditor({
         </div>
       </section>
 
+      {/* Social sharing */}
       <section className="rounded-[16px] border border-[#E2E4E8] bg-white p-5">
         <h2 className="text-sm font-semibold text-[#222631]">
           Social sharing
@@ -231,31 +232,33 @@ export default function SeoEditor({
           />
 
           <MediaPickerField
-  label="Social image"
-  hint="Used when the website is shared"
-  name="ogImage"
-  value={
-    value.ogImage
-  }
-  onChange={(
-    ogImage,
-  ) =>
-    setValue(
-      (
-        current,
-      ) => ({
-        ...current,
-        ogImage,
-      }),
-    )
-  }
-/>
+            label="Social image"
+            hint="Used when the website is shared"
+            name="ogImage"
+            value={
+              value.ogImage ??
+              ""
+            }
+            onChange={(
+              ogImage,
+            ) =>
+              setValue(
+                (
+                  current,
+                ) => ({
+                  ...current,
+                  ogImage,
+                }),
+              )
+            }
+          />
 
           <AdminField
             label="Canonical URL"
             name="canonicalUrl"
             value={
-              value.canonicalUrl
+              value.canonicalUrl ??
+              ""
             }
             onChange={(
               event,

@@ -28,8 +28,7 @@ import AdminTextarea from "../forms/AdminTextarea";
 import MediaPickerField from "../media/MediaPickerField";
 
 type SiteSettingsEditorProps = {
-  initialValue:
-    SiteSettings;
+  initialValue: SiteSettings;
 };
 
 export default function SiteSettingsEditor({
@@ -39,7 +38,7 @@ export default function SiteSettingsEditor({
     value,
     setValue,
   ] =
-    useState(
+    useState<SiteSettings>(
       initialValue,
     );
 
@@ -194,25 +193,26 @@ export default function SiteSettingsEditor({
           />
 
           <MediaPickerField
-  label="App icon"
-  hint="Select from Media Library"
-  name="appIconUrl"
-  value={
-    value.appIconUrl
-  }
-  onChange={(
-    appIconUrl,
-  ) =>
-    setValue(
-      (
-        current,
-      ) => ({
-        ...current,
-        appIconUrl,
-      }),
-    )
-  }
-/>
+            label="App icon"
+            hint="Select from Media Library"
+            name="appIconUrl"
+            value={
+              value.appIconUrl ??
+              ""
+            }
+            onChange={(
+              appIconUrl,
+            ) =>
+              setValue(
+                (
+                  current,
+                ) => ({
+                  ...current,
+                  appIconUrl,
+                }),
+              )
+            }
+          />
 
           <div className="md:col-span-2">
             <AdminTextarea
@@ -244,7 +244,8 @@ export default function SiteSettingsEditor({
             label="Privacy policy URL"
             name="privacyUrl"
             value={
-              value.privacyUrl
+              value.privacyUrl ??
+              ""
             }
             onChange={(
               event,
@@ -268,7 +269,8 @@ export default function SiteSettingsEditor({
             label="Terms URL"
             name="termsUrl"
             value={
-              value.termsUrl
+              value.termsUrl ??
+              ""
             }
             onChange={(
               event,
