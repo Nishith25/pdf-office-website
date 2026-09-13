@@ -349,3 +349,83 @@ export async function saveSiteSettings(
       },
     );
 }
+export async function saveSiteSections(
+  sections:
+    readonly SiteSection[],
+): Promise<void> {
+  if (
+    sections.length ===
+    0
+  ) {
+    return;
+  }
+
+  const database =
+    await getDatabase();
+
+  const validated =
+    sections.map(
+      (section) =>
+        siteSectionSchema.parse(
+          section,
+        ),
+    );
+
+  const now =
+    new Date();
+
+  await database
+    .collection(
+      "site_sections",
+    )
+    .bulkWrite(
+      validated.map(
+        (section) => ({
+          updateOne: {
+            filter: {
+              key:
+                section.key,
+            },
+
+            update: {
+              $set: {
+                ...section,
+
+                updatedAt:
+                  now,
+              },
+            },
+
+            upsert: true,
+          },
+        }),
+      ),
+    );
+}
+
+export async function getSiteSectionByKey(
+  key:
+    string,
+): Promise<
+  SiteSection | null
+> {
+  const database =
+    await getDatabase();
+
+  const document =
+    await database
+      .collection(
+        "site_sections",
+      )
+      .findOne({
+        key,
+      });
+
+  if (!document) {
+    return null;
+  }
+
+  return siteSectionSchema.parse(
+    document,
+  );
+}

@@ -18,7 +18,7 @@ type MediaPickerFieldProps = {
   label:
     string;
 
-  name:
+  name?:
     string;
 
   value:
@@ -28,6 +28,9 @@ type MediaPickerFieldProps = {
     (
       value:
         string,
+
+      item?:
+        MediaItem,
     ) => void;
 
   hint?:
@@ -86,9 +89,7 @@ export default function MediaPickerField({
           "/api/admin/media",
         );
 
-      if (
-        !response.ok
-      ) {
+      if (!response.ok) {
         return;
       }
 
@@ -112,15 +113,17 @@ export default function MediaPickerField({
 
   return (
     <div>
-      <input
-        type="hidden"
-        name={
-          name
-        }
-        value={
-          value
-        }
-      />
+      {name && (
+        <input
+          type="hidden"
+          name={
+            name
+          }
+          value={
+            value
+          }
+        />
+      )}
 
       <div className="flex items-end justify-between gap-3">
         <label className="text-[11px] font-semibold text-[#343A46]">
@@ -142,7 +145,7 @@ export default function MediaPickerField({
                 value
               }
               alt=""
-              className="h-14 w-14 rounded-[8px] border border-[#E2E4E8] object-cover"
+              className="h-16 w-16 rounded-[9px] border border-[#E2E4E8] object-cover"
             />
 
             <div className="min-w-0 flex-1">
@@ -192,7 +195,7 @@ export default function MediaPickerField({
                 </p>
 
                 <p className="mt-1 text-[9px] text-[#9298A3]">
-                  Select an image already uploaded to Cloudinary.
+                  Select an image from the Media Library.
                 </p>
               </div>
 
@@ -204,6 +207,7 @@ export default function MediaPickerField({
                   )
                 }
                 className="flex h-9 w-9 items-center justify-center rounded-[9px] border border-[#E0E3E8] bg-white"
+                aria-label="Close media picker"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -228,6 +232,7 @@ export default function MediaPickerField({
                         onClick={() => {
                           onChange(
                             item.url,
+                            item,
                           );
 
                           setOpen(
