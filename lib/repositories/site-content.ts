@@ -164,3 +164,56 @@ export async function getSiteSettings(): Promise<
     document,
   );
 }
+export async function saveHomepageSections(
+  sections:
+    readonly SiteSection[],
+): Promise<void> {
+  const database =
+    await getDatabase();
+
+  const validatedSections =
+    sections.map(
+      (section) =>
+        siteSectionSchema.parse(
+          section,
+        ),
+    );
+
+  if (
+    validatedSections.length ===
+    0
+  ) {
+    return;
+  }
+
+  const now =
+    new Date();
+
+  await database
+    .collection(
+      "site_sections",
+    )
+    .bulkWrite(
+      validatedSections.map(
+        (section) => ({
+          updateOne: {
+            filter: {
+              key:
+                section.key,
+            },
+
+            update: {
+              $set: {
+                ...section,
+
+                updatedAt:
+                  now,
+              },
+            },
+
+            upsert: true,
+          },
+        }),
+      ),
+    );
+}
