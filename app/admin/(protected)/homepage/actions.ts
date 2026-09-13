@@ -5,10 +5,6 @@ import {
 } from "next/cache";
 
 import {
-  getCurrentAdmin,
-} from "../../../../lib/auth/current-admin";
-
-import {
   buildHomepageSectionUpdates,
   homepageEditorSchema,
 } from "../../../../lib/admin/homepage-editor";
@@ -16,6 +12,10 @@ import {
 import type {
   AdminActionResult,
 } from "../../../../lib/admin/action-result";
+
+import {
+  getCurrentAdmin,
+} from "../../../../lib/auth/current-admin";
 
 import {
   writeActivity,
@@ -65,6 +65,7 @@ export async function saveHomepageAction(
   if (!admin) {
     return {
       success: false,
+
       message:
         "Your administrator session has expired. Please sign in again.",
     };
@@ -251,9 +252,7 @@ export async function saveHomepageAction(
       input,
     );
 
-  if (
-    !parsed.success
-  ) {
+  if (!parsed.success) {
     return {
       success: false,
 
@@ -283,11 +282,11 @@ export async function saveHomepageAction(
     );
 
     revalidatePath(
-      "/admin/homepage",
+      "/admin",
     );
 
     revalidatePath(
-      "/admin",
+      "/admin/homepage",
     );
 
     revalidatePath(

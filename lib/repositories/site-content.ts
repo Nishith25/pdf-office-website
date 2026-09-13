@@ -25,15 +25,24 @@ type OrderedItem = {
 export function sortByOrder<
   T extends OrderedItem,
 >(
-  items: readonly T[],
+  items:
+    readonly T[],
 ): T[] {
-  return [...items].sort(
-    (a, b) =>
-      a.order - b.order,
+  return [
+    ...items,
+  ].sort(
+    (
+      a,
+      b,
+    ) =>
+      a.order -
+      b.order,
   );
 }
 
-export async function getHomePage(): Promise<SitePage | null> {
+export async function getHomePage(): Promise<
+  SitePage | null
+> {
   const database =
     await getDatabase();
 
@@ -93,7 +102,9 @@ export async function getTools(): Promise<
 
   const documents =
     await database
-      .collection("tools")
+      .collection(
+        "tools",
+      )
       .find({})
       .sort({
         order: 1,
@@ -121,7 +132,9 @@ export async function getFaqs(): Promise<
 
   const documents =
     await database
-      .collection("faqs")
+      .collection(
+        "faqs",
+      )
       .find({})
       .sort({
         order: 1,
@@ -164,6 +177,7 @@ export async function getSiteSettings(): Promise<
     document,
   );
 }
+
 export async function saveHomepageSections(
   sections:
     readonly SiteSection[],
