@@ -6,26 +6,43 @@ import {
   notFound,
 } from "next/navigation";
 
-import PublicCmsPage from "../components/cms/public/PublicCmsPage";
+import PublicCmsPage from "../../components/cms/public/PublicCmsPage";
 
-import PublicSiteShell from "../components/cms/public/PublicSiteShell";
+import PublicSiteShell from "../../components/cms/public/PublicSiteShell";
 
 import {
   buildNextCmsMetadata,
-} from "../lib/cms/public/next-metadata";
+} from "../../lib/cms/public/next-metadata";
 
 import {
-  getCmsPublicHomepageModel,
-} from "../lib/cms/public/site-data";
+  getCmsPublicPageModelBySlug,
+} from "../../lib/cms/public/site-data";
 
 export const dynamic =
   "force-dynamic";
 
-export async function generateMetadata(): Promise<
+type Props = {
+  params:
+    Promise<{
+      slug:
+        string;
+    }>;
+};
+
+export async function generateMetadata({
+  params,
+}: Props): Promise<
   Metadata
 > {
+  const {
+    slug,
+  } =
+    await params;
+
   const model =
-    await getCmsPublicHomepageModel();
+    await getCmsPublicPageModelBySlug(
+      slug,
+    );
 
   if (!model) {
     return {};
@@ -37,9 +54,18 @@ export async function generateMetadata(): Promise<
   );
 }
 
-export default async function HomePage() {
+export default async function CmsPublicPageRoute({
+  params,
+}: Props) {
+  const {
+    slug,
+  } =
+    await params;
+
   const model =
-    await getCmsPublicHomepageModel();
+    await getCmsPublicPageModelBySlug(
+      slug,
+    );
 
   if (!model) {
     notFound();

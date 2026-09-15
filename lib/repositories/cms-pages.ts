@@ -33,7 +33,8 @@ import {
 
 export type CmsPageRecord =
   CmsPage & {
-    id: string;
+    id:
+      string;
   };
 
 export function canDeleteCmsPage(
@@ -52,7 +53,8 @@ function toPageRecord(
       string,
       unknown
     > & {
-      _id: ObjectId;
+      _id:
+        ObjectId;
     },
 ): CmsPageRecord {
   const parsed =
@@ -79,10 +81,12 @@ export async function ensureCmsPageIndexes(): Promise<void> {
 
   await collection.createIndex(
     {
-      slug: 1,
+      slug:
+        1,
     },
     {
-      unique: true,
+      unique:
+        true,
 
       name:
         "cms_pages_slug_unique",
@@ -153,14 +157,16 @@ export async function listCmsPages(): Promise<
           string,
           unknown
         > & {
-          _id: ObjectId;
+          _id:
+            ObjectId;
         },
       ),
   );
 }
 
 export async function getCmsPageById(
-  id: string,
+  id:
+    string,
 ): Promise<
   CmsPageRecord | null
 > {
@@ -196,13 +202,15 @@ export async function getCmsPageById(
       string,
       unknown
     > & {
-      _id: ObjectId;
+      _id:
+        ObjectId;
     },
   );
 }
 
 export async function getCmsPageBySlug(
-  slug: string,
+  slug:
+    string,
 ): Promise<
   CmsPageRecord | null
 > {
@@ -227,7 +235,59 @@ export async function getCmsPageBySlug(
       string,
       unknown
     > & {
-      _id: ObjectId;
+      _id:
+        ObjectId;
+    },
+  );
+}
+
+export async function getPublishedCmsPageBySlug(
+  slug:
+    string,
+): Promise<
+  CmsPageRecord | null
+> {
+  const normalizedSlug =
+    normalizeCmsSlug(
+      slug,
+    );
+
+  if (
+    !normalizedSlug ||
+    isReservedCmsSlug(
+      normalizedSlug,
+    )
+  ) {
+    return null;
+  }
+
+  const database =
+    await getDatabase();
+
+  const document =
+    await database
+      .collection(
+        CMS_COLLECTIONS.pages,
+      )
+      .findOne({
+        slug:
+          normalizedSlug,
+
+        status:
+          "published",
+      });
+
+  if (!document) {
+    return null;
+  }
+
+  return toPageRecord(
+    document as Record<
+      string,
+      unknown
+    > & {
+      _id:
+        ObjectId;
     },
   );
 }
@@ -260,13 +320,15 @@ export async function getCmsHomepage(): Promise<
       string,
       unknown
     > & {
-      _id: ObjectId;
+      _id:
+        ObjectId;
     },
   );
 }
 
 export async function insertCmsPage(
-  page: CmsPage,
+  page:
+    CmsPage,
 ): Promise<
   CmsPageRecord
 > {
@@ -298,9 +360,11 @@ export async function insertCmsPage(
 }
 
 export async function replaceCmsPage(
-  id: string,
+  id:
+    string,
 
-  page: CmsPage,
+  page:
+    CmsPage,
 ): Promise<boolean> {
   if (
     !ObjectId.isValid(
@@ -343,7 +407,8 @@ export async function replaceCmsPage(
 }
 
 export async function deleteCmsPageById(
-  id: string,
+  id:
+    string,
 ): Promise<boolean> {
   const page =
     await getCmsPageById(
@@ -381,9 +446,11 @@ export async function deleteCmsPageById(
 }
 
 export async function findAvailableCmsSlug(
-  requestedSlug: string,
+  requestedSlug:
+    string,
 
-  excludePageId?: string,
+  excludePageId?:
+    string,
 ): Promise<string> {
   const base =
     normalizeCmsSlug(
@@ -402,9 +469,12 @@ export async function findAvailableCmsSlug(
   }
 
   for (
-    let attempt = 1;
-    attempt <= 1000;
-    attempt += 1
+    let attempt =
+      1;
+    attempt <=
+      1000;
+    attempt +=
+      1
   ) {
     const candidate =
       buildCmsSlugCandidate(
@@ -432,7 +502,8 @@ export async function findAvailableCmsSlug(
 }
 
 export async function insertCmsPageWithUniqueSlug(
-  page: CmsPage,
+  page:
+    CmsPage,
 ): Promise<
   CmsPageRecord
 > {
@@ -444,12 +515,14 @@ export async function insertCmsPageWithUniqueSlug(
 
   return insertCmsPage({
     ...page,
+
     slug,
   });
 }
 
 export async function setCmsHomepage(
-  pageId: string,
+  pageId:
+    string,
 ): Promise<boolean> {
   if (
     !ObjectId.isValid(
@@ -537,7 +610,8 @@ export async function setCmsHomepage(
 }
 
 export async function deleteCmsPageWithBlocks(
-  pageId: string,
+  pageId:
+    string,
 ): Promise<boolean> {
   const deleted =
     await deleteCmsPageById(
