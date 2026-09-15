@@ -13,7 +13,7 @@ describe(
   "generic CMS navigation",
   () => {
     it(
-      "contains generic CMS concepts",
+      "contains all generic CMS workspaces",
       () => {
         const serialized =
           JSON.stringify(
@@ -29,7 +29,19 @@ describe(
         expect(
           serialized,
         ).toContain(
+          "Menus",
+        );
+
+        expect(
+          serialized,
+        ).toContain(
           "Media",
+        );
+
+        expect(
+          serialized,
+        ).toContain(
+          "Appearance",
         );
 
         expect(
@@ -57,7 +69,7 @@ describe(
     );
 
     it(
-      "matches active admin routes correctly",
+      "matches nested admin routes correctly",
       () => {
         expect(
           isCmsNavigationItemActive(
@@ -68,15 +80,22 @@ describe(
 
         expect(
           isCmsNavigationItemActive(
-            "/admin/pages",
+            "/admin/pages/123",
             "/admin/pages",
           ),
         ).toBe(true);
 
         expect(
           isCmsNavigationItemActive(
-            "/admin/pages/123",
-            "/admin/pages",
+            "/admin/menus/123",
+            "/admin/menus",
+          ),
+        ).toBe(true);
+
+        expect(
+          isCmsNavigationItemActive(
+            "/admin/appearance",
+            "/admin/appearance",
           ),
         ).toBe(true);
 

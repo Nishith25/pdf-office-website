@@ -5,6 +5,9 @@ export const CMS_COLLECTIONS = {
   blocks:
     "cms_blocks",
 
+  menus:
+    "cms_menus",
+
   settings:
     "cms_settings",
 

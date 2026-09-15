@@ -7,17 +7,19 @@ import {
   FileText,
   ImageIcon,
   LayoutDashboard,
+  Menu as MenuIcon,
+  Palette,
 } from "lucide-react";
+
+import {
+  usePathname,
+} from "next/navigation";
 
 import {
   CMS_NAVIGATION,
   isCmsNavigationItemActive,
   type CmsNavigationIcon,
 } from "../../lib/admin/cms-navigation";
-
-import {
-  usePathname,
-} from "next/navigation";
 
 function getNavigationIcon(
   icon:
@@ -29,8 +31,14 @@ function getNavigationIcon(
     case "pages":
       return FileText;
 
+    case "menus":
+      return MenuIcon;
+
     case "media":
       return ImageIcon;
+
+    case "appearance":
+      return Palette;
 
     case "activity":
       return Activity;

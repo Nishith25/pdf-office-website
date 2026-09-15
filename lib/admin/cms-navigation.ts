@@ -1,7 +1,9 @@
 export type CmsNavigationIcon =
   | "dashboard"
   | "pages"
+  | "menus"
   | "media"
+  | "appearance"
   | "activity";
 
 export type CmsNavigationItem = {
@@ -58,6 +60,17 @@ export const CMS_NAVIGATION:
           icon:
             "pages",
         },
+
+        {
+          label:
+            "Menus",
+
+          href:
+            "/admin/menus",
+
+          icon:
+            "menus",
+        },
       ],
     },
 
@@ -75,6 +88,24 @@ export const CMS_NAVIGATION:
 
           icon:
             "media",
+        },
+      ],
+    },
+
+    {
+      label:
+        "Appearance",
+
+      items: [
+        {
+          label:
+            "Appearance",
+
+          href:
+            "/admin/appearance",
+
+          icon:
+            "appearance",
         },
       ],
     },
