@@ -1,161 +1,106 @@
-import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
-import Navbar from "@/components/Navbar";
+import type {
+  Metadata,
+} from "next";
 
-import ConvertOrganize from "@/components/sections/ConvertOrganize";
-import DownloadCTA from "@/components/sections/DownloadCTA";
-import ESignShowcase from "@/components/sections/ESignShowcase";
-import FAQ from "@/components/sections/FAQ";
-import PDFTools from "@/components/sections/PDFTools";
-import ProductHighlights from "@/components/sections/ProductHighlights";
-import ScannerOCR from "@/components/sections/ScannerOCR";
+import PublicHomepage from "../components/site/PublicHomepage";
 
 import {
-  getSiteContent,
-} from "@/lib/content";
+  getPublicHomepageModel,
+} from "../lib/repositories/public-homepage";
 
 export const dynamic =
   "force-dynamic";
 
-export default async function Home() {
-  const content =
-    await getSiteContent();
+export async function generateMetadata(): Promise<Metadata> {
+  const model =
+    await getPublicHomepageModel();
+
+  const images =
+    model.seo.ogImage
+      ? [
+          {
+            url:
+              model.seo
+                .ogImage,
+          },
+        ]
+      : undefined;
+
+  return {
+    title:
+      model.seo.title,
+
+    description:
+      model.seo.description,
+
+    keywords:
+      model.seo.keywords,
+
+    alternates: {
+      canonical:
+        model.seo
+          .canonicalUrl,
+    },
+
+    openGraph: {
+      type:
+        "website",
+
+      url:
+        model.seo
+          .canonicalUrl,
+
+      title:
+        model.seo
+          .ogTitle,
+
+      description:
+        model.seo
+          .ogDescription,
+
+      siteName:
+        model.brand
+          .shortName,
+
+      images,
+    },
+
+    twitter: {
+      card:
+        model.seo
+          .ogImage
+          ? "summary_large_image"
+          : "summary",
+
+      title:
+        model.seo
+          .ogTitle,
+
+      description:
+        model.seo
+          .ogDescription,
+
+      images:
+        model.seo
+          .ogImage
+          ? [
+              model.seo
+                .ogImage,
+            ]
+          : undefined,
+    },
+  };
+}
+
+export default async function HomePage() {
+  const model =
+    await getPublicHomepageModel();
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-white">
-      <Navbar
-        brand={
-          content.brand
-        }
-        navigation={
-          content.navigation
-        }
-        playStoreUrl={
-          content.hero
-            .playStoreUrl
-        }
-      />
-
-      <Hero
-        eyebrow={
-          content.hero
-            .eyebrow
-        }
-        titleTop={
-          content.hero
-            .titleTop
-        }
-        titleBottom={
-          content.hero
-            .titleBottom
-        }
-        description={
-          content.hero
-            .description
-        }
-        primaryCta={
-          content.hero
-            .primaryCta
-        }
-        secondaryCta={
-          content.hero
-            .secondaryCta
-        }
-        playStoreUrl={
-          content.hero
-            .playStoreUrl
-        }
-        stats={
-          content.stats
-        }
-      />
-
-      <ProductHighlights
-        eyebrow={
-          content.onboarding
-            .eyebrow
-        }
-        title={
-          content.onboarding
-            .title
-        }
-        description={
-          content.onboarding
-            .description
-        }
-        items={
-          content.onboarding
-            .items
-        }
-      />
-
-      <PDFTools
-        eyebrow={
-          content.tools
-            .eyebrow
-        }
-        title={
-          content.tools
-            .title
-        }
-        description={
-          content.tools
-            .description
-        }
-        items={
-          content.tools
-            .items
-        }
-      />
-
-      <ScannerOCR />
-
-      <ConvertOrganize />
-
-      <ESignShowcase />
-
-      <DownloadCTA
-        appName={
-          content.brand.name
-        }
-        playStoreUrl={
-          content.hero
-            .playStoreUrl
-        }
-      />
-
-      <FAQ
-        eyebrow={
-          content.faq
-            .eyebrow
-        }
-        title={
-          content.faq
-            .title
-        }
-        description={
-          content.faq
-            .description
-        }
-        items={
-          content.faq
-            .items
-        }
-      />
-
-      <Footer
-        brandName={
-          content.brand.name
-        }
-        shortName={
-          content.brand
-            .shortName
-        }
-        playStoreUrl={
-          content.hero
-            .playStoreUrl
-        }
-      />
-    </main>
+    <PublicHomepage
+      model={
+        model
+      }
+    />
   );
 }
