@@ -11,6 +11,7 @@ import type {
 import {
   createCmsPageDraft,
   duplicateCmsPageDraft,
+  ensureCmsHomepageEligibility,
   publishCmsPage,
   unpublishCmsPage,
 } from "../lib/cms/core/page-lifecycle";
@@ -325,6 +326,145 @@ describe(
           copy.seo.title,
         ).toBe(
           "Home SEO",
+        );
+      },
+    );
+
+    it(
+      "automatically publishes a draft when it is being assigned as homepage",
+      () => {
+        const draft =
+          createCmsPageDraft(
+            {
+              title:
+                "Home",
+
+              slug:
+                "home",
+            },
+
+            EARLIER,
+          );
+
+        const result =
+          ensureCmsHomepageEligibility(
+            draft,
+            true,
+            NOW,
+          );
+
+        expect(
+          result.status,
+        ).toBe(
+          "published",
+        );
+
+        expect(
+          result.publishedAt,
+        ).toEqual(
+          NOW,
+        );
+
+        expect(
+          result.updatedAt,
+        ).toEqual(
+          NOW,
+        );
+
+        expect(
+          draft.status,
+        ).toBe(
+          "draft",
+        );
+      },
+    );
+
+    it(
+      "does not publish an ordinary draft page",
+      () => {
+        const draft =
+          createCmsPageDraft(
+            {
+              title:
+                "About",
+
+              slug:
+                "about",
+            },
+
+            EARLIER,
+          );
+
+        const result =
+          ensureCmsHomepageEligibility(
+            draft,
+            false,
+            NOW,
+          );
+
+        expect(
+          result.status,
+        ).toBe(
+          "draft",
+        );
+
+        expect(
+          result.publishedAt,
+        ).toBeNull();
+
+        expect(
+          result.createdAt,
+        ).toEqual(
+          EARLIER,
+        );
+      },
+    );
+
+    it(
+      "keeps an already published homepage candidate published",
+      () => {
+        const draft =
+          createCmsPageDraft(
+            {
+              title:
+                "Home",
+
+              slug:
+                "home",
+            },
+
+            EARLIER,
+          );
+
+        const published =
+          publishCmsPage(
+            draft,
+            EARLIER,
+          );
+
+        const result =
+          ensureCmsHomepageEligibility(
+            published,
+            true,
+            NOW,
+          );
+
+        expect(
+          result.status,
+        ).toBe(
+          "published",
+        );
+
+        expect(
+          result.publishedAt,
+        ).toEqual(
+          EARLIER,
+        );
+
+        expect(
+          result.createdAt,
+        ).toEqual(
+          EARLIER,
         );
       },
     );

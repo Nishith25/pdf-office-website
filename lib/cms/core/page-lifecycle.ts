@@ -38,6 +38,24 @@ function emptySeo(): CmsPage["seo"] {
   };
 }
 
+function cloneCmsPage(
+  page:
+    CmsPage,
+): CmsPage {
+  return cmsPageSchema.parse({
+    ...page,
+
+    seo: {
+      ...page.seo,
+
+      keywords: [
+        ...page.seo
+          .keywords,
+      ],
+    },
+  });
+}
+
 export function createCmsPageDraft(
   input: {
     title:
@@ -95,6 +113,15 @@ export function publishCmsPage(
   return cmsPageSchema.parse({
     ...page,
 
+    seo: {
+      ...page.seo,
+
+      keywords: [
+        ...page.seo
+          .keywords,
+      ],
+    },
+
     status:
       "published",
 
@@ -116,6 +143,15 @@ export function unpublishCmsPage(
 ): CmsPage {
   return cmsPageSchema.parse({
     ...page,
+
+    seo: {
+      ...page.seo,
+
+      keywords: [
+        ...page.seo
+          .keywords,
+      ],
+    },
 
     status:
       "draft",
@@ -171,4 +207,37 @@ export function duplicateCmsPageDraft(
     publishedAt:
       null,
   });
+}
+
+export function ensureCmsHomepageEligibility(
+  page:
+    CmsPage,
+
+  requestedHomepage:
+    boolean,
+
+  now =
+    new Date(),
+): CmsPage {
+  if (
+    !requestedHomepage
+  ) {
+    return cloneCmsPage(
+      page,
+    );
+  }
+
+  if (
+    page.status ===
+    "published"
+  ) {
+    return cloneCmsPage(
+      page,
+    );
+  }
+
+  return publishCmsPage(
+    page,
+    now,
+  );
 }

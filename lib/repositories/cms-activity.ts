@@ -20,75 +20,55 @@ import {
 
 export type CmsActivityRecord =
   CmsActivity & {
-    id:
-      string;
+    id: string;
   };
-
-function toActivityRecord(
-  document:
-    Record<
-      string,
-      unknown
-    > & {
-      _id:
-        ObjectId;
-    },
-): CmsActivityRecord {
-  const parsed =
-    cmsActivitySchema.parse(
-      document,
-    );
-
-  return {
-    id:
-      document._id.toString(),
-
-    ...parsed,
-  };
-}
 
 export async function writeCmsActivity(
-  action:
-    string,
+  activity: CmsActivity,
+): Promise<
+  CmsActivityRecord
+> {
+  const validated =
+    cmsActivitySchema.parse(
+      activity,
+    );
 
-  entityType:
-    CmsActivity["entityType"],
-
-  entityId:
-    string,
-
-  entityName:
-    string,
-): Promise<void> {
   const database =
     await getDatabase();
 
-  const document =
-    cmsActivitySchema.parse({
-      action,
-      entityType,
-      entityId,
-      entityName,
+  const result =
+    await database
+      .collection(
+        CMS_COLLECTIONS.activity,
+      )
+      .insertOne(
+        validated,
+      );
 
-      createdAt:
-        new Date(),
-    });
+  return {
+    id:
+      result.insertedId.toString(),
 
-  await database
-    .collection(
-      CMS_COLLECTIONS.activity,
-    )
-    .insertOne(
-      document,
-    );
+    ...validated,
+  };
 }
 
 export async function getRecentCmsActivity(
-  limit =
-    10,
+  limit = 10,
 ): Promise<
   CmsActivityRecord[]
 > {
+  const safeLimit =
+    Math.max(
+      1,
+      Math.min(
+        50,
+        Math.floor(
+          limit,
+        ),
+      ),
+    );
+
   const database =
     await getDatabase();
 
@@ -99,32 +79,28 @@ export async function getRecentCmsActivity(
       )
       .find({})
       .sort({
-        createdAt:
-          -1,
+        createdAt: -1,
       })
       .limit(
-        Math.max(
-          1,
-          Math.min(
-            limit,
-            50,
-          ),
-        ),
+        safeLimit,
       )
       .toArray();
 
   return documents.map(
-    (
-      document,
-    ) =>
-      toActivityRecord(
-        document as Record<
-          string,
-          unknown
-        > & {
-          _id:
-            ObjectId;
-        },
-      ),
+    (document) => {
+      const validated =
+        cmsActivitySchema.parse(
+          document,
+        );
+
+      return {
+        id:
+          (
+            document._id as ObjectId
+          ).toString(),
+
+        ...validated,
+      };
+    },
   );
 }

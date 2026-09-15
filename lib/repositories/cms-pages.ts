@@ -10,6 +10,15 @@ import {
   cmsPageSchema,
 } from "../cms/core/schemas";
 
+import {
+  buildCmsSlugCandidate,
+} from "../cms/core/slug-candidates";
+
+import {
+  isReservedCmsSlug,
+  normalizeCmsSlug,
+} from "../cms/core/slug";
+
 import type {
   CmsPage,
 } from "../cms/core/types";
@@ -18,10 +27,13 @@ import {
   getDatabase,
 } from "../db/database";
 
+import {
+  deleteCmsBlocksForPage,
+} from "./cms-blocks";
+
 export type CmsPageRecord =
   CmsPage & {
-    id:
-      string;
+    id: string;
   };
 
 export function canDeleteCmsPage(
@@ -40,8 +52,7 @@ function toPageRecord(
       string,
       unknown
     > & {
-      _id:
-        ObjectId;
+      _id: ObjectId;
     },
 ): CmsPageRecord {
   const parsed =
@@ -71,8 +82,7 @@ export async function ensureCmsPageIndexes(): Promise<void> {
       slug: 1,
     },
     {
-      unique:
-        true,
+      unique: true,
 
       name:
         "cms_pages_slug_unique",
@@ -143,16 +153,14 @@ export async function listCmsPages(): Promise<
           string,
           unknown
         > & {
-          _id:
-            ObjectId;
+          _id: ObjectId;
         },
       ),
   );
 }
 
 export async function getCmsPageById(
-  id:
-    string,
+  id: string,
 ): Promise<
   CmsPageRecord | null
 > {
@@ -188,15 +196,13 @@ export async function getCmsPageById(
       string,
       unknown
     > & {
-      _id:
-        ObjectId;
+      _id: ObjectId;
     },
   );
 }
 
 export async function getCmsPageBySlug(
-  slug:
-    string,
+  slug: string,
 ): Promise<
   CmsPageRecord | null
 > {
@@ -221,8 +227,7 @@ export async function getCmsPageBySlug(
       string,
       unknown
     > & {
-      _id:
-        ObjectId;
+      _id: ObjectId;
     },
   );
 }
@@ -255,15 +260,13 @@ export async function getCmsHomepage(): Promise<
       string,
       unknown
     > & {
-      _id:
-        ObjectId;
+      _id: ObjectId;
     },
   );
 }
 
 export async function insertCmsPage(
-  page:
-    CmsPage,
+  page: CmsPage,
 ): Promise<
   CmsPageRecord
 > {
@@ -295,11 +298,9 @@ export async function insertCmsPage(
 }
 
 export async function replaceCmsPage(
-  id:
-    string,
+  id: string,
 
-  page:
-    CmsPage,
+  page: CmsPage,
 ): Promise<boolean> {
   if (
     !ObjectId.isValid(
@@ -342,8 +343,7 @@ export async function replaceCmsPage(
 }
 
 export async function deleteCmsPageById(
-  id:
-    string,
+  id: string,
 ): Promise<boolean> {
   const page =
     await getCmsPageById(
@@ -378,4 +378,179 @@ export async function deleteCmsPageById(
     result.deletedCount ===
     1
   );
+}
+
+export async function findAvailableCmsSlug(
+  requestedSlug: string,
+
+  excludePageId?: string,
+): Promise<string> {
+  const base =
+    normalizeCmsSlug(
+      requestedSlug,
+    );
+
+  if (
+    !base ||
+    isReservedCmsSlug(
+      base,
+    )
+  ) {
+    throw new Error(
+      "Invalid CMS page slug.",
+    );
+  }
+
+  for (
+    let attempt = 1;
+    attempt <= 1000;
+    attempt += 1
+  ) {
+    const candidate =
+      buildCmsSlugCandidate(
+        base,
+        attempt,
+      );
+
+    const existing =
+      await getCmsPageBySlug(
+        candidate,
+      );
+
+    if (
+      !existing ||
+      existing.id ===
+        excludePageId
+    ) {
+      return candidate;
+    }
+  }
+
+  throw new Error(
+    "Unable to create a unique page slug.",
+  );
+}
+
+export async function insertCmsPageWithUniqueSlug(
+  page: CmsPage,
+): Promise<
+  CmsPageRecord
+> {
+  const slug =
+    await findAvailableCmsSlug(
+      page.slug ||
+        page.title,
+    );
+
+  return insertCmsPage({
+    ...page,
+    slug,
+  });
+}
+
+export async function setCmsHomepage(
+  pageId: string,
+): Promise<boolean> {
+  if (
+    !ObjectId.isValid(
+      pageId,
+    )
+  ) {
+    return false;
+  }
+
+  const target =
+    await getCmsPageById(
+      pageId,
+    );
+
+  if (!target) {
+    return false;
+  }
+
+  const database =
+    await getDatabase();
+
+  const collection =
+    database.collection(
+      CMS_COLLECTIONS.pages,
+    );
+
+  const now =
+    new Date();
+
+  await collection.updateMany(
+    {
+      isHomepage:
+        true,
+
+      _id: {
+        $ne:
+          new ObjectId(
+            pageId,
+          ),
+      },
+    },
+
+    {
+      $set: {
+        isHomepage:
+          false,
+
+        updatedAt:
+          now,
+      },
+    },
+  );
+
+  const result =
+    await collection.updateOne(
+      {
+        _id:
+          new ObjectId(
+            pageId,
+          ),
+      },
+
+      {
+        $set: {
+          isHomepage:
+            true,
+
+          status:
+            "published",
+
+          publishedAt:
+            target.publishedAt ??
+            now,
+
+          updatedAt:
+            now,
+        },
+      },
+    );
+
+  return (
+    result.matchedCount ===
+    1
+  );
+}
+
+export async function deleteCmsPageWithBlocks(
+  pageId: string,
+): Promise<boolean> {
+  const deleted =
+    await deleteCmsPageById(
+      pageId,
+    );
+
+  if (!deleted) {
+    return false;
+  }
+
+  await deleteCmsBlocksForPage(
+    pageId,
+  );
+
+  return true;
 }
