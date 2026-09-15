@@ -167,6 +167,172 @@ export const cmsBlockSchema =
       z.coerce.date(),
   });
 
+/*
+ * Generic CMS menu schemas
+ */
+
+export const cmsMenuItemTypeSchema =
+  z.enum([
+    "page",
+    "custom",
+  ]);
+
+export const cmsMenuItemTargetSchema =
+  z.enum([
+    "same-tab",
+    "new-tab",
+  ]);
+
+export const cmsMenuLocationSchema =
+  z.enum([
+    "header",
+    "footer",
+    "custom",
+  ]);
+
+export const cmsMenuItemSchema =
+  z
+    .object({
+      id: z
+        .string()
+        .trim()
+        .min(1)
+        .max(100),
+
+      label: z
+        .string()
+        .trim()
+        .min(1)
+        .max(120),
+
+      type:
+        cmsMenuItemTypeSchema,
+
+      pageId: z
+        .string()
+        .trim()
+        .min(1)
+        .max(100)
+        .nullable(),
+
+      customUrl: z
+        .string()
+        .trim()
+        .max(2000),
+
+      target:
+        cmsMenuItemTargetSchema,
+
+      parentId: z
+        .string()
+        .trim()
+        .min(1)
+        .max(100)
+        .nullable(),
+
+      order: z
+        .number()
+        .int()
+        .min(1),
+
+      enabled:
+        z.boolean(),
+    })
+    .superRefine(
+      (
+        value,
+        context,
+      ) => {
+        if (
+          value.type ===
+            "page" &&
+          !value.pageId
+        ) {
+          context.addIssue({
+            code:
+              "custom",
+
+            path: [
+              "pageId",
+            ],
+
+            message:
+              "A page menu item requires a page.",
+          });
+        }
+
+        if (
+          value.type ===
+            "custom" &&
+          value.customUrl.length ===
+            0
+        ) {
+          context.addIssue({
+            code:
+              "custom",
+
+            path: [
+              "customUrl",
+            ],
+
+            message:
+              "A custom menu item requires a URL.",
+          });
+        }
+
+        if (
+          value.parentId ===
+          value.id
+        ) {
+          context.addIssue({
+            code:
+              "custom",
+
+            path: [
+              "parentId",
+            ],
+
+            message:
+              "A menu item cannot be its own parent.",
+          });
+        }
+      },
+    );
+
+export const cmsMenuSchema =
+  z.object({
+    name: z
+      .string()
+      .trim()
+      .min(1)
+      .max(120),
+
+    key: z
+      .string()
+      .trim()
+      .min(1)
+      .max(120)
+      .regex(
+        /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+        "Menu key must use lowercase letters, numbers and hyphens.",
+      ),
+
+    location:
+      cmsMenuLocationSchema,
+
+    items: z
+      .array(
+        cmsMenuItemSchema,
+      )
+      .max(200),
+
+    createdAt:
+      z.coerce.date(),
+
+    updatedAt:
+      z.coerce.date(),
+  });
+
 const optionalUrl =
   z
     .string()
@@ -313,29 +479,39 @@ export const cmsSettingsSchema =
     theme:
       z.object({
         primaryColor:
-          z.string().regex(
-            /^#[0-9A-Fa-f]{6}$/,
-          ),
+          z
+            .string()
+            .regex(
+              /^#[0-9A-Fa-f]{6}$/,
+            ),
 
         secondaryColor:
-          z.string().regex(
-            /^#[0-9A-Fa-f]{6}$/,
-          ),
+          z
+            .string()
+            .regex(
+              /^#[0-9A-Fa-f]{6}$/,
+            ),
 
         accentColor:
-          z.string().regex(
-            /^#[0-9A-Fa-f]{6}$/,
-          ),
+          z
+            .string()
+            .regex(
+              /^#[0-9A-Fa-f]{6}$/,
+            ),
 
         backgroundColor:
-          z.string().regex(
-            /^#[0-9A-Fa-f]{6}$/,
-          ),
+          z
+            .string()
+            .regex(
+              /^#[0-9A-Fa-f]{6}$/,
+            ),
 
         textColor:
-          z.string().regex(
-            /^#[0-9A-Fa-f]{6}$/,
-          ),
+          z
+            .string()
+            .regex(
+              /^#[0-9A-Fa-f]{6}$/,
+            ),
 
         headingFont:
           z.enum([

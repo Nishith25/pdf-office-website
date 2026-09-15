@@ -6,6 +6,11 @@ import {
   cmsActivitySchema,
   cmsBlockSchema,
   cmsBlockTypeSchema,
+  cmsMenuItemSchema,
+  cmsMenuItemTargetSchema,
+  cmsMenuItemTypeSchema,
+  cmsMenuLocationSchema,
+  cmsMenuSchema,
   cmsPageSchema,
   cmsPageStatusSchema,
   cmsSettingsSchema,
@@ -39,4 +44,29 @@ export type CmsSettings =
 export type CmsActivity =
   z.infer<
     typeof cmsActivitySchema
+  >;
+
+export type CmsMenuItem =
+  z.infer<
+    typeof cmsMenuItemSchema
+  >;
+
+export type CmsMenu =
+  z.infer<
+    typeof cmsMenuSchema
+  >;
+
+export type CmsMenuLocation =
+  z.infer<
+    typeof cmsMenuLocationSchema
+  >;
+
+export type CmsMenuItemType =
+  z.infer<
+    typeof cmsMenuItemTypeSchema
+  >;
+
+export type CmsMenuItemTarget =
+  z.infer<
+    typeof cmsMenuItemTargetSchema
   >;
