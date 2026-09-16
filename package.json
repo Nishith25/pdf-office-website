@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "cms:migrate:preview": "node --env-file=.env.local --import tsx scripts/migrate-generic-cms.ts",
+    "cms:migrate:apply": "node --env-file=.env.local --import tsx scripts/migrate-generic-cms.ts --apply",
+    "cms:verify": "node --env-file=.env.local --import tsx scripts/verify-generic-cms.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
