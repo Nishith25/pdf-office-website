@@ -2,6 +2,10 @@ import type {
   CmsBlock,
 } from "../../../lib/cms/core/types";
 
+import {
+  projectCmsBlockDataForLegacyRenderer,
+} from "../../../lib/cms/public/legacy-render-projection";
+
 import ButtonGroupBlock from "./blocks/ButtonGroupBlock";
 import CardGridBlock from "./blocks/CardGridBlock";
 import CtaBlock from "./blocks/CtaBlock";
@@ -23,6 +27,12 @@ export default function PublicBlockRenderer({
   block:
     CmsBlock;
 }) {
+  const data =
+    projectCmsBlockDataForLegacyRenderer(
+      block.type,
+      block.data,
+    );
+
   switch (
     block.type
   ) {
@@ -30,7 +40,7 @@ export default function PublicBlockRenderer({
       return (
         <HeroBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -39,7 +49,7 @@ export default function PublicBlockRenderer({
       return (
         <RichTextBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -48,7 +58,7 @@ export default function PublicBlockRenderer({
       return (
         <ImageTextBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -57,7 +67,7 @@ export default function PublicBlockRenderer({
       return (
         <FeatureGridBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -66,7 +76,7 @@ export default function PublicBlockRenderer({
       return (
         <CardGridBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -75,7 +85,7 @@ export default function PublicBlockRenderer({
       return (
         <StatsBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -84,7 +94,7 @@ export default function PublicBlockRenderer({
       return (
         <GalleryBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -93,7 +103,7 @@ export default function PublicBlockRenderer({
       return (
         <LogoGridBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -102,7 +112,7 @@ export default function PublicBlockRenderer({
       return (
         <FaqBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -111,7 +121,7 @@ export default function PublicBlockRenderer({
       return (
         <CtaBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -120,7 +130,7 @@ export default function PublicBlockRenderer({
       return (
         <ButtonGroupBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -129,7 +139,7 @@ export default function PublicBlockRenderer({
       return (
         <DownloadBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -138,7 +148,7 @@ export default function PublicBlockRenderer({
       return (
         <DividerBlock
           data={
-            block.data
+            data
           }
         />
       );
@@ -147,7 +157,7 @@ export default function PublicBlockRenderer({
       return (
         <SpacerBlock
           data={
-            block.data
+            data
           }
         />
       );
