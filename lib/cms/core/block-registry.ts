@@ -2,6 +2,10 @@ import {
   cmsBlockSchema,
 } from "./schemas";
 
+import {
+  createCmsStructuredBlockDefault,
+} from "./structured-block-defaults";
+
 import type {
   CmsBlock,
   CmsBlockType,
@@ -974,21 +978,6 @@ export function getCmsBlockDefinition(
   return definition;
 }
 
-function cloneData(
-  value:
-    Record<
-      string,
-      unknown
-    >,
-): Record<
-  string,
-  unknown
-> {
-  return structuredClone(
-    value,
-  );
-}
-
 export function createCmsBlockDraft(
   type:
     CmsBlockType,
@@ -1002,11 +991,6 @@ export function createCmsBlockDraft(
   now =
     new Date(),
 ): CmsBlock {
-  const definition =
-    getCmsBlockDefinition(
-      type,
-    );
-
   return cmsBlockSchema.parse({
     pageId,
 
@@ -1018,8 +1002,8 @@ export function createCmsBlockDraft(
       true,
 
     data:
-      cloneData(
-        definition.defaultData,
+      createCmsStructuredBlockDefault(
+        type,
       ),
 
     createdAt:

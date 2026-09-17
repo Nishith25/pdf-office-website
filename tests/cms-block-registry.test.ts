@@ -10,6 +10,10 @@ import {
   getCmsBlockDefinition,
 } from "../lib/cms/core/block-registry";
 
+import {
+  isCmsStructuredBlockData,
+} from "../lib/cms/core/block-data-schemas";
+
 describe(
   "CMS block registry",
   () => {
@@ -116,11 +120,15 @@ describe(
 
         expect(
           block.order,
-        ).toBe(3);
+        ).toBe(
+          3,
+        );
 
         expect(
           block.visible,
-        ).toBe(true);
+        ).toBe(
+          true,
+        );
 
         expect(
           block.createdAt,
@@ -138,6 +146,37 @@ describe(
           block.data,
         ).toHaveProperty(
           "title",
+        );
+      },
+    );
+
+    it(
+      "creates new CMS blocks with structured V2 data",
+      () => {
+        const block =
+          createCmsBlockDraft(
+            "hero",
+            "page-1",
+            1,
+            new Date(
+              "2026-09-17T10:00:00.000Z",
+            ),
+          );
+
+        expect(
+          block.data,
+        ).toMatchObject({
+          schemaVersion:
+            2,
+        });
+
+        expect(
+          isCmsStructuredBlockData(
+            "hero",
+            block.data,
+          ),
+        ).toBe(
+          true,
         );
       },
     );

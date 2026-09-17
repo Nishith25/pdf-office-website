@@ -9,8 +9,8 @@ import {
 } from "next/navigation";
 
 import {
-  buildCmsBlockDataFromFormData,
-} from "../../../../lib/admin/cms-block-editor";
+  readCmsStructuredBlockDataFromFormData,
+} from "../../../../lib/admin/cms-structured-block-editor";
 
 import {
   buildCmsPageFromEditor,
@@ -703,7 +703,7 @@ export async function updateCmsBlockAction(
   }
 
   const data =
-    buildCmsBlockDataFromFormData(
+    readCmsStructuredBlockDataFromFormData(
       block.type,
 
       formData,
