@@ -211,13 +211,19 @@ describe(
         expect(
           html,
         ).toContain(
-          "<details",
+          "pdf-faq-static",
         );
 
         expect(
           html,
         ).toContain(
-          "<summary>Can I edit this?</summary>",
+          "<h3>Can I edit this?</h3>",
+        );
+
+        expect(
+          html,
+        ).not.toContain(
+          "<details",
         );
       },
     );

@@ -1,93 +1,115 @@
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
 import {
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+  cmsPresentationClassName,
+} from "./presentation";
+
+type HeroData =
+  CmsStructuredBlockDataByType["hero"];
 
 export default function HeroBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    HeroData;
 }) {
-  const eyebrow =
-    blockText(
-      data,
-      "eyebrow",
-    );
-
-  const title =
-    blockText(
-      data,
-      "title",
-    );
-
-  const description =
-    blockText(
-      data,
-      "description",
-    );
-
-  const image =
-    blockText(
-      data,
-      "image",
-    );
-
-  const buttonLabel =
-    blockText(
-      data,
-      "buttonLabel",
-    );
-
-  const buttonUrl =
-    blockText(
-      data,
-      "buttonUrl",
-    );
+  const presentation =
+    data.presentation;
 
   return (
-    <section className="pdf-hero">
+    <section
+      className={
+        cmsPresentationClassName(
+          presentation,
+          "pdf-hero",
+        )
+      }
+      data-presentation-background={
+        presentation.background
+      }
+      data-presentation-width={
+        presentation.width
+      }
+      data-presentation-spacing={
+        presentation.spacing
+      }
+      data-presentation-alignment={
+        presentation.alignment
+      }
+      data-presentation-variant={
+        presentation.variant
+      }
+    >
       <div className="pdf-hero-inner">
         <div className="pdf-hero-copy">
-          {eyebrow && (
+          {data.badge && (
+            <div className="pdf-hero-badge">
+              {
+                data.badge
+              }
+            </div>
+          )}
+
+          {data.eyebrow && (
             <p className="pdf-eyebrow">
               {
-                eyebrow
+                data.eyebrow
               }
             </p>
           )}
 
-          {title && (
+          {data.title && (
             <h1 className="pdf-hero-title">
               {
-                title
+                data.title
               }
             </h1>
           )}
 
-          {description && (
+          {data.description && (
             <p className="pdf-hero-description whitespace-pre-line">
               {
-                description
+                data.description
               }
             </p>
           )}
 
-          {(buttonLabel &&
-            buttonUrl) && (
+          {(data.primaryCta.label &&
+            data.primaryCta.url) ||
+          (data.secondaryCta.label &&
+            data.secondaryCta.url) ? (
             <div className="pdf-hero-actions">
-              <a
-                href={
-                  buttonUrl
-                }
-                className="pdf-primary-button"
-              >
-                {
-                  buttonLabel
-                }
-              </a>
+              {data.primaryCta.label &&
+                data.primaryCta.url && (
+                <a
+                  href={
+                    data.primaryCta.url
+                  }
+                  className="pdf-primary-button"
+                >
+                  {
+                    data.primaryCta.label
+                  }
+                </a>
+              )}
+
+              {data.secondaryCta.label &&
+                data.secondaryCta.url && (
+                <a
+                  href={
+                    data.secondaryCta.url
+                  }
+                  className="pdf-secondary-button"
+                >
+                  {
+                    data.secondaryCta.label
+                  }
+                </a>
+              )}
             </div>
-          )}
+          ) : null}
 
           <div className="pdf-hero-proof">
             Mobile document workspace
@@ -95,10 +117,10 @@ export default function HeroBlock({
         </div>
 
         <div className="pdf-product-stage">
-          {image ? (
+          {data.image ? (
             <img
               src={
-                image
+                data.image
               }
               alt=""
               className="pdf-product-stage-image"

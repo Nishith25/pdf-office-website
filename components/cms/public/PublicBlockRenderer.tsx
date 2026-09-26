@@ -7,8 +7,8 @@ import type {
 } from "../../../lib/cms/core/types";
 
 import {
-  projectCmsBlockDataForLegacyRenderer,
-} from "../../../lib/cms/public/legacy-render-projection";
+  normalizeCmsBlockData,
+} from "../../../lib/cms/core/block-data-normalizer";
 
 import ButtonGroupBlock from "./blocks/ButtonGroupBlock";
 import CardGridBlock from "./blocks/CardGridBlock";
@@ -31,12 +31,6 @@ export default function PublicBlockRenderer({
   block:
     CmsBlock;
 }) {
-  const data =
-    projectCmsBlockDataForLegacyRenderer(
-      block.type,
-      block.data,
-    );
-
   let content:
     ReactNode =
       null;
@@ -48,7 +42,10 @@ export default function PublicBlockRenderer({
       content = (
         <HeroBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "hero",
+              block.data,
+            )
           }
         />
       );
@@ -58,7 +55,10 @@ export default function PublicBlockRenderer({
       content = (
         <RichTextBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "richText",
+              block.data,
+            )
           }
         />
       );
@@ -68,7 +68,10 @@ export default function PublicBlockRenderer({
       content = (
         <ImageTextBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "imageText",
+              block.data,
+            )
           }
         />
       );
@@ -78,7 +81,10 @@ export default function PublicBlockRenderer({
       content = (
         <FeatureGridBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "featureGrid",
+              block.data,
+            )
           }
         />
       );
@@ -88,7 +94,10 @@ export default function PublicBlockRenderer({
       content = (
         <CardGridBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "cardGrid",
+              block.data,
+            )
           }
         />
       );
@@ -98,7 +107,10 @@ export default function PublicBlockRenderer({
       content = (
         <StatsBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "stats",
+              block.data,
+            )
           }
         />
       );
@@ -108,7 +120,10 @@ export default function PublicBlockRenderer({
       content = (
         <GalleryBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "gallery",
+              block.data,
+            )
           }
         />
       );
@@ -118,7 +133,10 @@ export default function PublicBlockRenderer({
       content = (
         <LogoGridBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "logoGrid",
+              block.data,
+            )
           }
         />
       );
@@ -128,7 +146,10 @@ export default function PublicBlockRenderer({
       content = (
         <FaqBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "faq",
+              block.data,
+            )
           }
         />
       );
@@ -138,7 +159,10 @@ export default function PublicBlockRenderer({
       content = (
         <CtaBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "cta",
+              block.data,
+            )
           }
         />
       );
@@ -148,7 +172,10 @@ export default function PublicBlockRenderer({
       content = (
         <ButtonGroupBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "buttonGroup",
+              block.data,
+            )
           }
         />
       );
@@ -158,7 +185,10 @@ export default function PublicBlockRenderer({
       content = (
         <DownloadBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "download",
+              block.data,
+            )
           }
         />
       );
@@ -168,7 +198,10 @@ export default function PublicBlockRenderer({
       content = (
         <DividerBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "divider",
+              block.data,
+            )
           }
         />
       );
@@ -178,7 +211,10 @@ export default function PublicBlockRenderer({
       content = (
         <SpacerBlock
           data={
-            data
+            normalizeCmsBlockData(
+              "spacer",
+              block.data,
+            )
           }
         />
       );
@@ -191,6 +227,7 @@ export default function PublicBlockRenderer({
       data-pdf-block={
         block.type
       }
+      data-pdf-schema-version="2"
     >
       {
         content

@@ -1,88 +1,103 @@
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
 import {
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+  cmsPresentationClassName,
+} from "./presentation";
+
+type DownloadData =
+  CmsStructuredBlockDataByType["download"];
 
 export default function DownloadBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    DownloadData;
 }) {
-  const title =
-    blockText(
-      data,
-      "title",
-    );
-
-  const description =
-    blockText(
-      data,
-      "description",
-    );
-
-  const buttonLabel =
-    blockText(
-      data,
-      "buttonLabel",
-    );
-
-  const buttonUrl =
-    blockText(
-      data,
-      "buttonUrl",
-    );
-
-  const image =
-    blockText(
-      data,
-      "image",
-    );
+  const presentation =
+    data.presentation;
 
   return (
-    <section className="pdf-download">
+    <section
+      className={
+        cmsPresentationClassName(
+          presentation,
+          "pdf-download",
+        )
+      }
+    >
       <div className="pdf-download-inner">
         <div className="pdf-download-copy">
-          <p className="pdf-eyebrow">
-            PDF Office mobile
-          </p>
-
-          {title && (
-            <h2 className="pdf-download-title mt-4">
+          {data.eyebrow && (
+            <p className="pdf-eyebrow">
               {
-                title
-              }
-            </h2>
-          )}
-
-          {description && (
-            <p className="pdf-download-description whitespace-pre-line">
-              {
-                description
+                data.eyebrow
               }
             </p>
           )}
 
-          {buttonLabel &&
-            buttonUrl && (
-            <a
-              href={
-                buttonUrl
-              }
-              className="pdf-primary-button"
-            >
+          {data.title && (
+            <h2 className="pdf-download-title mt-4">
               {
-                buttonLabel
+                data.title
               }
-            </a>
+            </h2>
+          )}
+
+          {data.description && (
+            <p className="pdf-download-description whitespace-pre-line">
+              {
+                data.description
+              }
+            </p>
+          )}
+
+          <div className="pdf-store-actions">
+            {data.googlePlayUrl && (
+              <a
+                href={
+                  data.googlePlayUrl
+                }
+                className="pdf-primary-button"
+              >
+                Get it on Google Play
+              </a>
+            )}
+
+            {data.appStoreUrl && (
+              <a
+                href={
+                  data.appStoreUrl
+                }
+                className="pdf-secondary-button"
+              >
+                Download on the App Store
+              </a>
+            )}
+          </div>
+
+          {data.qrImage && (
+            <div className="pdf-download-qr">
+              <img
+                src={
+                  data.qrImage
+                }
+                alt="Download app QR code"
+              />
+
+              <span>
+                Scan to download
+              </span>
+            </div>
           )}
         </div>
 
         <div className="pdf-download-device">
-          {image ? (
+          {data.image ? (
             <img
               src={
-                image
+                data.image
               }
               alt=""
             />

@@ -1,41 +1,54 @@
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
 import {
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+  cmsPresentationClassName,
+} from "./presentation";
+
+type RichTextData =
+  CmsStructuredBlockDataByType["richText"];
 
 export default function RichTextBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    RichTextData;
 }) {
-  const title =
-    blockText(
-      data,
-      "title",
-    );
-
-  const body =
-    blockText(
-      data,
-      "body",
-    );
+  const presentation =
+    data.presentation;
 
   return (
-    <section className="px-5 py-16 sm:px-6">
-      <div className="mx-auto max-w-4xl">
-        {title && (
-          <h2 className="text-3xl font-bold tracking-[-0.035em] sm:text-4xl">
+    <section
+      className={
+        cmsPresentationClassName(
+          presentation,
+          "pdf-section",
+          "pdf-rich-text",
+        )
+      }
+    >
+      <div className="pdf-container">
+        {data.eyebrow && (
+          <p className="pdf-eyebrow">
             {
-              title
+              data.eyebrow
+            }
+          </p>
+        )}
+
+        {data.title && (
+          <h2 className="pdf-section-title">
+            {
+              data.title
             }
           </h2>
         )}
 
-        {body && (
-          <div className="mt-6 whitespace-pre-line text-base leading-8 opacity-75">
+        {data.body && (
+          <div className="pdf-rich-text-body whitespace-pre-line">
             {
-              body
+              data.body
             }
           </div>
         )}

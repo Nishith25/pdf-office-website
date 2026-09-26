@@ -1,25 +1,21 @@
-import {
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
+type DividerData =
+  CmsStructuredBlockDataByType["divider"];
 
 export default function DividerBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    DividerData;
 }) {
-  const style =
-    blockText(
-      data,
-      "style",
-    );
-
   return (
     <div className="mx-auto max-w-6xl px-5 sm:px-6">
       <hr
         className={
-          style ===
+          data.style ===
           "subtle"
             ? "border-black/5"
             : "border-black/10"

@@ -1,118 +1,162 @@
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
 import {
-  blockLines,
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+  cmsPresentationClassName,
+} from "./presentation";
 
-function splitFeature(
-  value:
-    string,
-) {
-  const marker =
-    " — ";
-
-  const index =
-    value.indexOf(
-      marker,
-    );
-
-  if (
-    index ===
-    -1
-  ) {
-    return {
-      title:
-        value,
-
-      description:
-        "",
-    };
-  }
-
-  return {
-    title:
-      value
-        .slice(
-          0,
-          index,
-        )
-        .trim(),
-
-    description:
-      value
-        .slice(
-          index +
-            marker.length,
-        )
-        .trim(),
-  };
-}
+type FeatureGridData =
+  CmsStructuredBlockDataByType["featureGrid"];
 
 export default function FeatureGridBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    FeatureGridData;
 }) {
-  const title =
-    blockText(
-      data,
-      "title",
-    );
+  const presentation =
+    data.presentation;
 
-  const description =
-    blockText(
-      data,
-      "description",
-    );
-
-  const items =
-    blockLines(
-      data,
-      "items",
+  const cardLayout =
+    [
+      "icon-grid",
+      "bento",
+      "alternating",
+      "showcase",
+    ].includes(
+      presentation.variant,
     );
 
   return (
-    <section className="pdf-feature-grid pdf-section">
-      <div className="pdf-container pdf-feature-layout">
+    <section
+      className={
+        cmsPresentationClassName(
+          presentation,
+          "pdf-feature-grid",
+          "pdf-section",
+        )
+      }
+    >
+      <div
+        className={`pdf-container ${
+          cardLayout
+            ? ""
+            : "pdf-feature-layout"
+        }`}
+      >
         <div>
           <p className="pdf-eyebrow">
             Built for document work
           </p>
 
-          {title && (
+          {data.title && (
             <h2 className="pdf-section-title">
               {
-                title
+                data.title
               }
             </h2>
           )}
 
-          {description && (
+          {data.description && (
             <p className="pdf-section-description">
               {
-                description
+                data.description
               }
             </p>
           )}
         </div>
 
-        {items.length >
+        {data.items.length >
           0 && (
-          <div className="pdf-feature-list">
-            {items.map(
+          <div
+            className={
+              cardLayout
+                ? `pdf-feature-card-grid pdf-columns-${data.columns}`
+                : "pdf-feature-list"
+            }
+          >
+            {data.items.map(
               (
-                value,
+                item,
                 index,
-              ) => {
-                const feature =
-                  splitFeature(
-                    value,
-                  );
-
-                return (
+              ) =>
+                cardLayout ? (
                   <article
-                    key={`${value}-${index}`}
+                    key={
+                      item.id
+                    }
+                    className="pdf-feature-card"
+                  >
+                    {item.image && (
+                      <img
+                        src={
+                          item.image
+                        }
+                        alt=""
+                        className="pdf-feature-card-image"
+                      />
+                    )}
+
+                    <div className="pdf-feature-card-body">
+                      {item.badge && (
+                        <span className="pdf-item-badge">
+                          {
+                            item.badge
+                          }
+                        </span>
+                      )}
+
+                      {item.eyebrow && (
+                        <p className="pdf-feature-item-eyebrow">
+                          {
+                            item.eyebrow
+                          }
+                        </p>
+                      )}
+
+                      {item.icon && (
+                        <div className="pdf-item-icon">
+                          {
+                            item.icon
+                          }
+                        </div>
+                      )}
+
+                      <h3 className="pdf-feature-title">
+                        {
+                          item.title
+                        }
+                      </h3>
+
+                      {item.description && (
+                        <p className="pdf-feature-description">
+                          {
+                            item.description
+                          }
+                        </p>
+                      )}
+
+                      {item.linkLabel &&
+                        item.linkUrl && (
+                        <a
+                          href={
+                            item.linkUrl
+                          }
+                          className="pdf-item-link"
+                        >
+                          {
+                            item.linkLabel
+                          }
+                        </a>
+                      )}
+                    </div>
+                  </article>
+                ) : (
+                  <article
+                    key={
+                      item.id
+                    }
                     className="pdf-feature-row"
                   >
                     <div className="pdf-feature-number">
@@ -126,23 +170,60 @@ export default function FeatureGridBlock({
                     </div>
 
                     <div>
-                      <h3 className="pdf-feature-title">
-                        {
-                          feature.title
-                        }
-                      </h3>
-
-                      {feature.description && (
-                        <p className="pdf-feature-description">
+                      {item.badge && (
+                        <span className="pdf-item-badge">
                           {
-                            feature.description
+                            item.badge
+                          }
+                        </span>
+                      )}
+
+                      {item.eyebrow && (
+                        <p className="pdf-feature-item-eyebrow">
+                          {
+                            item.eyebrow
                           }
                         </p>
                       )}
+
+                      {item.icon && (
+                        <div className="pdf-item-icon">
+                          {
+                            item.icon
+                          }
+                        </div>
+                      )}
+
+                      <h3 className="pdf-feature-title">
+                        {
+                          item.title
+                        }
+                      </h3>
+
+                      {item.description && (
+                        <p className="pdf-feature-description">
+                          {
+                            item.description
+                          }
+                        </p>
+                      )}
+
+                      {item.linkLabel &&
+                        item.linkUrl && (
+                        <a
+                          href={
+                            item.linkUrl
+                          }
+                          className="pdf-item-link"
+                        >
+                          {
+                            item.linkLabel
+                          }
+                        </a>
+                      )}
                     </div>
                   </article>
-                );
-              },
+                ),
             )}
           </div>
         )}

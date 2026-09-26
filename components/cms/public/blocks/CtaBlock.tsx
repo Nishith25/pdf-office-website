@@ -1,69 +1,99 @@
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
 import {
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+  cmsPresentationClassName,
+} from "./presentation";
+
+type CtaData =
+  CmsStructuredBlockDataByType["cta"];
 
 export default function CtaBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    CtaData;
 }) {
-  const title =
-    blockText(
-      data,
-      "title",
-    );
-
-  const description =
-    blockText(
-      data,
-      "description",
-    );
-
-  const buttonLabel =
-    blockText(
-      data,
-      "buttonLabel",
-    );
-
-  const buttonUrl =
-    blockText(
-      data,
-      "buttonUrl",
-    );
+  const presentation =
+    data.presentation;
 
   return (
-    <section>
-      <div className="mx-auto max-w-6xl px-7 py-16 text-center text-white sm:px-12 sm:py-20">
-        {title && (
-          <h2 className="mx-auto max-w-3xl text-4xl font-[850] leading-[0.98] tracking-[-0.055em] sm:text-5xl lg:text-6xl">
-            {
-              title
-            }
-          </h2>
-        )}
+    <section
+      className={
+        cmsPresentationClassName(
+          presentation,
+          "pdf-cta",
+          "pdf-section",
+        )
+      }
+    >
+      <div className="pdf-container pdf-cta-inner">
+        <div className="pdf-cta-copy">
+          {data.eyebrow && (
+            <p className="pdf-eyebrow">
+              {
+                data.eyebrow
+              }
+            </p>
+          )}
 
-        {description && (
-          <p className="mx-auto mt-6 max-w-2xl text-[15px] leading-8 text-white/60">
-            {
-              description
-            }
-          </p>
-        )}
+          {data.title && (
+            <h2 className="pdf-cta-title">
+              {
+                data.title
+              }
+            </h2>
+          )}
 
-        {buttonLabel &&
-          buttonUrl && (
-          <a
-            href={
-              buttonUrl
-            }
-            className="pdf-primary-button mt-8"
-          >
-            {
-              buttonLabel
-            }
-          </a>
+          {data.description && (
+            <p className="pdf-cta-description">
+              {
+                data.description
+              }
+            </p>
+          )}
+
+          <div className="pdf-cta-actions">
+            {data.primaryCta.label &&
+              data.primaryCta.url && (
+              <a
+                href={
+                  data.primaryCta.url
+                }
+                className="pdf-primary-button"
+              >
+                {
+                  data.primaryCta.label
+                }
+              </a>
+            )}
+
+            {data.secondaryCta.label &&
+              data.secondaryCta.url && (
+              <a
+                href={
+                  data.secondaryCta.url
+                }
+                className="pdf-secondary-button"
+              >
+                {
+                  data.secondaryCta.label
+                }
+              </a>
+            )}
+          </div>
+        </div>
+
+        {data.image && (
+          <div className="pdf-cta-media">
+            <img
+              src={
+                data.image
+              }
+              alt=""
+            />
+          </div>
         )}
       </div>
     </section>

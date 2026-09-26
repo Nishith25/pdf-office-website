@@ -1,54 +1,76 @@
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
 import {
-  blockLines,
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+  cmsPresentationClassName,
+} from "./presentation";
+
+type GalleryData =
+  CmsStructuredBlockDataByType["gallery"];
 
 export default function GalleryBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    GalleryData;
 }) {
-  const title =
-    blockText(
-      data,
-      "title",
-    );
-
-  const images =
-    blockLines(
-      data,
-      "images",
-    );
+  const presentation =
+    data.presentation;
 
   return (
-    <section className="px-5 py-16 sm:px-6">
-      <div className="mx-auto max-w-6xl">
-        {title && (
-          <h2 className="text-3xl font-bold tracking-[-0.035em]">
+    <section
+      className={
+        cmsPresentationClassName(
+          presentation,
+          "pdf-section",
+          "pdf-gallery",
+        )
+      }
+    >
+      <div className="pdf-container">
+        {data.title && (
+          <h2 className="pdf-section-title">
             {
-              title
+              data.title
             }
           </h2>
         )}
 
-        {images.length >
+        {data.images.length >
           0 && (
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {images.map(
+          <div
+            className={`pdf-gallery-grid pdf-columns-${data.columns}`}
+          >
+            {data.images.map(
               (
-                image,
-                index,
+                item,
               ) => (
-                <img
-                  key={`${image}-${index}`}
-                  src={
-                    image
+                <figure
+                  key={
+                    item.id
                   }
-                  alt=""
-                  className="aspect-[4/3] w-full rounded-2xl object-cover"
-                />
+                  className="pdf-gallery-item"
+                >
+                  {item.image && (
+                    <img
+                      src={
+                        item.image
+                      }
+                      alt={
+                        item.altText
+                      }
+                    />
+                  )}
+
+                  {item.caption && (
+                    <figcaption>
+                      {
+                        item.caption
+                      }
+                    </figcaption>
+                  )}
+                </figure>
               ),
             )}
           </div>

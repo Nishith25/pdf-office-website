@@ -1,25 +1,21 @@
-import {
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
+type SpacerData =
+  CmsStructuredBlockDataByType["spacer"];
 
 export default function SpacerBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    SpacerData;
 }) {
-  const size =
-    blockText(
-      data,
-      "size",
-    );
-
   const className =
-    size ===
+    data.size ===
     "small"
       ? "h-8"
-      : size ===
+      : data.size ===
           "large"
         ? "h-32"
         : "h-16";

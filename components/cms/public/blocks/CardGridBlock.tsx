@@ -1,144 +1,136 @@
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
 import {
-  blockLines,
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+  cmsPresentationClassName,
+} from "./presentation";
 
-function splitCard(
-  value:
-    string,
-) {
-  const marker =
-    " — ";
-
-  const index =
-    value.indexOf(
-      marker,
-    );
-
-  if (
-    index ===
-    -1
-  ) {
-    return {
-      title:
-        value,
-
-      description:
-        "",
-    };
-  }
-
-  return {
-    title:
-      value
-        .slice(
-          0,
-          index,
-        )
-        .trim(),
-
-    description:
-      value
-        .slice(
-          index +
-            marker.length,
-        )
-        .trim(),
-  };
-}
+type CardGridData =
+  CmsStructuredBlockDataByType["cardGrid"];
 
 export default function CardGridBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    CardGridData;
 }) {
-  const title =
-    blockText(
-      data,
-      "title",
-    );
-
-  const description =
-    blockText(
-      data,
-      "description",
-    );
-
-  const cards =
-    blockLines(
-      data,
-      "cards",
-    );
+  const presentation =
+    data.presentation;
 
   return (
-    <section className="pdf-card-grid pdf-section">
+    <section
+      className={
+        cmsPresentationClassName(
+          presentation,
+          "pdf-card-grid",
+          "pdf-section",
+        )
+      }
+    >
       <div className="pdf-container">
-        {title && (
+        {data.title && (
           <h2 className="pdf-section-title">
             {
-              title
+              data.title
             }
           </h2>
         )}
 
-        {description && (
+        {data.description && (
           <p className="pdf-section-description">
             {
-              description
+              data.description
             }
           </p>
         )}
 
-        {cards.length >
+        {data.cards.length >
           0 && (
-          <div className="pdf-card-grid-list">
-            {cards.map(
+          <div
+            className={`pdf-card-grid-list pdf-columns-${data.columns}`}
+          >
+            {data.cards.map(
               (
-                value,
+                card,
                 index,
-              ) => {
-                const card =
-                  splitCard(
-                    value,
-                  );
-
-                return (
-                  <article
-                    key={`${value}-${index}`}
-                    className={`pdf-editorial-card ${
-                      card.description
-                        ? ""
-                        : "pdf-editorial-card-compact"
-                    }`}
-                  >
-                    <div className="pdf-card-index">
-                      {String(
-                        index +
-                          1,
-                      ).padStart(
-                        2,
-                        "0",
-                      )}
-                    </div>
-
-                    <h3 className="pdf-card-title">
-                      {
-                        card.title
-                      }
-                    </h3>
-
-                    {card.description && (
-                      <p className="pdf-card-description">
-                        {
-                          card.description
+              ) => (
+                <article
+                  key={
+                    card.id
+                  }
+                  className={`pdf-editorial-card ${
+                    card.description
+                      ? ""
+                      : "pdf-editorial-card-compact"
+                  }`}
+                >
+                  {card.image && (
+                    <div className="pdf-card-media">
+                      <img
+                        src={
+                          card.image
                         }
-                      </p>
+                        alt=""
+                      />
+                    </div>
+                  )}
+
+                  <div className="pdf-card-index">
+                    {String(
+                      index +
+                        1,
+                    ).padStart(
+                      2,
+                      "0",
                     )}
-                  </article>
-                );
-              },
+                  </div>
+
+                  {card.badge && (
+                    <span className="pdf-item-badge">
+                      {
+                        card.badge
+                      }
+                    </span>
+                  )}
+
+                  {card.icon && (
+                    <div className="pdf-item-icon">
+                      {
+                        card.icon
+                      }
+                    </div>
+                  )}
+
+                  <h3 className="pdf-card-title">
+                    {
+                      card.title
+                    }
+                  </h3>
+
+                  {card.description && (
+                    <p className="pdf-card-description">
+                      {
+                        card.description
+                      }
+                    </p>
+                  )}
+
+                  {card.linkLabel &&
+                    card.linkUrl && (
+                    <a
+                      href={
+                        card.linkUrl
+                      }
+                      className="pdf-item-link"
+                    >
+                      {
+                        card.linkLabel
+                      }
+                    </a>
+                  )}
+                </article>
+              ),
             )}
           </div>
         )}

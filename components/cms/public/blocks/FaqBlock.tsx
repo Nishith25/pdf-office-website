@@ -1,104 +1,91 @@
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
 import {
-  blockLines,
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+  cmsPresentationClassName,
+} from "./presentation";
 
-function splitFaq(
-  value:
-    string,
-) {
-  const marker =
-    " — ";
-
-  const index =
-    value.indexOf(
-      marker,
-    );
-
-  if (
-    index ===
-    -1
-  ) {
-    return {
-      question:
-        value,
-
-      answer:
-        "",
-    };
-  }
-
-  return {
-    question:
-      value
-        .slice(
-          0,
-          index,
-        )
-        .trim(),
-
-    answer:
-      value
-        .slice(
-          index +
-            marker.length,
-        )
-        .trim(),
-  };
-}
+type FaqData =
+  CmsStructuredBlockDataByType["faq"];
 
 export default function FaqBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    FaqData;
 }) {
-  const title =
-    blockText(
-      data,
-      "title",
-    );
+  const presentation =
+    data.presentation;
 
-  const items =
-    blockLines(
-      data,
-      "items",
-    );
+  const alwaysOpen =
+    presentation.variant ===
+    "stacked";
 
   return (
-    <section className="pdf-faq pdf-section">
+    <section
+      className={
+        cmsPresentationClassName(
+          presentation,
+          "pdf-faq",
+          "pdf-section",
+        )
+      }
+    >
       <div className="pdf-container pdf-faq-layout">
         <div>
           <p className="pdf-eyebrow">
             Help & answers
           </p>
 
-          {title && (
+          {data.title && (
             <h2 className="pdf-section-title">
               {
-                title
+                data.title
               }
             </h2>
           )}
+
+          {data.description && (
+            <p className="pdf-section-description">
+              {
+                data.description
+              }
+            </p>
+          )}
         </div>
 
-        {items.length >
+        {data.items.length >
           0 && (
           <div className="pdf-faq-list">
-            {items.map(
+            {data.items.map(
               (
-                value,
-                index,
-              ) => {
-                const item =
-                  splitFaq(
-                    value,
-                  );
+                item,
+              ) =>
+                alwaysOpen ? (
+                  <article
+                    key={
+                      item.id
+                    }
+                    className="pdf-faq-static"
+                  >
+                    <h3>
+                      {
+                        item.question
+                      }
+                    </h3>
 
-                return (
+                    <p className="pdf-faq-answer">
+                      {
+                        item.answer
+                      }
+                    </p>
+                  </article>
+                ) : (
                   <details
-                    key={`${value}-${index}`}
+                    key={
+                      item.id
+                    }
                     className="pdf-faq-item"
                   >
                     <summary>
@@ -115,8 +102,7 @@ export default function FaqBlock({
                       </p>
                     )}
                   </details>
-                );
-              },
+                ),
             )}
           </div>
         )}

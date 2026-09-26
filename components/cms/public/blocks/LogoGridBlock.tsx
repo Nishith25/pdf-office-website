@@ -1,59 +1,96 @@
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
 import {
-  blockLines,
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+  cmsPresentationClassName,
+} from "./presentation";
+
+type LogoGridData =
+  CmsStructuredBlockDataByType["logoGrid"];
 
 export default function LogoGridBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    LogoGridData;
 }) {
-  const title =
-    blockText(
-      data,
-      "title",
-    );
-
-  const logos =
-    blockLines(
-      data,
-      "logos",
-    );
+  const presentation =
+    data.presentation;
 
   return (
-    <section className="px-5 py-16 sm:px-6">
-      <div className="mx-auto max-w-6xl">
-        {title && (
-          <h2 className="text-center text-3xl font-bold tracking-[-0.035em]">
+    <section
+      className={
+        cmsPresentationClassName(
+          presentation,
+          "pdf-section",
+          "pdf-logo-grid",
+        )
+      }
+    >
+      <div className="pdf-container">
+        {data.title && (
+          <h2 className="pdf-section-title">
             {
-              title
+              data.title
             }
           </h2>
         )}
 
-        {logos.length >
+        {data.logos.length >
           0 && (
-          <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-            {logos.map(
+          <div className="pdf-logo-list">
+            {data.logos.map(
               (
                 logo,
-                index,
-              ) => (
-                <div
-                  key={`${logo}-${index}`}
-                  className="flex min-h-28 items-center justify-center rounded-2xl border border-black/10 bg-white p-6"
-                >
-                  <img
-                    src={
-                      logo
+              ) => {
+                const content = (
+                  <div className="pdf-logo-item">
+                    {logo.image ? (
+                      <img
+                        src={
+                          logo.image
+                        }
+                        alt={
+                          logo.name
+                        }
+                      />
+                    ) : (
+                      <span>
+                        {
+                          logo.name
+                        }
+                      </span>
+                    )}
+                  </div>
+                );
+
+                return logo.url ? (
+                  <a
+                    key={
+                      logo.id
                     }
-                    alt=""
-                    className="max-h-12 max-w-full object-contain"
-                  />
-                </div>
-              ),
+                    href={
+                      logo.url
+                    }
+                    className="pdf-logo-link"
+                  >
+                    {
+                      content
+                    }
+                  </a>
+                ) : (
+                  <div
+                    key={
+                      logo.id
+                    }
+                  >
+                    {
+                      content
+                    }
+                  </div>
+                );
+              },
             )}
           </div>
         )}

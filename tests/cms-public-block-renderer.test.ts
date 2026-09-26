@@ -603,7 +603,7 @@ describe(
         expect(
           html,
         ).toContain(
-          "Download Now",
+          "Get it on Google Play",
         );
 
         expect(

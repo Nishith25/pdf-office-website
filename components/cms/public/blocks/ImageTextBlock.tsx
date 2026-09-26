@@ -1,78 +1,71 @@
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
 import {
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+  cmsPresentationClassName,
+} from "./presentation";
+
+type ImageTextData =
+  CmsStructuredBlockDataByType["imageText"];
 
 export default function ImageTextBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    ImageTextData;
 }) {
-  const eyebrow =
-    blockText(
-      data,
-      "eyebrow",
-    );
-
-  const title =
-    blockText(
-      data,
-      "title",
-    );
-
-  const description =
-    blockText(
-      data,
-      "description",
-    );
-
-  const image =
-    blockText(
-      data,
-      "image",
-    );
-
-  const imagePosition =
-    blockText(
-      data,
-      "imagePosition",
-    );
+  const presentation =
+    data.presentation;
 
   const copy = (
     <div>
-      {eyebrow && (
+      {data.eyebrow && (
         <p className="pdf-eyebrow">
           {
-            eyebrow
+            data.eyebrow
           }
         </p>
       )}
 
-      {title && (
+      {data.title && (
         <h2 className="pdf-section-title">
           {
-            title
+            data.title
           }
         </h2>
       )}
 
-      {description && (
+      {data.description && (
         <p className="pdf-section-description whitespace-pre-line">
           {
-            description
+            data.description
           }
         </p>
+      )}
+
+      {data.cta.label &&
+        data.cta.url && (
+        <a
+          href={
+            data.cta.url
+          }
+          className="pdf-primary-button mt-7"
+        >
+          {
+            data.cta.label
+          }
+        </a>
       )}
     </div>
   );
 
   const media = (
     <div className="pdf-image-text-media">
-      {image ? (
+      {data.image ? (
         <img
           src={
-            image
+            data.image
           }
           alt=""
         />
@@ -92,9 +85,17 @@ export default function ImageTextBlock({
   );
 
   return (
-    <section className="pdf-image-text pdf-section">
+    <section
+      className={
+        cmsPresentationClassName(
+          presentation,
+          "pdf-image-text",
+          "pdf-section",
+        )
+      }
+    >
       <div className="pdf-container pdf-image-text-inner">
-        {imagePosition ===
+        {data.imagePosition ===
         "left" ? (
           <>
             {

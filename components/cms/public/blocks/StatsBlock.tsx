@@ -1,116 +1,77 @@
+import type {
+  CmsStructuredBlockDataByType,
+} from "../../../../lib/cms/core/block-data-schemas";
+
 import {
-  blockLines,
-  blockText,
-  type CmsPublicBlockData,
-} from "./block-data";
+  cmsPresentationClassName,
+} from "./presentation";
 
-function splitStat(
-  item:
-    string,
-) {
-  const marker =
-    " — ";
-
-  const index =
-    item.indexOf(
-      marker,
-    );
-
-  if (
-    index ===
-    -1
-  ) {
-    return {
-      value:
-        item,
-
-      label:
-        "",
-    };
-  }
-
-  return {
-    value:
-      item
-        .slice(
-          0,
-          index,
-        )
-        .trim(),
-
-    label:
-      item
-        .slice(
-          index +
-            marker.length,
-        )
-        .trim(),
-  };
-}
+type StatsData =
+  CmsStructuredBlockDataByType["stats"];
 
 export default function StatsBlock({
   data,
 }: {
   data:
-    CmsPublicBlockData;
+    StatsData;
 }) {
-  const title =
-    blockText(
-      data,
-      "title",
-    );
-
-  const items =
-    blockLines(
-      data,
-      "items",
-    );
+  const presentation =
+    data.presentation;
 
   return (
-    <section className="pdf-stats">
+    <section
+      className={
+        cmsPresentationClassName(
+          presentation,
+          "pdf-stats",
+        )
+      }
+    >
       <div className="pdf-stats-inner">
-        {title && (
+        {data.title && (
           <p className="pdf-stats-title">
             {
-              title
+              data.title
             }
           </p>
         )}
 
-        {items.length >
+        {data.items.length >
           0 && (
           <div className="pdf-stats-grid">
-            {items.map(
+            {data.items.map(
               (
                 item,
-                index,
-              ) => {
-                const stat =
-                  splitStat(
-                    item,
-                  );
+              ) => (
+                <div
+                  key={
+                    item.id
+                  }
+                  className="pdf-stat"
+                >
+                  <div className="pdf-stat-value">
+                    {
+                      item.value
+                    }
+                  </div>
 
-                return (
-                  <div
-                    key={`${item}-${index}`}
-                    className="pdf-stat"
-                  >
-                    <div className="pdf-stat-value">
+                  {item.label && (
+                    <div className="pdf-stat-label">
                       {
-                        stat.value
+                        item.label
                       }
                     </div>
+                  )}
 
-                    {stat.label && (
-                      <div className="pdf-stat-label">
-                        {
-                          stat.label
-                        }
-                      </div>
-                    )}
-                  </div>
-                );
-              },
+                  {item.description && (
+                    <p className="pdf-stat-description">
+                      {
+                        item.description
+                      }
+                    </p>
+                  )}
+                </div>
+              ),
             )}
           </div>
         )}
