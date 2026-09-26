@@ -1,4 +1,8 @@
 import type {
+  ReactNode,
+} from "react";
+
+import type {
   CmsSettings,
 } from "../../../lib/cms/core/types";
 
@@ -16,7 +20,7 @@ function ExternalLink({
     string;
 
   children:
-    React.ReactNode;
+    ReactNode;
 }) {
   if (!href) {
     return null;
@@ -29,7 +33,6 @@ function ExternalLink({
       }
       target="_blank"
       rel="noopener noreferrer"
-      className="text-sm opacity-70 transition hover:opacity-100"
     >
       {
         children
@@ -104,30 +107,70 @@ export default function PublicFooter({
       item.href,
   );
 
+  const hasContact =
+    Boolean(
+      contact.email ||
+      contact.phone ||
+      contact.address,
+    );
+
+  const storeUrls =
+    new Set(
+      [
+        externalLinks
+          .googlePlayUrl,
+        externalLinks
+          .appStoreUrl,
+      ].filter(Boolean),
+    );
+
+  const visibleNavigation =
+    navigation.filter(
+      (
+        item,
+      ) =>
+        !storeUrls.has(
+          item.href,
+        ),
+    );
+
+  const hasConnect =
+    socialLinks.length >
+      0 ||
+    Boolean(
+      externalLinks
+        .googlePlayUrl ||
+      externalLinks
+        .appStoreUrl,
+    );
+
   return (
-    <footer className="mt-auto border-t border-black/10 bg-[var(--cms-background)]">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
-        <div>
-          <div className="flex items-center gap-3">
-            {identity.logoUrl && (
+    <footer className="pdf-footer">
+      <div className="pdf-footer-main">
+        <div className="pdf-footer-brand">
+          <div className="pdf-brand-mark">
+            {identity.logoUrl ? (
               <img
                 src={
                   identity.logoUrl
                 }
                 alt=""
-                className="h-10 w-10 object-contain"
               />
+            ) : (
+              <span>
+                PDF
+              </span>
             )}
+          </div>
 
-            <p className="font-bold">
-              {
-                identity.siteName
-              }
-            </p>
+          <div className="pdf-footer-brand-name">
+            {
+              identity.siteName
+            }
           </div>
 
           {identity.tagline && (
-            <p className="mt-4 max-w-sm text-sm leading-6 opacity-65">
+            <p className="pdf-footer-copy">
               {
                 identity.tagline
               }
@@ -135,7 +178,7 @@ export default function PublicFooter({
           )}
 
           {footer.text && (
-            <p className="mt-3 max-w-sm text-sm leading-6 opacity-65">
+            <p className="pdf-footer-copy">
               {
                 footer.text
               }
@@ -143,111 +186,117 @@ export default function PublicFooter({
           )}
         </div>
 
-        <div>
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.12em] opacity-50">
-            Navigation
-          </p>
+        {visibleNavigation
+          .length >
+          0 && (
+          <div>
+            <p className="pdf-footer-heading">
+              Explore
+            </p>
 
-          <PublicNavigation
-            items={
-              navigation
-            }
-            orientation="vertical"
-          />
-        </div>
-
-        <div>
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.12em] opacity-50">
-            Contact
-          </p>
-
-          <div className="space-y-3 text-sm opacity-70">
-            {contact.email && (
-              <a
-                href={`mailto:${contact.email}`}
-                className="block"
-              >
-                {
-                  contact.email
-                }
-              </a>
-            )}
-
-            {contact.phone && (
-              <a
-                href={`tel:${contact.phone}`}
-                className="block"
-              >
-                {
-                  contact.phone
-                }
-              </a>
-            )}
-
-            {contact.address && (
-              <p className="whitespace-pre-line leading-6">
-                {
-                  contact.address
-                }
-              </p>
-            )}
+            <PublicNavigation
+              items={
+                visibleNavigation
+              }
+              orientation="vertical"
+            />
           </div>
-        </div>
+        )}
 
-        <div>
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.12em] opacity-50">
-            Follow
-          </p>
+        {hasContact && (
+          <div>
+            <p className="pdf-footer-heading">
+              Contact
+            </p>
 
-          <div className="flex flex-col gap-3">
-            {socialLinks.map(
-              (
-                item,
-              ) => (
-                <ExternalLink
-                  key={
-                    item.label
-                  }
-                  href={
-                    item.href
-                  }
+            <div className="grid gap-3 text-[13px]">
+              {contact.email && (
+                <a
+                  href={`mailto:${contact.email}`}
                 >
                   {
-                    item.label
+                    contact.email
                   }
-                </ExternalLink>
-              ),
-            )}
+                </a>
+              )}
 
-            {externalLinks
-              .googlePlayUrl && (
-              <ExternalLink
-                href={
-                  externalLinks
-                    .googlePlayUrl
-                }
-              >
-                Google Play
-              </ExternalLink>
-            )}
+              {contact.phone && (
+                <a
+                  href={`tel:${contact.phone}`}
+                >
+                  {
+                    contact.phone
+                  }
+                </a>
+              )}
 
-            {externalLinks
-              .appStoreUrl && (
-              <ExternalLink
-                href={
-                  externalLinks
-                    .appStoreUrl
-                }
-              >
-                App Store
-              </ExternalLink>
-            )}
+              {contact.address && (
+                <p className="m-0 whitespace-pre-line leading-6 text-white/55">
+                  {
+                    contact.address
+                  }
+                </p>
+              )}
+            </div>
           </div>
-        </div>
+        )}
+
+        {hasConnect && (
+          <div>
+            <p className="pdf-footer-heading">
+              Connect
+            </p>
+
+            <div className="grid gap-3 text-[13px]">
+              {socialLinks.map(
+                (
+                  item,
+                ) => (
+                  <ExternalLink
+                    key={
+                      item.label
+                    }
+                    href={
+                      item.href
+                    }
+                  >
+                    {
+                      item.label
+                    }
+                  </ExternalLink>
+                ),
+              )}
+
+              {externalLinks
+                .googlePlayUrl && (
+                <ExternalLink
+                  href={
+                    externalLinks
+                      .googlePlayUrl
+                  }
+                >
+                  Google Play
+                </ExternalLink>
+              )}
+
+              {externalLinks
+                .appStoreUrl && (
+                <ExternalLink
+                  href={
+                    externalLinks
+                      .appStoreUrl
+                  }
+                >
+                  App Store
+                </ExternalLink>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
-      <div className="border-t border-black/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-5 text-xs opacity-55 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+      <div className="pdf-footer-bottom">
+        <div className="pdf-footer-bottom-inner">
           <span>
             {footer.copyright ||
               identity.siteName}

@@ -108,7 +108,25 @@ describe(
         expect(
           html,
         ).toContain(
-          "13+ — PDF Tools",
+          "13+",
+        );
+
+        expect(
+          html,
+        ).toContain(
+          "PDF Tools",
+        );
+
+        expect(
+          html,
+        ).toContain(
+          "pdf-stat-value",
+        );
+
+        expect(
+          html,
+        ).toContain(
+          "pdf-stat-label",
         );
       },
     );
@@ -181,7 +199,25 @@ describe(
         expect(
           html,
         ).toContain(
-          "Can I edit this? — Yes.",
+          "Can I edit this?",
+        );
+
+        expect(
+          html,
+        ).toContain(
+          "Yes.",
+        );
+
+        expect(
+          html,
+        ).toContain(
+          "<details",
+        );
+
+        expect(
+          html,
+        ).toContain(
+          "<summary>Can I edit this?</summary>",
         );
       },
     );

@@ -4,6 +4,50 @@ import {
   type CmsPublicBlockData,
 } from "./block-data";
 
+function splitStat(
+  item:
+    string,
+) {
+  const marker =
+    " — ";
+
+  const index =
+    item.indexOf(
+      marker,
+    );
+
+  if (
+    index ===
+    -1
+  ) {
+    return {
+      value:
+        item,
+
+      label:
+        "",
+    };
+  }
+
+  return {
+    value:
+      item
+        .slice(
+          0,
+          index,
+        )
+        .trim(),
+
+    label:
+      item
+        .slice(
+          index +
+            marker.length,
+        )
+        .trim(),
+  };
+}
+
 export default function StatsBlock({
   data,
 }: {
@@ -23,35 +67,50 @@ export default function StatsBlock({
     );
 
   return (
-    <section className="px-5 py-16 sm:px-6">
-      <div className="mx-auto max-w-6xl">
+    <section className="pdf-stats">
+      <div className="pdf-stats-inner">
         {title && (
-          <h2 className="text-center text-3xl font-bold tracking-[-0.035em]">
+          <p className="pdf-stats-title">
             {
               title
             }
-          </h2>
+          </p>
         )}
 
         {items.length >
           0 && (
-          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="pdf-stats-grid">
             {items.map(
               (
                 item,
                 index,
-              ) => (
-                <div
-                  key={`${item}-${index}`}
-                  className="rounded-2xl border border-black/10 p-6 text-center"
-                >
-                  <p className="text-xl font-bold text-[var(--cms-primary)]">
-                    {
-                      item
-                    }
-                  </p>
-                </div>
-              ),
+              ) => {
+                const stat =
+                  splitStat(
+                    item,
+                  );
+
+                return (
+                  <div
+                    key={`${item}-${index}`}
+                    className="pdf-stat"
+                  >
+                    <div className="pdf-stat-value">
+                      {
+                        stat.value
+                      }
+                    </div>
+
+                    {stat.label && (
+                      <div className="pdf-stat-label">
+                        {
+                          stat.label
+                        }
+                      </div>
+                    )}
+                  </div>
+                );
+              },
             )}
           </div>
         )}

@@ -44,10 +44,11 @@ export default function PublicSiteShell({
 
   return (
     <div
+      data-pdf-theme="product-editorial"
       style={
         themeStyle
       }
-      className={`flex min-h-screen flex-col bg-[var(--cms-background)] text-[var(--cms-text)] ${getCmsBodyFontClass(
+      className={`pdf-shell flex min-h-screen flex-col ${getCmsBodyFontClass(
         settings.theme,
       )}`}
     >
@@ -60,7 +61,7 @@ export default function PublicSiteShell({
         }
       />
 
-      <div className="flex-1">
+      <div className="pdf-public-main flex-1">
         {
           children
         }

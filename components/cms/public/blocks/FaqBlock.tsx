@@ -4,6 +4,50 @@ import {
   type CmsPublicBlockData,
 } from "./block-data";
 
+function splitFaq(
+  value:
+    string,
+) {
+  const marker =
+    " — ";
+
+  const index =
+    value.indexOf(
+      marker,
+    );
+
+  if (
+    index ===
+    -1
+  ) {
+    return {
+      question:
+        value,
+
+      answer:
+        "",
+    };
+  }
+
+  return {
+    question:
+      value
+        .slice(
+          0,
+          index,
+        )
+        .trim(),
+
+    answer:
+      value
+        .slice(
+          index +
+            marker.length,
+        )
+        .trim(),
+  };
+}
+
 export default function FaqBlock({
   data,
 }: {
@@ -23,35 +67,56 @@ export default function FaqBlock({
     );
 
   return (
-    <section className="px-5 py-16 sm:px-6">
-      <div className="mx-auto max-w-4xl">
-        {title && (
-          <h2 className="text-3xl font-bold tracking-[-0.035em]">
-            {
-              title
-            }
-          </h2>
-        )}
+    <section className="pdf-faq pdf-section">
+      <div className="pdf-container pdf-faq-layout">
+        <div>
+          <p className="pdf-eyebrow">
+            Help & answers
+          </p>
+
+          {title && (
+            <h2 className="pdf-section-title">
+              {
+                title
+              }
+            </h2>
+          )}
+        </div>
 
         {items.length >
           0 && (
-          <div className="mt-8 space-y-3">
+          <div className="pdf-faq-list">
             {items.map(
               (
-                item,
+                value,
                 index,
-              ) => (
-                <div
-                  key={`${item}-${index}`}
-                  className="rounded-2xl border border-black/10 bg-white p-5"
-                >
-                  <p className="font-semibold leading-7">
-                    {
-                      item
-                    }
-                  </p>
-                </div>
-              ),
+              ) => {
+                const item =
+                  splitFaq(
+                    value,
+                  );
+
+                return (
+                  <details
+                    key={`${value}-${index}`}
+                    className="pdf-faq-item"
+                  >
+                    <summary>
+                      {
+                        item.question
+                      }
+                    </summary>
+
+                    {item.answer && (
+                      <p className="pdf-faq-answer">
+                        {
+                          item.answer
+                        }
+                      </p>
+                    )}
+                  </details>
+                );
+              },
             )}
           </div>
         )}

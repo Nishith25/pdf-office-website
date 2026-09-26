@@ -39,14 +39,10 @@ export default function ImageTextBlock({
       "imagePosition",
     );
 
-  const imageFirst =
-    imagePosition ===
-    "left";
-
   const copy = (
     <div>
       {eyebrow && (
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--cms-primary)]">
+        <p className="pdf-eyebrow">
           {
             eyebrow
           }
@@ -54,7 +50,7 @@ export default function ImageTextBlock({
       )}
 
       {title && (
-        <h2 className="mt-3 text-3xl font-bold tracking-[-0.035em] sm:text-4xl">
+        <h2 className="pdf-section-title">
           {
             title
           }
@@ -62,7 +58,7 @@ export default function ImageTextBlock({
       )}
 
       {description && (
-        <p className="mt-5 whitespace-pre-line text-base leading-8 opacity-75">
+        <p className="pdf-section-description whitespace-pre-line">
           {
             description
           }
@@ -71,27 +67,40 @@ export default function ImageTextBlock({
     </div>
   );
 
-  const media =
-    image ? (
-      <img
-        src={
-          image
-        }
-        alt=""
-        className="min-h-[280px] w-full rounded-3xl object-cover"
-      />
-    ) : (
-      <div />
-    );
+  const media = (
+    <div className="pdf-image-text-media">
+      {image ? (
+        <img
+          src={
+            image
+          }
+          alt=""
+        />
+      ) : (
+        <div className="pdf-image-text-placeholder">
+          <span>
+            PDF OFFICE
+          </span>
+
+          <strong>
+            One workspace.
+            Every document.
+          </strong>
+        </div>
+      )}
+    </div>
+  );
 
   return (
-    <section className="px-5 py-16 sm:px-6">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2">
-        {imageFirst ? (
+    <section className="pdf-image-text pdf-section">
+      <div className="pdf-container pdf-image-text-inner">
+        {imagePosition ===
+        "left" ? (
           <>
             {
               media
             }
+
             {
               copy
             }
@@ -101,6 +110,7 @@ export default function ImageTextBlock({
             {
               copy
             }
+
             {
               media
             }

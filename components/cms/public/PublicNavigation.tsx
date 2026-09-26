@@ -27,7 +27,7 @@ function NavigationLink({
           ? "noopener noreferrer"
           : undefined
       }
-      className="text-sm font-medium opacity-75 transition hover:opacity-100"
+      className="pdf-navigation-link"
     >
       {
         item.label
@@ -45,8 +45,8 @@ export default function PublicNavigation({
     readonly CmsPublicNavigationItem[];
 
   orientation?:
-    "horizontal" |
-    "vertical";
+    | "horizontal"
+    | "vertical";
 }) {
   if (
     items.length ===
@@ -63,8 +63,8 @@ export default function PublicNavigation({
         className={
           orientation ===
           "vertical"
-            ? "space-y-3"
-            : "flex flex-wrap items-center gap-x-6 gap-y-3"
+            ? "pdf-navigation-list-vertical"
+            : "pdf-navigation-list"
         }
       >
         {items.map(
@@ -75,7 +75,7 @@ export default function PublicNavigation({
               key={
                 item.id
               }
-              className="relative"
+              className="pdf-navigation-item relative"
             >
               <NavigationLink
                 item={
@@ -90,8 +90,8 @@ export default function PublicNavigation({
                   className={
                     orientation ===
                     "vertical"
-                      ? "mt-3 space-y-2 border-l border-black/10 pl-4"
-                      : "mt-2 flex flex-wrap gap-x-4 gap-y-2 lg:absolute lg:left-0 lg:top-full lg:z-30 lg:min-w-48 lg:flex-col lg:rounded-xl lg:border lg:border-black/10 lg:bg-white lg:p-3 lg:shadow-lg"
+                      ? "mt-3 grid gap-2 border-l border-white/10 pl-4"
+                      : "pdf-navigation-children"
                   }
                 >
                   {item.children.map(

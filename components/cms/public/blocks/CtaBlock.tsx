@@ -34,10 +34,10 @@ export default function CtaBlock({
     );
 
   return (
-    <section className="px-5 py-16 sm:px-6">
-      <div className="mx-auto max-w-5xl rounded-3xl bg-[var(--cms-secondary)] px-6 py-14 text-center text-white sm:px-10">
+    <section>
+      <div className="mx-auto max-w-6xl px-7 py-16 text-center text-white sm:px-12 sm:py-20">
         {title && (
-          <h2 className="text-3xl font-bold tracking-[-0.035em] sm:text-4xl">
+          <h2 className="mx-auto max-w-3xl text-4xl font-[850] leading-[0.98] tracking-[-0.055em] sm:text-5xl lg:text-6xl">
             {
               title
             }
@@ -45,7 +45,7 @@ export default function CtaBlock({
         )}
 
         {description && (
-          <p className="mx-auto mt-4 max-w-2xl leading-8 opacity-80">
+          <p className="mx-auto mt-6 max-w-2xl text-[15px] leading-8 text-white/60">
             {
               description
             }
@@ -58,7 +58,7 @@ export default function CtaBlock({
             href={
               buttonUrl
             }
-            className="mt-7 inline-flex min-h-12 items-center justify-center rounded-xl bg-[var(--cms-primary)] px-6 text-sm font-bold text-white"
+            className="pdf-primary-button mt-8"
           >
             {
               buttonLabel

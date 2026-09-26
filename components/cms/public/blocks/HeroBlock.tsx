@@ -1,9 +1,6 @@
-import type {
-  CmsPublicBlockData,
-} from "./block-data";
-
 import {
   blockText,
+  type CmsPublicBlockData,
 } from "./block-data";
 
 export default function HeroBlock({
@@ -48,34 +45,12 @@ export default function HeroBlock({
       "buttonUrl",
     );
 
-  const alignment =
-    blockText(
-      data,
-      "alignment",
-    );
-
-  const centered =
-    alignment ===
-    "center";
-
   return (
-    <section className="overflow-hidden px-5 py-20 sm:px-6 sm:py-28">
-      <div
-        className={`mx-auto max-w-6xl ${
-          centered
-            ? "text-center"
-            : ""
-        }`}
-      >
-        <div
-          className={
-            centered
-              ? "mx-auto max-w-4xl"
-              : "max-w-4xl"
-          }
-        >
+    <section className="pdf-hero">
+      <div className="pdf-hero-inner">
+        <div className="pdf-hero-copy">
           {eyebrow && (
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--cms-primary)]">
+            <p className="pdf-eyebrow">
               {
                 eyebrow
               }
@@ -83,7 +58,7 @@ export default function HeroBlock({
           )}
 
           {title && (
-            <h1 className="mt-4 text-4xl font-bold tracking-[-0.045em] text-[var(--cms-text)] sm:text-5xl lg:text-6xl">
+            <h1 className="pdf-hero-title">
               {
                 title
               }
@@ -91,47 +66,87 @@ export default function HeroBlock({
           )}
 
           {description && (
-            <p
-              className={`mt-6 whitespace-pre-line text-base leading-8 opacity-75 sm:text-lg ${
-                centered
-                  ? "mx-auto max-w-3xl"
-                  : "max-w-3xl"
-              }`}
-            >
+            <p className="pdf-hero-description whitespace-pre-line">
               {
                 description
               }
             </p>
           )}
 
-          {buttonLabel &&
-            buttonUrl && (
-              <div className="mt-8">
-                <a
-                  href={
-                    buttonUrl
-                  }
-                  className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[var(--cms-primary)] px-6 text-sm font-bold text-white transition hover:opacity-90"
-                >
-                  {
-                    buttonLabel
-                  }
-                </a>
-              </div>
-            )}
+          {(buttonLabel &&
+            buttonUrl) && (
+            <div className="pdf-hero-actions">
+              <a
+                href={
+                  buttonUrl
+                }
+                className="pdf-primary-button"
+              >
+                {
+                  buttonLabel
+                }
+              </a>
+            </div>
+          )}
+
+          <div className="pdf-hero-proof">
+            Mobile document workspace
+          </div>
         </div>
 
-        {image && (
-          <div className="mt-12">
+        <div className="pdf-product-stage">
+          {image ? (
             <img
               src={
                 image
               }
               alt=""
-              className="mx-auto max-h-[640px] w-full rounded-3xl object-cover"
+              className="pdf-product-stage-image"
             />
-          </div>
-        )}
+          ) : (
+            <div className="pdf-product-stage-fallback">
+              <div className="pdf-product-stage-top">
+                <span className="pdf-product-stage-label">
+                  PDF OFFICE
+                </span>
+
+                <span className="pdf-product-stage-dot" />
+              </div>
+
+              <div className="pdf-document-preview">
+                <span className="pdf-document-preview-badge">
+                  PDF
+                </span>
+
+                <div className="pdf-document-preview-title" />
+
+                <div className="pdf-document-preview-line" />
+                <div className="pdf-document-preview-line" />
+                <div className="pdf-document-preview-line short" />
+                <div className="pdf-document-preview-line" />
+                <div className="pdf-document-preview-line short" />
+              </div>
+
+              <div className="pdf-product-tools">
+                <div className="pdf-product-tool">
+                  SCAN
+                </div>
+
+                <div className="pdf-product-tool">
+                  OCR
+                </div>
+
+                <div className="pdf-product-tool">
+                  EDIT
+                </div>
+
+                <div className="pdf-product-tool">
+                  SIGN
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

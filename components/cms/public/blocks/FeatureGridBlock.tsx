@@ -4,6 +4,50 @@ import {
   type CmsPublicBlockData,
 } from "./block-data";
 
+function splitFeature(
+  value:
+    string,
+) {
+  const marker =
+    " — ";
+
+  const index =
+    value.indexOf(
+      marker,
+    );
+
+  if (
+    index ===
+    -1
+  ) {
+    return {
+      title:
+        value,
+
+      description:
+        "",
+    };
+  }
+
+  return {
+    title:
+      value
+        .slice(
+          0,
+          index,
+        )
+        .trim(),
+
+    description:
+      value
+        .slice(
+          index +
+            marker.length,
+        )
+        .trim(),
+  };
+}
+
 export default function FeatureGridBlock({
   data,
 }: {
@@ -29,45 +73,76 @@ export default function FeatureGridBlock({
     );
 
   return (
-    <section className="px-5 py-16 sm:px-6">
-      <div className="mx-auto max-w-6xl">
-        {title && (
-          <h2 className="text-3xl font-bold tracking-[-0.035em] sm:text-4xl">
-            {
-              title
-            }
-          </h2>
-        )}
-
-        {description && (
-          <p className="mt-4 max-w-3xl text-base leading-8 opacity-70">
-            {
-              description
-            }
+    <section className="pdf-feature-grid pdf-section">
+      <div className="pdf-container pdf-feature-layout">
+        <div>
+          <p className="pdf-eyebrow">
+            Built for document work
           </p>
-        )}
+
+          {title && (
+            <h2 className="pdf-section-title">
+              {
+                title
+              }
+            </h2>
+          )}
+
+          {description && (
+            <p className="pdf-section-description">
+              {
+                description
+              }
+            </p>
+          )}
+        </div>
 
         {items.length >
           0 && (
-          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="pdf-feature-list">
             {items.map(
               (
-                item,
+                value,
                 index,
-              ) => (
-                <article
-                  key={`${item}-${index}`}
-                  className="rounded-2xl border border-black/10 bg-white/60 p-6"
-                >
-                  <div className="mb-4 h-2 w-10 rounded-full bg-[var(--cms-primary)]" />
+              ) => {
+                const feature =
+                  splitFeature(
+                    value,
+                  );
 
-                  <p className="font-semibold leading-7">
-                    {
-                      item
-                    }
-                  </p>
-                </article>
-              ),
+                return (
+                  <article
+                    key={`${value}-${index}`}
+                    className="pdf-feature-row"
+                  >
+                    <div className="pdf-feature-number">
+                      {String(
+                        index +
+                          1,
+                      ).padStart(
+                        2,
+                        "0",
+                      )}
+                    </div>
+
+                    <div>
+                      <h3 className="pdf-feature-title">
+                        {
+                          feature.title
+                        }
+                      </h3>
+
+                      {feature.description && (
+                        <p className="pdf-feature-description">
+                          {
+                            feature.description
+                          }
+                        </p>
+                      )}
+                    </div>
+                  </article>
+                );
+              },
             )}
           </div>
         )}

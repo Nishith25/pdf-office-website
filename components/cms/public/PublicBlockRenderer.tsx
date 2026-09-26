@@ -1,4 +1,8 @@
 import type {
+  ReactNode,
+} from "react";
+
+import type {
   CmsBlock,
 } from "../../../lib/cms/core/types";
 
@@ -33,136 +37,164 @@ export default function PublicBlockRenderer({
       block.data,
     );
 
+  let content:
+    ReactNode =
+      null;
+
   switch (
     block.type
   ) {
     case "hero":
-      return (
+      content = (
         <HeroBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "richText":
-      return (
+      content = (
         <RichTextBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "imageText":
-      return (
+      content = (
         <ImageTextBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "featureGrid":
-      return (
+      content = (
         <FeatureGridBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "cardGrid":
-      return (
+      content = (
         <CardGridBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "stats":
-      return (
+      content = (
         <StatsBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "gallery":
-      return (
+      content = (
         <GalleryBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "logoGrid":
-      return (
+      content = (
         <LogoGridBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "faq":
-      return (
+      content = (
         <FaqBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "cta":
-      return (
+      content = (
         <CtaBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "buttonGroup":
-      return (
+      content = (
         <ButtonGroupBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "download":
-      return (
+      content = (
         <DownloadBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "divider":
-      return (
+      content = (
         <DividerBlock
           data={
             data
           }
         />
       );
+      break;
 
     case "spacer":
-      return (
+      content = (
         <SpacerBlock
           data={
             data
           }
         />
       );
-
-    default:
-      return null;
+      break;
   }
+
+  return (
+    <div
+      className="pdf-block"
+      data-pdf-block={
+        block.type
+      }
+    >
+      {
+        content
+      }
+    </div>
+  );
 }

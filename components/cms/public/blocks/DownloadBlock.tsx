@@ -40,11 +40,15 @@ export default function DownloadBlock({
     );
 
   return (
-    <section className="px-5 py-16 sm:px-6">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 rounded-3xl border border-black/10 bg-white p-7 lg:grid-cols-2 lg:p-10">
-        <div>
+    <section className="pdf-download">
+      <div className="pdf-download-inner">
+        <div className="pdf-download-copy">
+          <p className="pdf-eyebrow">
+            PDF Office mobile
+          </p>
+
           {title && (
-            <h2 className="text-3xl font-bold tracking-[-0.035em]">
+            <h2 className="pdf-download-title mt-4">
               {
                 title
               }
@@ -52,7 +56,7 @@ export default function DownloadBlock({
           )}
 
           {description && (
-            <p className="mt-4 whitespace-pre-line leading-8 opacity-70">
+            <p className="pdf-download-description whitespace-pre-line">
               {
                 description
               }
@@ -65,7 +69,7 @@ export default function DownloadBlock({
               href={
                 buttonUrl
               }
-              className="mt-7 inline-flex min-h-12 items-center rounded-xl bg-[var(--cms-primary)] px-6 text-sm font-bold text-white"
+              className="pdf-primary-button"
             >
               {
                 buttonLabel
@@ -74,15 +78,35 @@ export default function DownloadBlock({
           )}
         </div>
 
-        {image && (
-          <img
-            src={
-              image
-            }
-            alt=""
-            className="max-h-[500px] w-full rounded-2xl object-contain"
-          />
-        )}
+        <div className="pdf-download-device">
+          {image ? (
+            <img
+              src={
+                image
+              }
+              alt=""
+            />
+          ) : (
+            <div className="pdf-device-frame">
+              <div className="pdf-device-screen">
+                <div className="pdf-device-app">
+                  PDF OFFICE
+                </div>
+
+                <h3>
+                  Your documents.
+                  Ready anywhere.
+                </h3>
+
+                <p>
+                  Scan, work with PDFs
+                  and keep essential
+                  document tools close.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

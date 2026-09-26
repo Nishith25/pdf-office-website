@@ -4,6 +4,50 @@ import {
   type CmsPublicBlockData,
 } from "./block-data";
 
+function splitCard(
+  value:
+    string,
+) {
+  const marker =
+    " — ";
+
+  const index =
+    value.indexOf(
+      marker,
+    );
+
+  if (
+    index ===
+    -1
+  ) {
+    return {
+      title:
+        value,
+
+      description:
+        "",
+    };
+  }
+
+  return {
+    title:
+      value
+        .slice(
+          0,
+          index,
+        )
+        .trim(),
+
+    description:
+      value
+        .slice(
+          index +
+            marker.length,
+        )
+        .trim(),
+  };
+}
+
 export default function CardGridBlock({
   data,
 }: {
@@ -29,10 +73,10 @@ export default function CardGridBlock({
     );
 
   return (
-    <section className="px-5 py-16 sm:px-6">
-      <div className="mx-auto max-w-6xl">
+    <section className="pdf-card-grid pdf-section">
+      <div className="pdf-container">
         {title && (
-          <h2 className="text-3xl font-bold tracking-[-0.035em]">
+          <h2 className="pdf-section-title">
             {
               title
             }
@@ -40,7 +84,7 @@ export default function CardGridBlock({
         )}
 
         {description && (
-          <p className="mt-4 max-w-3xl leading-8 opacity-70">
+          <p className="pdf-section-description">
             {
               description
             }
@@ -49,23 +93,52 @@ export default function CardGridBlock({
 
         {cards.length >
           0 && (
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="pdf-card-grid-list">
             {cards.map(
               (
-                card,
+                value,
                 index,
-              ) => (
-                <article
-                  key={`${card}-${index}`}
-                  className="min-h-36 rounded-2xl border border-black/10 bg-white p-6 shadow-sm"
-                >
-                  <p className="font-semibold leading-7">
-                    {
-                      card
-                    }
-                  </p>
-                </article>
-              ),
+              ) => {
+                const card =
+                  splitCard(
+                    value,
+                  );
+
+                return (
+                  <article
+                    key={`${value}-${index}`}
+                    className={`pdf-editorial-card ${
+                      card.description
+                        ? ""
+                        : "pdf-editorial-card-compact"
+                    }`}
+                  >
+                    <div className="pdf-card-index">
+                      {String(
+                        index +
+                          1,
+                      ).padStart(
+                        2,
+                        "0",
+                      )}
+                    </div>
+
+                    <h3 className="pdf-card-title">
+                      {
+                        card.title
+                      }
+                    </h3>
+
+                    {card.description && (
+                      <p className="pdf-card-description">
+                        {
+                          card.description
+                        }
+                      </p>
+                    )}
+                  </article>
+                );
+              },
             )}
           </div>
         )}
