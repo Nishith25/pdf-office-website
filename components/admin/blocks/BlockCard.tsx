@@ -14,7 +14,12 @@ import {
   Trash2,
 } from "lucide-react";
 
-import MediaPickerField from "../media/MediaPickerField";
+import StructuredBlockEditor from "./StructuredBlockEditor";
+
+import {
+  getCmsStructuredEditorData,
+  stringifyCmsStructuredBlockPayload,
+} from "../../../lib/admin/cms-structured-block-editor";
 
 import {
   getCmsBlockDefinition,
@@ -63,29 +68,6 @@ type Props = {
     boolean;
 };
 
-function stringValue(
-  value:
-    unknown,
-): string {
-  return typeof value ===
-    "string"
-    ? value
-    : "";
-}
-
-function linesValue(
-  value:
-    unknown,
-): string {
-  return Array.isArray(
-    value,
-  )
-    ? value
-        .map(String)
-        .join("\n")
-    : "";
-}
-
 export default function BlockCard({
   pageId,
   block,
@@ -97,37 +79,32 @@ export default function BlockCard({
       block.type,
     );
 
-  const initialMedia =
-    Object.fromEntries(
-      definition.fields
-        .filter(
-          (field) =>
-            field.type ===
-            "media",
-        )
-        .map(
-          (field) => [
-            field.key,
-            stringValue(
-              block.data[
-                field.key
-              ],
-            ),
-          ],
-        ),
-    );
-
   const [
-    mediaValues,
-    setMediaValues,
+    structuredData,
+    setStructuredData,
   ] =
     useState<
       Record<
         string,
-        string
+        unknown
       >
-    >(
-      initialMedia,
+    >(() => {
+      const normalized =
+        getCmsStructuredEditorData(
+          block.type,
+          block.data,
+        );
+
+      return normalized as unknown as Record<
+        string,
+        unknown
+      >;
+    });
+
+  const blockPayload =
+    stringifyCmsStructuredBlockPayload(
+      block.type,
+      structuredData,
     );
 
   return (
@@ -159,6 +136,12 @@ export default function BlockCard({
               definition.label
             }
           </h3>
+
+          <p className="mt-1 max-w-xl text-[9px] leading-relaxed text-[#9298A3]">
+            {
+              definition.description
+            }
+          </p>
         </div>
 
         <div className="flex flex-wrap gap-1.5">
@@ -190,11 +173,13 @@ export default function BlockCard({
             />
 
             <button
+              type="submit"
               disabled={
                 isFirst
               }
-              className="flex h-8 w-8 items-center justify-center rounded-[8px] border border-[#DFE2E7] disabled:opacity-30"
+              className="flex h-8 w-8 items-center justify-center rounded-[8px] border border-[#DFE2E7] disabled:cursor-not-allowed disabled:opacity-30"
               title="Move up"
+              aria-label="Move block up"
             >
               <ArrowUp className="h-3.5 w-3.5" />
             </button>
@@ -228,11 +213,13 @@ export default function BlockCard({
             />
 
             <button
+              type="submit"
               disabled={
                 isLast
               }
-              className="flex h-8 w-8 items-center justify-center rounded-[8px] border border-[#DFE2E7] disabled:opacity-30"
+              className="flex h-8 w-8 items-center justify-center rounded-[8px] border border-[#DFE2E7] disabled:cursor-not-allowed disabled:opacity-30"
               title="Move down"
+              aria-label="Move block down"
             >
               <ArrowDown className="h-3.5 w-3.5" />
             </button>
@@ -260,8 +247,10 @@ export default function BlockCard({
             />
 
             <button
+              type="submit"
               className="flex h-8 w-8 items-center justify-center rounded-[8px] border border-[#DFE2E7]"
               title="Duplicate block"
+              aria-label="Duplicate block"
             >
               <Copy className="h-3.5 w-3.5" />
             </button>
@@ -289,8 +278,14 @@ export default function BlockCard({
             />
 
             <button
+              type="submit"
               className="flex h-8 w-8 items-center justify-center rounded-[8px] border border-[#DFE2E7]"
               title={
+                block.visible
+                  ? "Hide block"
+                  : "Show block"
+              }
+              aria-label={
                 block.visible
                   ? "Hide block"
                   : "Show block"
@@ -326,8 +321,10 @@ export default function BlockCard({
             />
 
             <button
+              type="submit"
               className="flex h-8 w-8 items-center justify-center rounded-[8px] border border-[#F0D5D5] text-[#B84E4E]"
               title="Delete block"
+              aria-label="Delete block"
               onClick={(
                 event,
               ) => {
@@ -368,195 +365,38 @@ export default function BlockCard({
           }
         />
 
-        <div className="grid gap-5 md:grid-cols-2">
-          {definition.fields.map(
-            (
-              field,
-            ) => {
-              const value =
-                block.data[
-                  field.key
-                ];
+        <input
+          type="hidden"
+          name="blockData"
+          value={
+            blockPayload
+          }
+        />
 
-              if (
-                field.type ===
-                "media"
-              ) {
-                return (
-                  <MediaPickerField
-                    key={
-                      field.key
-                    }
-                    label={
-                      field.label
-                    }
-                    hint={
-                      field.helpText
-                    }
-                    name={`field.${field.key}`}
-                    value={
-                      mediaValues[
-                        field.key
-                      ] ??
-                      ""
-                    }
-                    onChange={(
-                      nextValue,
-                    ) =>
-                      setMediaValues(
-                        (
-                          current,
-                        ) => ({
-                          ...current,
+        <StructuredBlockEditor
+          type={
+            block.type
+          }
+          data={
+            structuredData
+          }
+          onChange={(
+            nextData,
+          ) =>
+            setStructuredData(
+              nextData,
+            )
+          }
+        />
 
-                          [field.key]:
-                            nextValue,
-                        }),
-                      )
-                    }
-                  />
-                );
-              }
+        <div className="mt-5 flex items-center justify-between gap-4 border-t border-[#ECEEF1] pt-5">
+          <p className="text-[9px] leading-relaxed text-[#9298A3]">
+            Save this block after making changes.
+          </p>
 
-              if (
-                field.type ===
-                "textarea" ||
-                field.type ===
-                "lines"
-              ) {
-                return (
-                  <label
-                    key={
-                      field.key
-                    }
-                    className="md:col-span-2"
-                  >
-                    <span className="text-[11px] font-semibold text-[#343A46]">
-                      {
-                        field.label
-                      }
-                    </span>
-
-                    <textarea
-                      name={`field.${field.key}`}
-                      defaultValue={
-                        field.type ===
-                        "lines"
-                          ? linesValue(
-                              value,
-                            )
-                          : stringValue(
-                              value,
-                            )
-                      }
-                      rows={
-                        field.type ===
-                        "lines"
-                          ? 6
-                          : 5
-                      }
-                      className="mt-2 w-full rounded-[10px] border border-[#DDE0E6] bg-white px-3.5 py-3 text-sm outline-none focus:border-[#617CE4] focus:ring-4 focus:ring-[#3157E7]/[0.07]"
-                    />
-
-                    {field.helpText && (
-                      <span className="mt-1 block text-[9px] text-[#9298A3]">
-                        {
-                          field.helpText
-                        }
-                      </span>
-                    )}
-                  </label>
-                );
-              }
-
-              if (
-                field.type ===
-                "select"
-              ) {
-                return (
-                  <label
-                    key={
-                      field.key
-                    }
-                  >
-                    <span className="text-[11px] font-semibold text-[#343A46]">
-                      {
-                        field.label
-                      }
-                    </span>
-
-                    <select
-                      name={`field.${field.key}`}
-                      defaultValue={
-                        stringValue(
-                          value,
-                        )
-                      }
-                      className="mt-2 min-h-11 w-full rounded-[10px] border border-[#DDE0E6] bg-white px-3.5 text-sm outline-none"
-                    >
-                      {field.options?.map(
-                        (
-                          option,
-                        ) => (
-                          <option
-                            key={
-                              option.value
-                            }
-                            value={
-                              option.value
-                            }
-                          >
-                            {
-                              option.label
-                            }
-                          </option>
-                        ),
-                      )}
-                    </select>
-                  </label>
-                );
-              }
-
-              return (
-                <label
-                  key={
-                    field.key
-                  }
-                >
-                  <span className="text-[11px] font-semibold text-[#343A46]">
-                    {
-                      field.label
-                    }
-                  </span>
-
-                  <input
-                    name={`field.${field.key}`}
-                    type={
-                      field.type ===
-                      "url"
-                        ? "text"
-                        : "text"
-                    }
-                    defaultValue={
-                      stringValue(
-                        value,
-                      )
-                    }
-                    placeholder={
-                      field.placeholder
-                    }
-                    className="mt-2 min-h-11 w-full rounded-[10px] border border-[#DDE0E6] bg-white px-3.5 text-sm outline-none focus:border-[#617CE4] focus:ring-4 focus:ring-[#3157E7]/[0.07]"
-                  />
-                </label>
-              );
-            },
-          )}
-        </div>
-
-        <div className="mt-5 flex justify-end">
           <button
             type="submit"
-            className="inline-flex min-h-10 items-center gap-2 rounded-[9px] bg-[#3157E7] px-4 text-[11px] font-semibold text-white"
+            className="inline-flex min-h-10 items-center gap-2 rounded-[9px] bg-[#3157E7] px-4 text-[11px] font-semibold text-white transition hover:bg-[#294BC8]"
           >
             <Save className="h-3.5 w-3.5" />
 
