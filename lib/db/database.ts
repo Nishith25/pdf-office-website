@@ -2,6 +2,10 @@ import type {
   Db,
 } from "mongodb";
 
+import {
+  getSiteConfig,
+} from "../site/config";
+
 export async function getDatabase(): Promise<Db> {
   const {
     default:
@@ -13,11 +17,10 @@ export async function getDatabase(): Promise<Db> {
   const client =
     await clientPromise;
 
-  const databaseName =
-    process.env.MONGODB_DB ||
-    "pdf_office_website";
+  const site =
+    getSiteConfig();
 
   return client.db(
-    databaseName,
+    site.databaseName,
   );
 }

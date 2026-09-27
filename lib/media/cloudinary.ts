@@ -6,8 +6,14 @@ import {
   requireServerEnv,
 } from "../env";
 
-export const CLOUDINARY_MEDIA_FOLDER =
-  "pdf-office";
+import {
+  getSiteConfig,
+} from "../site/config";
+
+export function getCloudinaryMediaFolder(): string {
+  return getSiteConfig()
+    .mediaFolder;
+}
 
 export function createCloudinaryUploadSignature() {
   const cloudName =
@@ -32,7 +38,7 @@ export function createCloudinaryUploadSignature() {
     );
 
   const folder =
-    CLOUDINARY_MEDIA_FOLDER;
+    getCloudinaryMediaFolder();
 
   const signature =
     cloudinary.utils.api_sign_request(
@@ -70,7 +76,8 @@ function configureCloudinary() {
         "CLOUDINARY_API_SECRET",
       ),
 
-    secure: true,
+    secure:
+      true,
   });
 
   return cloudinary;

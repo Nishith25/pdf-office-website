@@ -10,6 +10,10 @@ import {
   normalizeAdminEmail,
 } from "../lib/repositories/admin";
 
+import {
+  getSiteConfig,
+} from "../lib/site/config";
+
 const rawUri =
   process.env.MONGODB_URI;
 
@@ -18,10 +22,6 @@ const rawEmail =
 
 const rawPassword =
   process.env.ADMIN_PASSWORD;
-
-const databaseName =
-  process.env.MONGODB_DB ||
-  "pdf_office_website";
 
 if (!rawUri) {
   throw new Error(
@@ -42,18 +42,21 @@ if (!rawPassword) {
 }
 
 if (
-  rawPassword.length < 12
+  rawPassword.length <
+  12
 ) {
   throw new Error(
     "ADMIN_PASSWORD must be at least 12 characters long",
   );
 }
 
-const uri: string =
-  rawUri;
+const uri:
+  string =
+    rawUri;
 
-const adminPassword: string =
-  rawPassword;
+const adminPassword:
+  string =
+    rawPassword;
 
 const email =
   normalizeAdminEmail(
@@ -61,8 +64,13 @@ const email =
   );
 
 async function createAdmin() {
+  const site =
+    getSiteConfig();
+
   const client =
-    new MongoClient(uri);
+    new MongoClient(
+      uri,
+    );
 
   try {
     await client.connect();
@@ -71,9 +79,17 @@ async function createAdmin() {
       "Connected to MongoDB",
     );
 
+    console.log(
+      `Site: ${site.name}`,
+    );
+
+    console.log(
+      `Database: ${site.databaseName}`,
+    );
+
     const database =
       client.db(
-        databaseName,
+        site.databaseName,
       );
 
     const collection =
@@ -83,17 +99,20 @@ async function createAdmin() {
 
     await collection.createIndex(
       {
-        key: 1,
+        key:
+          1,
       },
+
       {
-        unique: true,
+        unique:
+          true,
       },
     );
 
     const passwordHash =
-  await hashPassword(
-    adminPassword,
-  );
+      await hashPassword(
+        adminPassword,
+      );
 
     const now =
       new Date();
@@ -101,27 +120,38 @@ async function createAdmin() {
     const result =
       await collection.updateOne(
         {
-          key: "primary",
+          key:
+            "primary",
         },
+
         {
           $set: {
             email,
+
             passwordHash,
-            updatedAt: now,
+
+            updatedAt:
+              now,
           },
 
           $setOnInsert: {
-            key: "primary",
-            createdAt: now,
+            key:
+              "primary",
+
+            createdAt:
+              now,
           },
         },
+
         {
-          upsert: true,
+          upsert:
+            true,
         },
       );
 
     if (
-      result.upsertedCount > 0
+      result.upsertedCount >
+      0
     ) {
       console.log(
         "Admin account created.",
@@ -145,12 +175,16 @@ async function createAdmin() {
 }
 
 createAdmin().catch(
-  (error) => {
+  (
+    error,
+  ) => {
     console.error(
       "Admin setup failed:",
       error,
     );
 
-    process.exit(1);
+    process.exit(
+      1,
+    );
   },
 );

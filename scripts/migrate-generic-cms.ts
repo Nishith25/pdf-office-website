@@ -1,4 +1,8 @@
 import {
+  getSiteConfig,
+} from "../lib/site/config";
+
+import {
   MongoClient,
   type Db,
 } from "mongodb";
@@ -43,8 +47,8 @@ const rawUri =
   process.env.MONGODB_URI;
 
 const databaseName =
-  process.env.MONGODB_DB ||
-  "pdf_office_website";
+  getSiteConfig()
+    .databaseName;
 
 if (!rawUri) {
   throw new Error(

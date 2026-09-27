@@ -1,29 +1,39 @@
-import Image from "next/image";
-
 import {
   FileText,
   ScanLine,
   ShieldCheck,
 } from "lucide-react";
 
+import {
+  getSiteConfig,
+} from "../../../lib/site/config";
+
 import LoginForm from "./LoginForm";
 
-export const metadata = {
-  title:
-    "Admin Login | PDF Office",
-};
+export function generateMetadata() {
+  const site =
+    getSiteConfig();
+
+  return {
+    title:
+      `Admin Login | ${site.shortName}`,
+  };
+}
 
 export default function AdminLoginPage() {
+  const site =
+    getSiteConfig();
+
   return (
     <main className="min-h-screen bg-[#F4F5F7] px-4 py-8 sm:px-6">
       <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-5xl overflow-hidden rounded-[22px] border border-[#E1E3E8] bg-white shadow-[0_18px_60px_rgba(25,31,46,0.08)] lg:grid-cols-[0.9fr_1.1fr]">
-        {/* Brand panel */}
         <section className="relative hidden overflow-hidden bg-[#182033] p-10 text-white lg:flex lg:flex-col lg:justify-between">
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.08]"
             style={{
               backgroundImage:
                 "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
+
               backgroundSize:
                 "32px 32px",
             }}
@@ -31,9 +41,13 @@ export default function AdminLoginPage() {
 
           <div className="relative">
             <div className="flex items-center gap-3">
-              <Image
-                src="/app-icon.png"
-                alt="PDF Office"
+              <img
+                src={
+                  site.adminLogoUrl
+                }
+                alt={
+                  site.shortName
+                }
                 width={52}
                 height={52}
                 className="h-12 w-12 rounded-[12px] object-cover"
@@ -41,7 +55,9 @@ export default function AdminLoginPage() {
 
               <div>
                 <p className="text-sm font-semibold">
-                  PDF Office
+                  {
+                    site.shortName
+                  }
                 </p>
 
                 <p className="mt-0.5 text-[10px] uppercase tracking-[0.16em] text-white/50">
@@ -55,8 +71,8 @@ export default function AdminLoginPage() {
             </h1>
 
             <p className="mt-5 max-w-sm text-sm leading-7 text-white/60">
-              Update website content, PDF tools, FAQs, media and site
-              settings from one controlled workspace.
+              Update pages, structured content, media, navigation and
+              website settings from one controlled workspace.
             </p>
           </div>
 
@@ -73,7 +89,7 @@ export default function AdminLoginPage() {
               <ScanLine className="h-4 w-4 text-[#8EA4FF]" />
 
               <span className="text-xs text-white/70">
-                Product-specific section editing
+                Website block editing
               </span>
             </div>
 
@@ -87,21 +103,26 @@ export default function AdminLoginPage() {
           </div>
         </section>
 
-        {/* Login */}
         <section className="flex items-center justify-center px-6 py-12 sm:px-12 lg:px-16">
           <div className="w-full max-w-[390px]">
             <div className="flex items-center gap-3 lg:hidden">
-              <Image
-                src="/app-icon.png"
-                alt="PDF Office"
+              <img
+                src={
+                  site.adminLogoUrl
+                }
+                alt={
+                  site.shortName
+                }
                 width={46}
                 height={46}
-                className="h-11 w-11 rounded-[11px]"
+                className="h-11 w-11 rounded-[11px] object-cover"
               />
 
               <div>
                 <p className="text-sm font-bold text-[#171A22]">
-                  PDF Office
+                  {
+                    site.shortName
+                  }
                 </p>
 
                 <p className="text-[9px] uppercase tracking-[0.14em] text-[#9197A3]">
@@ -119,8 +140,11 @@ export default function AdminLoginPage() {
             </h2>
 
             <p className="mt-3 text-sm leading-6 text-[#747B89]">
-              Sign in with the administrator account to manage PDF
-              Office website content.
+              Sign in with the administrator account to manage{" "}
+              {
+                site.shortName
+              }{" "}
+              website content.
             </p>
 
             <LoginForm />

@@ -8,11 +8,16 @@ import {
 } from "../env";
 
 import {
+  getSiteConfig,
+} from "../site/config";
+
+import {
   ADMIN_SESSION_SECONDS,
 } from "./constants";
 
 type AdminSession = {
-  email: string;
+  email:
+    string;
 };
 
 function getSessionSecret(): Uint8Array {
@@ -27,21 +32,27 @@ function getSessionSecret(): Uint8Array {
 }
 
 export async function createSessionToken(
-  email: string,
+  email:
+    string,
 ): Promise<string> {
   const now =
     Math.floor(
-      Date.now() / 1000,
+      Date.now() /
+        1000,
     );
+
+  const site =
+    getSiteConfig();
 
   return new SignJWT({
     email,
   })
     .setProtectedHeader({
-      alg: "HS256",
+      alg:
+        "HS256",
     })
     .setSubject(
-      "pdf-office-admin",
+      site.adminSessionSubject,
     )
     .setIssuedAt(
       now,
@@ -56,9 +67,13 @@ export async function createSessionToken(
 }
 
 export async function verifySessionToken(
-  token: string,
+  token:
+    string,
 ): Promise<AdminSession | null> {
   try {
+    const site =
+      getSiteConfig();
+
     const {
       payload,
     } =
@@ -69,8 +84,9 @@ export async function verifySessionToken(
           algorithms: [
             "HS256",
           ],
+
           subject:
-            "pdf-office-admin",
+            site.adminSessionSubject,
         },
       );
 
