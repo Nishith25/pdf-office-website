@@ -128,14 +128,13 @@ describe(
                 headerNavigation,
 
                 footerNavigation,
-
-                children:
-                  React.createElement(
-                    "main",
-                    null,
-                    "Page content",
-                  ),
               },
+
+              React.createElement(
+                "main",
+                null,
+                "Page content",
+              ),
             ),
           );
 

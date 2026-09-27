@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import {
   ArrowUpRight,
   Blocks,
@@ -142,33 +144,33 @@ export default function AdminShell({
           <div className="border-b border-[#E5E7EB] bg-white lg:hidden">
             <div className="overflow-x-auto px-4 py-2">
               <div className="flex min-w-max gap-2">
-                <a
+                <Link
                   href="/admin"
                   className="rounded-[8px] border border-[#E1E4E9] px-3 py-2 text-[10px] font-semibold text-[#59616E]"
                 >
                   Dashboard
-                </a>
+                </Link>
 
-                <a
+                <Link
                   href="/admin/pages"
                   className="rounded-[8px] border border-[#E1E4E9] px-3 py-2 text-[10px] font-semibold text-[#59616E]"
                 >
                   Pages
-                </a>
+                </Link>
 
-                <a
+                <Link
                   href="/admin/media"
                   className="rounded-[8px] border border-[#E1E4E9] px-3 py-2 text-[10px] font-semibold text-[#59616E]"
                 >
                   Media
-                </a>
+                </Link>
 
-                <a
+                <Link
                   href="/admin/activity"
                   className="rounded-[8px] border border-[#E1E4E9] px-3 py-2 text-[10px] font-semibold text-[#59616E]"
                 >
                   Activity
-                </a>
+                </Link>
               </div>
             </div>
           </div>

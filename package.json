@@ -17,7 +17,8 @@
     "cms:blocks:verify": "node --env-file=.env.local --import tsx scripts/verify-structured-cms-blocks.ts",
     "site:bootstrap:preview": "node --env-file=.env.local --import tsx scripts/bootstrap-gamenexa-site.ts",
     "site:bootstrap:apply": "node --env-file=.env.local --import tsx scripts/bootstrap-gamenexa-site.ts --apply",
-    "site:bootstrap:verify": "node --env-file=.env.local --import tsx scripts/verify-gamenexa-site.ts"
+    "site:bootstrap:verify": "node --env-file=.env.local --import tsx scripts/verify-gamenexa-site.ts",
+    "verify:release": "npm run lint && npm test && npm run build"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

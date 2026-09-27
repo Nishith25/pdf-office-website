@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import type {
   CmsSettings,
 } from "../../../lib/cms/core/types";
@@ -27,7 +29,7 @@ export default function PublicHeader({
   return (
     <header className="pdf-site-header">
       <div className="pdf-site-header-inner">
-        <a
+        <Link
           href="/"
           className="pdf-brand"
           aria-label={`${identity.siteName} home`}
@@ -62,7 +64,7 @@ export default function PublicHeader({
               </div>
             )}
           </div>
-        </a>
+        </Link>
 
         <div className="pdf-desktop-nav">
           <PublicNavigation

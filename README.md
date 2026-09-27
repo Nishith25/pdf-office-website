@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GAMENEXA CMS — PDF Office
 
-## Getting Started
+PDF Office is powered by the reusable GAMENEXA CMS architecture.
 
-First, run the development server:
+The project combines a site-specific theme with a generic structured content management system built with Next.js, TypeScript, MongoDB and Cloudinary.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Architecture
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Each GAMENEXA website has:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- one deployment
+- one MongoDB database
+- one primary administrator
+- one isolated admin session identity
+- one isolated Cloudinary media folder
+- one site profile
+- the shared V2 structured CMS core
+- a site-specific public theme
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The current PDF Office profile is defined in:
 
-## Learn More
+`site.config.ts`
 
-To learn more about Next.js, take a look at the following resources:
+Runtime configuration is resolved through:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`lib/site/config.ts`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## PDF Office
 
-## Deploy on Vercel
+Current defaults:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Site key: `pdf-office`
+- Database: `pdf_office_website`
+- Admin subject: `pdf-office-admin`
+- Media folder: `pdf-office`
+- Theme: `pdf-office-product-editorial`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Environment variables can override deployment-specific identity values.
+
+See `.env.example`.
+
+## Development
+
+Install dependencies:
+
+`npm ci`
+
+Run locally:
+
+`npm run dev`
+
+Production build:
+
+`npm run build`
+
+Run tests:
+
+`npm test`
+
+Run the complete local release check:
+
+`npm run verify:release`
+
+## CMS Verification
+
+Verify the existing generic CMS:
+
+`npm run cms:verify`
+
+Verify structured V2 CMS blocks:
+
+`npm run cms:blocks:verify`
+
+Verify the GAMENEXA site:
+
+`npm run site:bootstrap:verify`
+
+## Creating a New GAMENEXA Website
+
+Configure a separate deployment using values such as:
+
+- `SITE_KEY=gps-maps`
+- `SITE_NAME=GPS Maps`
+- `SITE_SHORT_NAME=GPS Maps`
+- `SITE_URL=https://example.com`
+- `SITE_MEDIA_FOLDER=gps-maps`
+- `MONGODB_DB=gps_maps_website`
+
+Preview the target database before creating anything:
+
+`npm run site:bootstrap:preview`
+
+Preview mode is read-only.
+
+For an existing site the bootstrap must report:
+
+`EXISTING SITE DETECTED — bootstrap apply would be refused.`
+
+Only for a brand-new empty database, after reviewing the preview and setting the bootstrap administrator credentials, initialize it with:
+
+`npm run site:bootstrap:apply`
+
+Never run the bootstrap apply command against an existing production website.
+
+## Structured CMS Blocks
+
+The CMS uses schema version 2 structured blocks.
+
+Supported blocks:
+
+- hero
+- richText
+- imageText
+- featureGrid
+- cardGrid
+- stats
+- gallery
+- logoGrid
+- faq
+- cta
+- buttonGroup
+- download
+- divider
+- spacer
+
+Public rendering consumes normalized V2 data directly.
+
+## Production
+
+The public website includes:
+
+- dynamic CMS metadata
+- dynamic sitemap generation
+- robots directives
+- baseline security headers
+- public 404 and runtime error handling
+- GitHub CI
+- Vercel deployment verification
+
+The admin area is available under `/admin`.
+
+## Safety
+
+Do not commit `.env.local`, credentials, API secrets or database connection credentials.
+
+`.env.example` contains variable names only and is safe to commit.

@@ -34,7 +34,7 @@ export default function PublicSiteShell({
   footerNavigation:
     readonly CmsPublicNavigationItem[];
 
-  children:
+  children?:
     ReactNode;
 }) {
   const themeStyle =
