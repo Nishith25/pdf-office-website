@@ -224,10 +224,10 @@ export default function PublicBlockRenderer({
   return (
     <div
       className="pdf-block"
-      data-pdf-block={
+      data-cms-block={
         block.type
       }
-      data-pdf-schema-version="2"
+      data-cms-schema-version="2"
     >
       {
         content

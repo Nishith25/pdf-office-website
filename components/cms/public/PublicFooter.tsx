@@ -60,6 +60,25 @@ export default function PublicFooter({
   } =
     settings;
 
+  const brandFallback =
+    identity.shortName
+      .trim()
+      .split(
+        /\s+/,
+      )[0]
+      ?.slice(
+        0,
+        4,
+      )
+      .toUpperCase() ||
+    identity.siteName
+      .trim()
+      .slice(
+        0,
+        3,
+      )
+      .toUpperCase();
+
   const socialLinks = [
     {
       label:
@@ -158,7 +177,9 @@ export default function PublicFooter({
               />
             ) : (
               <span>
-                PDF
+                {
+                  brandFallback
+                }
               </span>
             )}
           </div>

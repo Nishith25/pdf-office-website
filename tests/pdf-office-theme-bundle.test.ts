@@ -48,12 +48,12 @@ describe(
   "PDF Office professional public theme",
   () => {
     it(
-      "marks the public site with the PDF Office editorial product theme",
+      "marks the public site with the configured site theme",
       () => {
         expect(
           shell,
         ).toContain(
-          'data-pdf-theme="product-editorial"',
+          "data-site-theme",
         );
 
         expect(
@@ -87,7 +87,7 @@ describe(
         expect(
           renderer,
         ).toContain(
-          "data-pdf-block",
+          "data-cms-block",
         );
       },
     );

@@ -12,6 +12,10 @@ import type {
 } from "../../../lib/cms/public/navigation";
 
 import {
+  getSiteConfig,
+} from "../../../lib/site/config";
+
+import {
   buildCmsThemeStyle,
   getCmsBodyFontClass,
 } from "../../../lib/cms/public/theme";
@@ -37,6 +41,9 @@ export default function PublicSiteShell({
   children?:
     ReactNode;
 }) {
+  const site =
+    getSiteConfig();
+
   const themeStyle =
     buildCmsThemeStyle(
       settings.theme,
@@ -44,37 +51,44 @@ export default function PublicSiteShell({
 
   return (
     <div
-      data-pdf-theme="product-editorial"
+      data-site-theme={
+        site.themeKey
+      }
+      data-site-key={
+        site.key
+      }
       style={
         themeStyle
       }
-      className={`pdf-shell flex min-h-screen flex-col ${getCmsBodyFontClass(
+      className={getCmsBodyFontClass(
         settings.theme,
-      )}`}
+      )}
     >
-      <PublicHeader
-        settings={
-          settings
-        }
-        navigation={
-          headerNavigation
-        }
-      />
+      <div className="pdf-shell flex min-h-screen flex-col">
+        <PublicHeader
+          settings={
+            settings
+          }
+          navigation={
+            headerNavigation
+          }
+        />
 
-      <div className="pdf-public-main flex-1">
-        {
-          children
-        }
+        <div className="pdf-public-main flex-1">
+          {
+            children
+          }
+        </div>
+
+        <PublicFooter
+          settings={
+            settings
+          }
+          navigation={
+            footerNavigation
+          }
+        />
       </div>
-
-      <PublicFooter
-        settings={
-          settings
-        }
-        navigation={
-          footerNavigation
-        }
-      />
     </div>
   );
 }
