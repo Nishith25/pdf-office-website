@@ -144,3 +144,40 @@ The admin area is available under `/admin`.
 Do not commit `.env.local`, credentials, API secrets or database connection credentials.
 
 `.env.example` contains variable names only and is safe to commit.
+
+## GPS Maps Deployment
+
+GPS Maps uses the shared GAMENEXA CMS codebase but must run as an isolated deployment.
+
+Expected GPS production profile:
+
+- site key: `gps-maps`
+- database: `gps_maps_website`
+- media folder: `gps-maps`
+- theme: `gps-maps-navigation`
+- admin session subject: `gps-maps-admin`
+
+Use `.env.gps.example` as the deployment variable checklist.
+
+Before initializing a new site, inspect the resolved configuration:
+
+`npm run site:config`
+
+Then run only the read-only bootstrap preview:
+
+`npm run site:bootstrap:preview`
+
+The preview must show the intended GPS site and database and must report:
+
+`EMPTY SITE — ready for bootstrap apply.`
+
+Bootstrap apply has an additional safety lock. Apply mode requires exact confirmation of:
+
+- site key
+- database name
+- site URL
+- `CREATE_EMPTY_SITE` confirmation phrase
+
+The bootstrap still refuses any database that already contains CMS or administrator records.
+
+Never reuse the PDF Office database for GPS Maps.

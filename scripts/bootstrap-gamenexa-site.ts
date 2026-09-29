@@ -11,6 +11,10 @@ import {
 } from "../lib/cms/bootstrap";
 
 import {
+  assertBootstrapApplyConfirmation,
+} from "../lib/cms/bootstrap/apply-guard";
+
+import {
   CMS_COLLECTIONS,
 } from "../lib/cms/core/collections";
 
@@ -122,6 +126,10 @@ async function main() {
     );
 
     console.log(
+      `Site URL: ${site.siteUrl}`,
+    );
+
+    console.log(
       `Media folder: ${site.mediaFolder}`,
     );
 
@@ -189,6 +197,21 @@ async function main() {
         "Bootstrap refused because this database already contains CMS/admin records.",
       );
     }
+
+    assertBootstrapApplyConfirmation(
+      {
+        siteKey:
+          site.key,
+
+        databaseName:
+          site.databaseName,
+
+        siteUrl:
+          site.siteUrl,
+      },
+
+      process.env,
+    );
 
     const rawEmail =
       process.env
