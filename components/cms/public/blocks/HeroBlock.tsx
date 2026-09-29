@@ -6,6 +6,10 @@ import {
   cmsPresentationClassName,
 } from "./presentation";
 
+import {
+  getPublicThemeCopy,
+} from "../../../../lib/site/public-theme-copy";
+
 type HeroData =
   CmsStructuredBlockDataByType["hero"];
 
@@ -17,6 +21,9 @@ export default function HeroBlock({
 }) {
   const presentation =
     data.presentation;
+
+  const copy =
+    getPublicThemeCopy();
 
   return (
     <section
@@ -112,7 +119,9 @@ export default function HeroBlock({
           ) : null}
 
           <div className="pdf-hero-proof">
-            Mobile document workspace
+            {
+              copy.heroProof
+            }
           </div>
         </div>
 
@@ -129,7 +138,9 @@ export default function HeroBlock({
             <div className="pdf-product-stage-fallback">
               <div className="pdf-product-stage-top">
                 <span className="pdf-product-stage-label">
-                  PDF OFFICE
+                  {
+                    copy.heroStageLabel
+                  }
                 </span>
 
                 <span className="pdf-product-stage-dot" />
@@ -137,7 +148,9 @@ export default function HeroBlock({
 
               <div className="pdf-document-preview">
                 <span className="pdf-document-preview-badge">
-                  PDF
+                  {
+                    copy.heroStageBadge
+                  }
                 </span>
 
                 <div className="pdf-document-preview-title" />
@@ -150,21 +163,22 @@ export default function HeroBlock({
               </div>
 
               <div className="pdf-product-tools">
-                <div className="pdf-product-tool">
-                  SCAN
-                </div>
-
-                <div className="pdf-product-tool">
-                  OCR
-                </div>
-
-                <div className="pdf-product-tool">
-                  EDIT
-                </div>
-
-                <div className="pdf-product-tool">
-                  SIGN
-                </div>
+                {copy.heroTools.map(
+                  (
+                    tool,
+                  ) => (
+                    <div
+                      key={
+                        tool
+                      }
+                      className="pdf-product-tool"
+                    >
+                      {
+                        tool
+                      }
+                    </div>
+                  ),
+                )}
               </div>
             </div>
           )}

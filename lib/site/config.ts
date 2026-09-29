@@ -2,7 +2,9 @@ import {
   z,
 } from "zod";
 
-import siteProfile from "../../site.config";
+import siteProfile, {
+  siteProfiles,
+} from "../../site.config";
 
 const siteKeySchema =
   z
@@ -172,7 +174,7 @@ export function buildSiteConfig(
       string | undefined
     > = process.env,
 ): SiteConfig {
-  const profile =
+  const defaultProfile =
     profileSchema.parse(
       siteProfile,
     );
@@ -183,18 +185,36 @@ export function buildSiteConfig(
   const key =
     siteKeySchema.parse(
       explicitSiteKey ||
-        profile.key,
+        defaultProfile.key,
     );
+
+  const knownProfile =
+    Object.prototype.hasOwnProperty.call(
+      siteProfiles,
+      key,
+    )
+      ? profileSchema.parse(
+          siteProfiles[
+            key as keyof typeof siteProfiles
+          ],
+        )
+      : null;
+
+  const profile =
+    knownProfile ||
+    defaultProfile;
 
   const databaseName =
     databaseNameSchema.parse(
       env.MONGODB_DB?.trim() ||
         (
-          explicitSiteKey
-            ? databaseNameFromSiteKey(
-                key,
-              )
-            : profile.defaultDatabaseName
+          knownProfile
+            ? profile.defaultDatabaseName
+            : explicitSiteKey
+              ? databaseNameFromSiteKey(
+                  key,
+                )
+              : profile.defaultDatabaseName
         ),
     );
 
@@ -203,9 +223,11 @@ export function buildSiteConfig(
       env.SITE_MEDIA_FOLDER
         ?.trim() ||
         (
-          explicitSiteKey
-            ? key
-            : profile.defaultMediaFolder
+          knownProfile
+            ? profile.defaultMediaFolder
+            : explicitSiteKey
+              ? key
+              : profile.defaultMediaFolder
         ),
     );
 

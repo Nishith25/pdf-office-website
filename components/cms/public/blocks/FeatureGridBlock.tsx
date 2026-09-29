@@ -6,6 +6,10 @@ import {
   cmsPresentationClassName,
 } from "./presentation";
 
+import {
+  getPublicThemeCopy,
+} from "../../../../lib/site/public-theme-copy";
+
 type FeatureGridData =
   CmsStructuredBlockDataByType["featureGrid"];
 
@@ -17,6 +21,9 @@ export default function FeatureGridBlock({
 }) {
   const presentation =
     data.presentation;
+
+  const copy =
+    getPublicThemeCopy();
 
   const cardLayout =
     [
@@ -47,7 +54,9 @@ export default function FeatureGridBlock({
       >
         <div>
           <p className="pdf-eyebrow">
-            Built for document work
+            {
+              copy.featureEyebrow
+            }
           </p>
 
           {data.title && (

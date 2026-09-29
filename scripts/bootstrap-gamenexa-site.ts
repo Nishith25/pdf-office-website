@@ -324,35 +324,41 @@ async function main() {
         .insertedId
         .toString();
 
-    const heroBlock =
-      cmsBlockSchema.parse({
-        pageId,
+    const blocks =
+      seed.blocks.map(
+        (
+          block,
+          index,
+        ) =>
+          cmsBlockSchema.parse({
+            pageId,
 
-        type:
-          "hero",
+            type:
+              block.type,
 
-        order:
-          1,
+            order:
+              index + 1,
 
-        visible:
-          true,
+            visible:
+              true,
 
-        data:
-          seed.heroData,
+            data:
+              block.data,
 
-        createdAt:
-          now,
+            createdAt:
+              now,
 
-        updatedAt:
-          now,
-      });
+            updatedAt:
+              now,
+          }),
+      );
 
     await database
       .collection(
         CMS_COLLECTIONS.blocks,
       )
-      .insertOne(
-        heroBlock,
+      .insertMany(
+        blocks,
       );
 
     const headerMenu =
@@ -530,7 +536,7 @@ async function main() {
     );
 
     console.log(
-      "✓ V2 hero created",
+      `✓ Structured homepage blocks created: ${seed.blocks.length}`,
     );
 
     console.log(

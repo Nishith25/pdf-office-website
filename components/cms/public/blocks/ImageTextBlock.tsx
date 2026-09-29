@@ -6,6 +6,10 @@ import {
   cmsPresentationClassName,
 } from "./presentation";
 
+import {
+  getPublicThemeCopy,
+} from "../../../../lib/site/public-theme-copy";
+
 type ImageTextData =
   CmsStructuredBlockDataByType["imageText"];
 
@@ -17,6 +21,9 @@ export default function ImageTextBlock({
 }) {
   const presentation =
     data.presentation;
+
+  const themeCopy =
+    getPublicThemeCopy();
 
   const copy = (
     <div>
@@ -72,12 +79,15 @@ export default function ImageTextBlock({
       ) : (
         <div className="pdf-image-text-placeholder">
           <span>
-            PDF OFFICE
+            {
+              themeCopy.imagePlaceholderEyebrow
+            }
           </span>
 
           <strong>
-            One workspace.
-            Every document.
+            {
+              themeCopy.imagePlaceholderTitle
+            }
           </strong>
         </div>
       )}

@@ -6,6 +6,10 @@ import {
   cmsPresentationClassName,
 } from "./presentation";
 
+import {
+  getPublicThemeCopy,
+} from "../../../../lib/site/public-theme-copy";
+
 type DownloadData =
   CmsStructuredBlockDataByType["download"];
 
@@ -17,6 +21,9 @@ export default function DownloadBlock({
 }) {
   const presentation =
     data.presentation;
+
+  const copy =
+    getPublicThemeCopy();
 
   return (
     <section
@@ -105,18 +112,21 @@ export default function DownloadBlock({
             <div className="pdf-device-frame">
               <div className="pdf-device-screen">
                 <div className="pdf-device-app">
-                  PDF OFFICE
+                  {
+                    copy.downloadAppLabel
+                  }
                 </div>
 
                 <h3>
-                  Your documents.
-                  Ready anywhere.
+                  {
+                    copy.downloadTitle
+                  }
                 </h3>
 
                 <p>
-                  Scan, work with PDFs
-                  and keep essential
-                  document tools close.
+                  {
+                    copy.downloadDescription
+                  }
                 </p>
               </div>
             </div>
