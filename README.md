@@ -181,3 +181,5 @@ Bootstrap apply has an additional safety lock. Apply mode requires exact confirm
 The bootstrap still refuses any database that already contains CMS or administrator records.
 
 Never reuse the PDF Office database for GPS Maps.
+
+<!-- GPS Maps production deployment uses the shared GAMENEXA codebase. -->
