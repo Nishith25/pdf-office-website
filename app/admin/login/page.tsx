@@ -17,6 +17,31 @@ export function generateMetadata() {
   return {
     title:
       `Admin Login | ${site.shortName}`,
+
+    description:
+      `Official ${site.shortName} administrator portal.`,
+
+    robots: {
+      index:
+        false,
+
+      follow:
+        false,
+
+      nocache:
+        true,
+
+      googleBot: {
+        index:
+          false,
+
+        follow:
+          false,
+
+        noimageindex:
+          true,
+      },
+    },
   };
 }
 
@@ -148,6 +173,34 @@ export default function AdminLoginPage() {
             </p>
 
             <LoginForm />
+
+            <div className="mt-5 rounded-[10px] border border-[#E4E7EE] bg-[#F8F9FB] px-4 py-3">
+              <p className="text-[11px] font-semibold text-[#3A404C]">
+                Official{" "}
+                {
+                  site.shortName
+                }{" "}
+                administrator portal
+              </p>
+
+              <p className="mt-1.5 text-[10px] leading-5 text-[#7A818E]">
+                Use only the administrator account created for this website.
+                This portal does not request Google, Vercel, email-provider,
+                or other third-party passwords.
+              </p>
+
+              <a
+                href={
+                  site.siteUrl
+                }
+                className="mt-2 inline-flex text-[10px] font-semibold text-[#3157E7] hover:underline"
+              >
+                Return to{" "}
+                {
+                  site.shortName
+                }
+              </a>
+            </div>
 
             <div className="mt-8 border-t border-[#EAEBEF] pt-5">
               <div className="flex items-center gap-2 text-[10px] text-[#999FAB]">

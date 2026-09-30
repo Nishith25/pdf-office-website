@@ -71,9 +71,9 @@ export default function LoginForm() {
             id="email"
             name="email"
             type="email"
-            autoComplete="email"
+            autoComplete="username"
             required
-            placeholder="admin@example.com"
+            placeholder="Administrator email"
             className="min-h-12 w-full rounded-[12px] border border-[#DDE0E7] bg-white pl-10 pr-4 text-sm text-[#171A22] outline-none transition placeholder:text-[#ADB1BA] focus:border-[#6480E9] focus:ring-4 focus:ring-[#3157E7]/[0.08]"
           />
         </div>
