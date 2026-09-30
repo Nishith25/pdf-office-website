@@ -10,8 +10,8 @@ import {
 } from "../../../../lib/admin/settings-editor";
 
 import {
-  getSiteSettings,
-} from "../../../../lib/repositories/site-content";
+  getCmsSettings,
+} from "../../../../lib/repositories/cms-settings";
 
 export const dynamic =
   "force-dynamic";
@@ -23,12 +23,49 @@ export const metadata = {
 
 export default async function AdminSettingsPage() {
   const settings =
-    await getSiteSettings();
+    await getCmsSettings();
 
   const initialValue =
-    createSiteSettingsEditorState(
-      settings,
-    );
+    createSiteSettingsEditorState({
+      brandName:
+        settings.identity.siteName,
+
+      shortName:
+        settings.identity.shortName,
+
+      playStoreUrl:
+        settings.externalLinks.googlePlayUrl,
+
+      siteUrl:
+        settings.identity.siteUrl,
+
+      appIconUrl:
+        settings.identity.logoUrl,
+
+      footerText:
+        settings.footer.text,
+
+      privacyUrl:
+        "",
+
+      termsUrl:
+        "",
+
+      instagramUrl:
+        settings.social.instagram,
+
+      facebookUrl:
+        settings.social.facebook,
+
+      linkedinUrl:
+        settings.social.linkedin,
+
+      youtubeUrl:
+        settings.social.youtube,
+
+      xUrl:
+        settings.social.x,
+    });
 
   return (
     <div className="mx-auto max-w-[1100px]">

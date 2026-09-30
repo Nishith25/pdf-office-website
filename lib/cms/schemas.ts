@@ -50,6 +50,36 @@ export const siteSettingsSchema =
       .or(
         z.literal(""),
       ),
+
+    instagramUrl: z
+      .string()
+      .url()
+      .optional()
+      .or(z.literal("")),
+
+    facebookUrl: z
+      .string()
+      .url()
+      .optional()
+      .or(z.literal("")),
+
+    linkedinUrl: z
+      .string()
+      .url()
+      .optional()
+      .or(z.literal("")),
+
+    youtubeUrl: z
+      .string()
+      .url()
+      .optional()
+      .or(z.literal("")),
+
+    xUrl: z
+      .string()
+      .url()
+      .optional()
+      .or(z.literal("")),
   });
 
 export const seoSchema =

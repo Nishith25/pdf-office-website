@@ -142,6 +142,66 @@ export default function SiteSettingsEditor({
             }
           />
 
+          <AdminField
+            label="Instagram URL"
+            name="instagramUrl"
+            value={value.instagramUrl ?? ""}
+            onChange={(event) =>
+              setValue((current) => ({
+                ...current,
+                instagramUrl: event.target.value,
+              }))
+            }
+          />
+
+          <AdminField
+            label="Facebook URL"
+            name="facebookUrl"
+            value={value.facebookUrl ?? ""}
+            onChange={(event) =>
+              setValue((current) => ({
+                ...current,
+                facebookUrl: event.target.value,
+              }))
+            }
+          />
+
+          <AdminField
+            label="LinkedIn URL"
+            name="linkedinUrl"
+            value={value.linkedinUrl ?? ""}
+            onChange={(event) =>
+              setValue((current) => ({
+                ...current,
+                linkedinUrl: event.target.value,
+              }))
+            }
+          />
+
+          <AdminField
+            label="YouTube URL"
+            name="youtubeUrl"
+            value={value.youtubeUrl ?? ""}
+            onChange={(event) =>
+              setValue((current) => ({
+                ...current,
+                youtubeUrl: event.target.value,
+              }))
+            }
+          />
+
+          <AdminField
+            label="X URL"
+            name="xUrl"
+            value={value.xUrl ?? ""}
+            onChange={(event) =>
+              setValue((current) => ({
+                ...current,
+                xUrl: event.target.value,
+              }))
+            }
+          />
+
           <div className="md:col-span-2">
             <AdminField
               label="Google Play URL"

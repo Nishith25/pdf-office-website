@@ -45,5 +45,25 @@ export function createSiteSettingsEditorState(
     termsUrl:
       settings?.termsUrl ??
       "",
+
+    instagramUrl:
+      settings?.instagramUrl ??
+      "",
+
+    facebookUrl:
+      settings?.facebookUrl ??
+      "",
+
+    linkedinUrl:
+      settings?.linkedinUrl ??
+      "",
+
+    youtubeUrl:
+      settings?.youtubeUrl ??
+      "",
+
+    xUrl:
+      settings?.xUrl ??
+      "",
   });
 }

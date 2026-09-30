@@ -38,6 +38,11 @@ import {
   saveSiteSettings,
 } from "../../../../lib/repositories/site-content";
 
+import {
+  getCmsSettings,
+  saveCmsSettings,
+} from "../../../../lib/repositories/cms-settings";
+
 function readText(
   formData:
     FormData,
@@ -123,6 +128,36 @@ export async function saveSiteSettingsAction(
           formData,
           "termsUrl",
         ),
+
+      instagramUrl:
+        readText(
+          formData,
+          "instagramUrl",
+        ),
+
+      facebookUrl:
+        readText(
+          formData,
+          "facebookUrl",
+        ),
+
+      linkedinUrl:
+        readText(
+          formData,
+          "linkedinUrl",
+        ),
+
+      youtubeUrl:
+        readText(
+          formData,
+          "youtubeUrl",
+        ),
+
+      xUrl:
+        readText(
+          formData,
+          "xUrl",
+        ),
     });
 
   if (
@@ -140,6 +175,59 @@ export async function saveSiteSettingsAction(
     await saveSiteSettings(
       parsed.data,
     );
+
+    const cmsSettings =
+      await getCmsSettings();
+
+    await saveCmsSettings({
+      ...cmsSettings,
+
+      identity: {
+        ...cmsSettings.identity,
+
+        siteName:
+          parsed.data.brandName,
+
+        shortName:
+          parsed.data.shortName,
+
+        siteUrl:
+          parsed.data.siteUrl,
+      },
+
+      social: {
+        ...cmsSettings.social,
+
+        instagram:
+          parsed.data.instagramUrl || "",
+
+        facebook:
+          parsed.data.facebookUrl || "",
+
+        linkedin:
+          parsed.data.linkedinUrl || "",
+
+        youtube:
+          parsed.data.youtubeUrl || "",
+
+        x:
+          parsed.data.xUrl || "",
+      },
+
+      externalLinks: {
+        ...cmsSettings.externalLinks,
+
+        googlePlayUrl:
+          parsed.data.playStoreUrl,
+      },
+
+      footer: {
+        ...cmsSettings.footer,
+
+        text:
+          parsed.data.footerText,
+      },
+    });
 
     await writeActivity(
       "Updated site settings",
