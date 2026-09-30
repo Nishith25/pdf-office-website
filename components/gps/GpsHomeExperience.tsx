@@ -72,16 +72,6 @@ const safetyFeatures = [
 
 const toolItems = [
   {
-    title: "My Location",
-    description:
-      "See your current position and useful location information quickly.",
-  },
-  {
-    title: "Find Address",
-    description:
-      "Look up an address or understand a selected location directly from the map.",
-  },
-  {
     title: "Parking Manager",
     description:
       "Save where you parked and return to your vehicle without searching again.",
@@ -102,14 +92,14 @@ const toolItems = [
       "Translate useful text between languages while travelling.",
   },
   {
-    title: "Voice Navigation",
-    description:
-      "Use spoken navigation guidance while following your route.",
-  },
-  {
     title: "Map Styles",
     description:
       "Switch between supported map views including normal, hybrid, terrain and satellite-style experiences.",
+  },
+  {
+    title: "My Location & Find Address",
+    description:
+      "See your current position and quickly understand or search for an address.",
   },
 ];
 
@@ -117,136 +107,31 @@ const faqItems = [
   {
     question: "Can GPS Maps work without internet?",
     answer:
-      "Supported countries, regions and selected map areas can be downloaded in advance so essential map access remains available when connectivity is limited.",
+      "Supported regions and selected map areas can be downloaded in advance for use when connectivity is limited.",
   },
   {
     question: "Does GPS Maps support voice navigation?",
     answer:
-      "Yes. Voice-assisted navigation can help you follow routes and driving directions while travelling.",
+      "Yes. Voice-assisted navigation helps you follow routes and driving directions while travelling.",
   },
   {
-    question: "Does the app include weather forecasts?",
+    question: "Does the app include weather, radar and AQI?",
     answer:
-      "Yes. The app includes current conditions, hourly information, longer-range forecasts and weather-focused travel insights.",
-  },
-  {
-    question: "Does GPS Maps include radar and AQI?",
-    answer:
-      "Yes. The weather experience includes radar-style weather layers and air-quality information with pollutant details and health-oriented guidance.",
+      "Yes. GPS Maps includes weather forecasts, radar-style information and air-quality insights for travel planning.",
   },
   {
     question: "Can I share my live location?",
     answer:
-      "Yes. GPS Maps includes live-location and private-circle features designed to help people stay connected.",
-  },
-  {
-    question: "What can I find with Nearby Explore?",
-    answer:
-      "Nearby discovery can surface useful categories such as restaurants, cafes, fuel, hospitals, shopping, parking and other places around you.",
-  },
-  {
-    question: "What map tools are included?",
-    answer:
-      "The app includes tools such as My Location, Find Address, Parking Manager, Ride Dashboard, Digital Compass, Translator and map-view controls.",
+      "Yes. Live-location sharing and private-circle features help you stay connected with people you trust.",
   },
 ];
 
 function MapStage() {
   return (
     <div
-      className="gpsx-map-stage"
+      className="gpsx-map-stage gpsx-map-stage-empty"
       aria-hidden="true"
-    >
-      <div className="gpsx-map-grid" />
-
-      <svg
-        className="gpsx-map-svg"
-        viewBox="0 0 720 680"
-        role="presentation"
-      >
-        <g className="gpsx-map-roads">
-          <path d="M-40 150 C120 130 190 210 350 175 S590 80 770 120" />
-          <path d="M-20 490 C120 430 245 470 355 410 S590 300 760 350" />
-          <path d="M135 -30 C155 120 115 230 190 350 S230 560 205 730" />
-          <path d="M535 -30 C500 110 565 220 505 350 S500 580 570 730" />
-          <path d="M-30 300 C130 250 240 310 390 280 S610 220 760 255" />
-          <path d="M355 -30 C330 105 390 165 350 270 S300 510 340 730" />
-        </g>
-
-        <g className="gpsx-map-minor-roads">
-          <path d="M45 60 L650 600" />
-          <path d="M85 620 L620 70" />
-          <path d="M-20 385 L760 500" />
-          <path d="M20 225 L690 80" />
-          <path d="M275 -20 L680 420" />
-          <path d="M35 555 L460 675" />
-        </g>
-
-        <path
-          className="gpsx-route-shadow"
-          d="M150 520 C210 470 185 400 280 370 C370 342 390 275 455 250 C520 224 540 175 590 125"
-        />
-
-        <path
-          className="gpsx-route"
-          d="M150 520 C210 470 185 400 280 370 C370 342 390 275 455 250 C520 224 540 175 590 125"
-        />
-
-        <circle
-          className="gpsx-route-origin"
-          cx="150"
-          cy="520"
-          r="13"
-        />
-
-        <circle
-          className="gpsx-route-origin-core"
-          cx="150"
-          cy="520"
-          r="5"
-        />
-
-        <circle
-          className="gpsx-route-destination"
-          cx="590"
-          cy="125"
-          r="15"
-        />
-
-        <circle
-          className="gpsx-route-destination-core"
-          cx="590"
-          cy="125"
-          r="6"
-        />
-      </svg>
-
-      <div className="gpsx-map-status gpsx-map-status-top">
-        <span className="gpsx-map-status-label">
-          NAVIGATION
-        </span>
-
-        <strong>
-          Route active
-        </strong>
-      </div>
-
-      <div className="gpsx-map-status gpsx-map-status-bottom">
-        <span className="gpsx-map-pulse" />
-
-        <span>
-          Voice guidance ready
-        </span>
-      </div>
-
-      <div className="gpsx-map-place gpsx-map-place-a">
-        Start
-      </div>
-
-      <div className="gpsx-map-place gpsx-map-place-b">
-        Destination
-      </div>
-    </div>
+    />
   );
 }
 
@@ -568,61 +453,47 @@ export default function GpsHomeExperience({
             </div>
           </div>
 
-          <div className="gpsx-route-board">
-            <div className="gpsx-route-board-head">
-              <span>ROUTE / LIVE</span>
-              <span>GPS MAPS</span>
+          <div className="gpsx-route-card">
+              <div className="gpsx-route-card-top">
+                <span>Route preview</span>
+                <span>Voice guidance on</span>
+              </div>
+
+              <div className="gpsx-route-card-body">
+                <div className="gpsx-route-stop">
+                  <span className="gpsx-route-stop-dot gpsx-route-stop-dot-start" />
+
+                  <div>
+                    <small>Start</small>
+                    <strong>Madhapur</strong>
+                  </div>
+                </div>
+
+                <div className="gpsx-route-connector" />
+
+                <div className="gpsx-route-stop">
+                  <span className="gpsx-route-stop-dot gpsx-route-stop-dot-end" />
+
+                  <div>
+                    <small>Destination</small>
+                    <strong>HITEC City</strong>
+                  </div>
+                </div>
+
+                <div className="gpsx-route-card-meta">
+                  <div>
+                    <small>ETA</small>
+                    <strong>18 min</strong>
+                  </div>
+
+                  <div>
+                    <small>Distance</small>
+                    <strong>7.4 km</strong>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <svg
-              viewBox="0 0 640 520"
-              role="presentation"
-              aria-hidden="true"
-            >
-              <path
-                className="gpsx-board-gridline"
-                d="M0 95 H640 M0 190 H640 M0 285 H640 M0 380 H640"
-              />
-
-              <path
-                className="gpsx-board-gridline"
-                d="M110 0 V520 M220 0 V520 M330 0 V520 M440 0 V520 M550 0 V520"
-              />
-
-              <path
-                className="gpsx-board-route"
-                d="M120 405 C145 330 230 340 250 275 C270 215 345 240 370 175 C392 116 460 150 520 82"
-              />
-
-              <circle
-                cx="120"
-                cy="405"
-                r="10"
-                className="gpsx-board-point"
-              />
-
-              <circle
-                cx="520"
-                cy="82"
-                r="14"
-                className="gpsx-board-point-end"
-              />
-            </svg>
-
-            <div className="gpsx-route-board-distance">
-              <small>
-                Guidance
-              </small>
-
-              <strong>
-                ON
-              </strong>
-
-              <span>
-                voice
-              </span>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -694,109 +565,31 @@ export default function GpsHomeExperience({
             <WeatherBoard />
             <AqiPanel />
           </div>
-        </div>
-      </section>
 
-      <section
-        id="nearby"
-        className="gpsx-nearby-section"
-      >
-        <div className="gpsx-shell">
-          <div className="gpsx-section-intro gpsx-section-intro-inline">
-            <p className="gpsx-label">
-              Nearby
-            </p>
-
-            <h2>
-              See what&apos;s around you.
-            </h2>
-          </div>
-
-          <div className="gpsx-nearby-grid">
-            {[
-              "Restaurants",
-              "Cafes",
-              "Fuel",
-              "Hospitals",
-              "Shopping",
-              "Parking",
-              "Temples",
-              "Kids' Parks",
-            ].map((item, index) => (
-              <div
-                key={item}
-                className="gpsx-nearby-item"
-              >
-                <span>
-                  {String(index + 1).padStart(
-                    2,
-                    "0",
-                  )}
-                </span>
-
-                <strong>{item}</strong>
-
-                <small>NEARBY</small>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section
-        id="travel"
-        className="gpsx-travel-section"
-      >
-        <div className="gpsx-shell gpsx-travel-layout">
-          <div className="gpsx-travel-copy">
-            <p className="gpsx-label gpsx-label-light">
-              Travel Planner
-            </p>
-
-            <h2>
-              Plan the trip
-              <br />
-              around the conditions.
-            </h2>
-
-            <p>
-              Choose where you are travelling, select a date and
-              use weather-aware activity suitability to understand
-              the conditions before you go.
-            </p>
-          </div>
-
-          <div className="gpsx-travel-board">
-            <div className="gpsx-travel-fields">
-              <div>
-                <span>SOURCE</span>
-                <strong>Current location</strong>
-              </div>
-
-              <div>
-                <span>DESTINATION</span>
-                <strong>Your destination</strong>
-              </div>
-
-              <div>
-                <span>DATE</span>
-                <strong>Select travel date</strong>
-              </div>
+          <div className="gpsx-travel-compact">
+            <div>
+              <span>TRAVEL PLANNER</span>
+              <strong>Plan around the conditions.</strong>
             </div>
 
-            <div className="gpsx-activity-grid">
-              {[
-                ["Cycling", "GOOD"],
-                ["Running", "FAIR"],
-                ["Hiking", "FAIR"],
-                ["Cricket", "GOOD"],
-                ["Picnic", "GOOD"],
-              ].map(([name, score]) => (
-                <div key={name}>
-                  <span>{name}</span>
-                  <strong>{score}</strong>
-                </div>
-              ))}
+            <div>
+              <span>CYCLING</span>
+              <strong>GOOD</strong>
+            </div>
+
+            <div>
+              <span>RUNNING</span>
+              <strong>FAIR</strong>
+            </div>
+
+            <div>
+              <span>HIKING</span>
+              <strong>FAIR</strong>
+            </div>
+
+            <div>
+              <span>PICNIC</span>
+              <strong>GOOD</strong>
             </div>
           </div>
         </div>
@@ -1047,9 +840,7 @@ export default function GpsHomeExperience({
           </h2>
 
           <p>
-            Navigation, offline maps, weather intelligence,
-            nearby discovery, live location and practical
-            travel tools for everyday movement.
+            Navigation, offline maps, weather and location tools for everyday travel.
           </p>
 
           <a
