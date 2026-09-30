@@ -31,14 +31,14 @@ describe(
 
         expect(
           page,
-        ).toContain(
-          "index: false",
+        ).toMatch(
+          /index:\s*false/,
         );
 
         expect(
           page,
-        ).toContain(
-          "follow: false",
+        ).toMatch(
+          /follow:\s*false/,
         );
       },
     );

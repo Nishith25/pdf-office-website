@@ -13,15 +13,27 @@ import {
   getCmsDashboardSummary,
 } from "../../../lib/repositories/cms-dashboard";
 
+import {
+  getSiteConfig,
+} from "../../../lib/site/config";
+
 export const dynamic =
   "force-dynamic";
 
-export const metadata = {
-  title:
-    "Dashboard | CMS",
-};
+export function generateMetadata() {
+  const site =
+    getSiteConfig();
+
+  return {
+    title:
+      `Dashboard | ${site.shortName} CMS`,
+  };
+}
 
 export default async function CmsDashboardPage() {
+  const site =
+    getSiteConfig();
+
   const {
     summary,
     recentActivity,
@@ -118,12 +130,17 @@ export default async function CmsDashboardPage() {
           </p>
 
           <h1 className="mt-2 text-3xl font-semibold tracking-[-0.045em] text-[#181B23] sm:text-4xl">
-            Website overview
+            {
+              site.shortName
+            } overview
           </h1>
 
           <p className="mt-2 max-w-xl text-sm leading-6 text-[#757C89]">
-            Manage pages, content, media and website configuration
-            from one reusable CMS.
+            Manage pages, content and website configuration for{" "}
+            {
+              site.shortName
+            }{" "}
+            from one controlled CMS workspace.
           </p>
         </div>
 
@@ -231,7 +248,9 @@ export default async function CmsDashboardPage() {
               </h2>
 
               <p className="mt-0.5 text-[10px] text-[#8B919C]">
-                Latest generic CMS changes
+                Latest {
+                  site.shortName
+                } CMS changes
               </p>
             </div>
           </div>
@@ -277,7 +296,7 @@ export default async function CmsDashboardPage() {
           ) : (
             <div className="mt-5 rounded-[12px] border border-dashed border-[#DDE0E5] bg-[#FAFAFB] px-4 py-8 text-center">
               <p className="text-[10px] font-medium text-[#777E8A]">
-                No generic CMS activity yet.
+                No CMS activity yet.
               </p>
 
               <p className="mt-1 text-[9px] text-[#A0A5AE]">

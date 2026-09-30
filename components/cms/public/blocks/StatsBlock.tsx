@@ -6,6 +6,8 @@ import {
   cmsPresentationClassName,
 } from "./presentation";
 
+import ExplainableCopy from "./ExplainableCopy";
+
 type StatsData =
   CmsStructuredBlockDataByType["stats"];
 
@@ -20,6 +22,7 @@ export default function StatsBlock({
 
   return (
     <section
+      id="overview"
       className={
         cmsPresentationClassName(
           presentation,
@@ -56,19 +59,19 @@ export default function StatsBlock({
                   </div>
 
                   {item.label && (
-                    <div className="pdf-stat-label">
-                      {
+                    <ExplainableCopy
+                      title={
                         item.label
                       }
-                    </div>
-                  )}
-
-                  {item.description && (
-                    <p className="pdf-stat-description">
-                      {
+                      description={
                         item.description
                       }
-                    </p>
+                      titleClassName="pdf-stat-label"
+                      descriptionClassName="pdf-stat-description"
+                      heading={
+                        false
+                      }
+                    />
                   )}
                 </div>
               ),

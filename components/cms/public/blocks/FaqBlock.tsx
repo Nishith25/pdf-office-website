@@ -24,6 +24,7 @@ export default function FaqBlock({
 
   return (
     <section
+      id="faq"
       className={
         cmsPresentationClassName(
           presentation,

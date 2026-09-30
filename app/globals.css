@@ -4290,3 +4290,105 @@ img {
   .pdf-navigation-link:hover {
   color: #ffffff;
 }
+
+
+/* ---------------------------------------------------------
+   GPS MAPS — EXPLAINABLE FEATURE COPY
+--------------------------------------------------------- */
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable {
+  width: 100%;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-summary::-webkit-details-marker {
+  display: none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-title {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-icon {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #dbe5f0;
+  border-radius: 999px;
+
+  background: #ffffff;
+
+  color: #2563eb;
+
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable[open]
+.gps-explainable-icon {
+  transform: rotate(45deg);
+
+  background: #2563eb;
+  color: #ffffff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-panel {
+  margin-top: 12px;
+
+  padding: 13px 14px;
+
+  border: 1px solid #dbe5f0;
+  border-radius: 12px;
+
+  background: #f8fbff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-panel
+.pdf-stat-description,
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-panel
+.pdf-card-description,
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-panel
+.pdf-feature-description {
+  margin-top: 0;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#overview,
+[data-site-theme="gps-maps-navigation"]
+#explore,
+[data-site-theme="gps-maps-navigation"]
+#tools,
+[data-site-theme="gps-maps-navigation"]
+#faq,
+[data-site-theme="gps-maps-navigation"]
+#start {
+  scroll-margin-top: 96px;
+}

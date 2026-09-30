@@ -8,15 +8,27 @@ import {
   getMediaItems,
 } from "../../../../lib/repositories/media";
 
+import {
+  getSiteConfig,
+} from "../../../../lib/site/config";
+
 export const dynamic =
   "force-dynamic";
 
-export const metadata = {
-  title:
-    "Media | PDF Office Admin",
-};
+export function generateMetadata() {
+  const site =
+    getSiteConfig();
+
+  return {
+    title:
+      `Media | ${site.shortName} Admin`,
+  };
+}
 
 export default async function AdminMediaPage() {
+  const site =
+    getSiteConfig();
+
   const media =
     await getMediaItems();
 
@@ -36,8 +48,11 @@ export default async function AdminMediaPage() {
         </h1>
 
         <p className="mt-2 max-w-2xl text-sm leading-6 text-[#747B88]">
-          Upload and manage persistent PDF Office website images stored
-          in Cloudinary.
+          Upload and manage persistent{" "}
+          {
+            site.shortName
+          }{" "}
+          website images.
         </p>
       </div>
 

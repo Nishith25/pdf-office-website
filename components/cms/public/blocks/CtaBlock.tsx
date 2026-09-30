@@ -20,6 +20,7 @@ export default function CtaBlock({
 
   return (
     <section
+      id="start"
       className={
         cmsPresentationClassName(
           presentation,

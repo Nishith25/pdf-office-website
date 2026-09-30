@@ -10,6 +10,8 @@ import {
   getPublicThemeCopy,
 } from "../../../../lib/site/public-theme-copy";
 
+import ExplainableCopy from "./ExplainableCopy";
+
 type FeatureGridData =
   CmsStructuredBlockDataByType["featureGrid"];
 
@@ -37,6 +39,7 @@ export default function FeatureGridBlock({
 
   return (
     <section
+      id="tools"
       className={
         cmsPresentationClassName(
           presentation,
@@ -132,19 +135,16 @@ export default function FeatureGridBlock({
                         </div>
                       )}
 
-                      <h3 className="pdf-feature-title">
-                        {
+                      <ExplainableCopy
+                        title={
                           item.title
                         }
-                      </h3>
-
-                      {item.description && (
-                        <p className="pdf-feature-description">
-                          {
-                            item.description
-                          }
-                        </p>
-                      )}
+                        description={
+                          item.description
+                        }
+                        titleClassName="pdf-feature-title"
+                        descriptionClassName="pdf-feature-description"
+                      />
 
                       {item.linkLabel &&
                         item.linkUrl && (
@@ -203,19 +203,16 @@ export default function FeatureGridBlock({
                         </div>
                       )}
 
-                      <h3 className="pdf-feature-title">
-                        {
+                      <ExplainableCopy
+                        title={
                           item.title
                         }
-                      </h3>
-
-                      {item.description && (
-                        <p className="pdf-feature-description">
-                          {
-                            item.description
-                          }
-                        </p>
-                      )}
+                        description={
+                          item.description
+                        }
+                        titleClassName="pdf-feature-title"
+                        descriptionClassName="pdf-feature-description"
+                      />
 
                       {item.linkLabel &&
                         item.linkUrl && (

@@ -13,6 +13,10 @@ import {
 
 import AdminSidebarNavigation from "./AdminSidebarNavigation";
 
+import {
+  getSiteConfig,
+} from "../../lib/site/config";
+
 type AdminShellProps = {
   adminEmail:
     string;
@@ -21,15 +25,28 @@ type AdminShellProps = {
     React.ReactNode;
 };
 
-function CmsBrandMark() {
-  return (
-    <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-[11px] bg-[#202538] shadow-sm">
-      <Blocks className="h-[18px] w-[18px] text-white" />
+function CmsBrandMark({
+  logoUrl,
+  shortName,
+}: {
+  logoUrl:
+    string;
 
-      <span className="absolute -bottom-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full border-2 border-[#FCFCFD] bg-[#3157E7] px-1 text-[6px] font-black tracking-[-0.04em] text-white">
-        CMS
-      </span>
-    </div>
+  shortName:
+    string;
+}) {
+  return (
+    <img
+      src={
+        logoUrl
+      }
+      alt={
+        shortName
+      }
+      width={40}
+      height={40}
+      className="h-10 w-10 shrink-0 rounded-[11px] object-cover shadow-sm"
+    />
   );
 }
 
@@ -37,6 +54,9 @@ export default function AdminShell({
   adminEmail,
   children,
 }: AdminShellProps) {
+  const site =
+    getSiteConfig();
+
   return (
     <div className="min-h-screen bg-[#F5F6F8] text-[#171A22]">
       <div className="mx-auto flex min-h-screen max-w-[1800px]">
@@ -44,11 +64,18 @@ export default function AdminShell({
         <aside className="hidden w-[250px] shrink-0 border-r border-[#E3E5E9] bg-[#FCFCFD] lg:flex lg:flex-col">
           <div className="border-b border-[#E7E9ED] px-5 py-5">
             <div className="flex items-center gap-3">
-              <CmsBrandMark />
+              <CmsBrandMark
+                logoUrl={
+                  site.adminLogoUrl
+                }
+                shortName={
+                  site.shortName
+                }
+              />
 
               <div className="min-w-0">
                 <p className="truncate text-sm font-bold tracking-[-0.02em]">
-                  Site CMS
+                  {site.shortName} CMS
                 </p>
 
                 <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-[#9096A2]">
@@ -109,7 +136,7 @@ export default function AdminShell({
 
               <div>
                 <p className="text-xs font-bold">
-                  Site CMS
+                  {site.shortName} CMS
                 </p>
 
                 <p className="text-[8px] uppercase tracking-[0.12em] text-[#9A9FAB]">
@@ -120,7 +147,7 @@ export default function AdminShell({
 
             <div className="hidden lg:block">
               <p className="text-xs font-semibold text-[#222631]">
-                Content Management System
+                {site.shortName} Content Management
               </p>
 
               <p className="mt-0.5 text-[9px] text-[#979CA7]">

@@ -558,7 +558,7 @@ export default function MediaLibrary({
           </p>
 
           <p className="mt-2 text-[10px] text-[#9298A3]">
-            Upload the first PDF Office image.
+            Upload the first website image.
           </p>
         </div>
       )}

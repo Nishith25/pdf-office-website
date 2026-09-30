@@ -18,6 +18,11 @@ import {
   getCmsPublicHomepageModel,
 } from "../lib/cms/public/site-data";
 
+import {
+  buildHomepageStructuredData,
+  serializeStructuredData,
+} from "../lib/cms/public/structured-data";
+
 export const dynamic =
   "force-dynamic";
 
@@ -45,6 +50,12 @@ export default async function HomePage() {
     notFound();
   }
 
+  const structuredData =
+    buildHomepageStructuredData(
+      model.page,
+      model.settings,
+    );
+
   return (
     <PublicSiteShell
       settings={
@@ -57,6 +68,17 @@ export default async function HomePage() {
         model.footerNavigation
       }
     >
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+      >
+        {
+          serializeStructuredData(
+            structuredData,
+          )
+        }
+      </script>
+
       <PublicCmsPage
         page={
           model.page

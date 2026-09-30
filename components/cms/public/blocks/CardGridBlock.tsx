@@ -6,6 +6,8 @@ import {
   cmsPresentationClassName,
 } from "./presentation";
 
+import ExplainableCopy from "./ExplainableCopy";
+
 type CardGridData =
   CmsStructuredBlockDataByType["cardGrid"];
 
@@ -20,6 +22,7 @@ export default function CardGridBlock({
 
   return (
     <section
+      id="explore"
       className={
         cmsPresentationClassName(
           presentation,
@@ -102,19 +105,16 @@ export default function CardGridBlock({
                     </div>
                   )}
 
-                  <h3 className="pdf-card-title">
-                    {
+                  <ExplainableCopy
+                    title={
                       card.title
                     }
-                  </h3>
-
-                  {card.description && (
-                    <p className="pdf-card-description">
-                      {
-                        card.description
-                      }
-                    </p>
-                  )}
+                    description={
+                      card.description
+                    }
+                    titleClassName="pdf-card-title"
+                    descriptionClassName="pdf-card-description"
+                  />
 
                   {card.linkLabel &&
                     card.linkUrl && (
