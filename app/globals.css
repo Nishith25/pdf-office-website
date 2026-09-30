@@ -13981,3 +13981,78 @@ small {
   border-right: none !important;
   grid-template-columns: 1fr !important;
 }
+
+
+/* =========================================================
+   GPS CMS — DYNAMIC CONTENT HELPERS
+   ========================================================= */
+
+[data-site-theme="gps-maps-navigation"]
+.gpsx-cms-section-description {
+  max-width: 620px;
+  margin-top: 18px;
+  color: #74736d;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gpsx-cms-weather-grid {
+  display: grid;
+  margin-top: 58px;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid #d3d3ce;
+  border-left: 1px solid #d3d3ce;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gpsx-cms-weather-card {
+  min-height: 190px;
+  padding: 24px;
+  border-right: 1px solid #d3d3ce;
+  border-bottom: 1px solid #d3d3ce;
+  background: #f5f5f1;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gpsx-cms-weather-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #898883;
+  font-size: 8px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gpsx-cms-weather-card h3 {
+  margin: 50px 0 0;
+  color: #111;
+  font-size: 25px;
+  font-weight: 560;
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gpsx-cms-weather-card p {
+  margin: 14px 0 0;
+  color: #74736d;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+@media (max-width: 900px) {
+  [data-site-theme="gps-maps-navigation"]
+  .gpsx-cms-weather-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  [data-site-theme="gps-maps-navigation"]
+  .gpsx-cms-weather-grid {
+    grid-template-columns: 1fr;
+  }
+}

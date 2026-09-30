@@ -73,7 +73,7 @@ describe(
         expect(
           component,
         ).toContain(
-          "gpsx-map-stage",
+          "gpsx-hero-layout",
         );
 
         expect(
