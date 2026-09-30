@@ -39,10 +39,10 @@ export const siteProfiles = {
       "GPS Maps",
 
     tagline:
-      "Earth Maps • Navigation • Location Tools",
+      "Navigation • Offline Maps • Weather • Live Location",
 
     siteUrl:
-      "https://gps-earth-maps-web.vercel.app",
+      "https://gps-maps-website.vercel.app",
 
     defaultDatabaseName:
       "gps_maps_website",

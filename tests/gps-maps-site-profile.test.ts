@@ -41,7 +41,7 @@ describe(
         expect(
           config.tagline,
         ).toBe(
-          "Earth Maps • Navigation • Location Tools",
+          "Navigation • Offline Maps • Weather • Live Location",
         );
 
         expect(
