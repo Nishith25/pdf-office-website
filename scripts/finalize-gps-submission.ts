@@ -86,6 +86,8 @@ const seo = {
 };
 
 const heroData = {
+  schemaVersion:
+    2,
   eyebrow:
     "",
 
@@ -136,6 +138,8 @@ const heroData = {
 };
 
 const toolsData = {
+  schemaVersion:
+    2,
   title:
     "More tools",
 
@@ -322,6 +326,8 @@ const toolsData = {
 };
 
 const featuresData = {
+  schemaVersion:
+    2,
   title:
     "Features",
 
@@ -526,6 +532,8 @@ const featuresData = {
 };
 
 const faqData = {
+  schemaVersion:
+    2,
   title:
     "Questions",
 
@@ -597,6 +605,8 @@ const faqData = {
 };
 
 const ctaData = {
+  schemaVersion:
+    2,
   eyebrow:
     "",
 

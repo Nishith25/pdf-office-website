@@ -6,8 +6,9 @@ import {
   notFound,
 } from "next/navigation";
 
-import PublicCmsPage from "../components/cms/public/PublicCmsPage";
+import GpsHomeExperience from "../components/gps/GpsHomeExperience";
 
+import PublicCmsPage from "../components/cms/public/PublicCmsPage";
 import PublicSiteShell from "../components/cms/public/PublicSiteShell";
 
 import {
@@ -22,6 +23,14 @@ import {
   buildHomepageStructuredData,
   serializeStructuredData,
 } from "../lib/cms/public/structured-data";
+
+import {
+  listPublishedCmsBlogPosts,
+} from "../lib/repositories/cms-blog";
+
+import {
+  getSiteConfig,
+} from "../lib/site/config";
 
 export const dynamic =
   "force-dynamic";
@@ -49,6 +58,20 @@ export default async function HomePage() {
   if (!model) {
     notFound();
   }
+
+  const site =
+    getSiteConfig();
+
+  const recentPosts =
+    site.key ===
+      "gps-maps"
+      ? (
+          await listPublishedCmsBlogPosts()
+        ).slice(
+          0,
+          3,
+        )
+      : [];
 
   const structuredData =
     buildHomepageStructuredData(
@@ -79,14 +102,29 @@ export default async function HomePage() {
         }
       </script>
 
-      <PublicCmsPage
-        page={
-          model.page
-        }
-        blocks={
-          model.blocks
-        }
-      />
+      {site.key ===
+      "gps-maps" ? (
+        <GpsHomeExperience
+          blocks={
+            model.blocks
+          }
+          settings={
+            model.settings
+          }
+          recentPosts={
+            recentPosts
+          }
+        />
+      ) : (
+        <PublicCmsPage
+          page={
+            model.page
+          }
+          blocks={
+            model.blocks
+          }
+        />
+      )}
     </PublicSiteShell>
   );
 }

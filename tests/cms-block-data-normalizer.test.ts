@@ -144,6 +144,92 @@ describe(
     );
 
     it(
+      "preserves structured V2-shaped data when the version marker is missing",
+      () => {
+        const result =
+          normalizeCmsBlockData(
+            "featureGrid",
+            {
+              title:
+                "Features",
+
+              description:
+                "",
+
+              columns:
+                3,
+
+              items: [
+                {
+                  id:
+                    "route",
+
+                  eyebrow:
+                    "",
+
+                  title:
+                    "Route Planner",
+
+                  description:
+                    "Plan a route before travelling.",
+
+                  icon:
+                    "",
+
+                  image:
+                    "",
+
+                  badge:
+                    "",
+
+                  linkLabel:
+                    "",
+
+                  linkUrl:
+                    "",
+                },
+              ],
+
+              presentation: {
+                background:
+                  "default",
+
+                width:
+                  "wide",
+
+                spacing:
+                  "normal",
+
+                alignment:
+                  "left",
+
+                variant:
+                  "icon-grid",
+              },
+            },
+          );
+
+        expect(
+          result.schemaVersion,
+        ).toBe(
+          2,
+        );
+
+        expect(
+          result.items,
+        ).toHaveLength(
+          1,
+        );
+
+        expect(
+          result.items[0]?.title,
+        ).toBe(
+          "Route Planner",
+        );
+      },
+    );
+
+    it(
       "is idempotent for already structured data",
       () => {
         const first =

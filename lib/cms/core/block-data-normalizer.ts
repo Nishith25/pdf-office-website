@@ -165,10 +165,48 @@ export function normalizeCmsBlockData(
     );
   }
 
-  const data =
+  /*
+   * Some early structured CMS records were saved
+   * before schemaVersion was written explicitly.
+   *
+   * If the data already matches the current V2
+   * structure after adding only schemaVersion,
+   * preserve it instead of treating object arrays
+   * as legacy string arrays.
+   */
+  const candidate =
     record(
       input,
     );
+
+  if (
+    !(
+      "schemaVersion"
+      in candidate
+    )
+  ) {
+    const versionedCandidate = {
+      schemaVersion:
+        2,
+
+      ...candidate,
+    };
+
+    if (
+      isCmsStructuredBlockData(
+        type,
+        versionedCandidate,
+      )
+    ) {
+      return parseCmsStructuredBlockData(
+        type,
+        versionedCandidate,
+      );
+    }
+  }
+
+  const data =
+    candidate;
 
   switch (
     type
