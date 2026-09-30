@@ -22,7 +22,7 @@ export default function CardGridBlock({
 
   return (
     <section
-      id="explore"
+      id="tools"
       className={
         cmsPresentationClassName(
           presentation,

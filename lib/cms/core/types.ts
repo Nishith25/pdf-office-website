@@ -5,6 +5,7 @@ import {
 import {
   cmsActivitySchema,
   cmsBlockSchema,
+  cmsBlogPostSchema,
   cmsBlockTypeSchema,
   cmsMenuItemSchema,
   cmsMenuItemTargetSchema,
@@ -34,6 +35,11 @@ export type CmsBlock =
 export type CmsBlockType =
   z.infer<
     typeof cmsBlockTypeSchema
+  >;
+
+export type CmsBlogPost =
+  z.infer<
+    typeof cmsBlogPostSchema
   >;
 
 export type CmsSettings =

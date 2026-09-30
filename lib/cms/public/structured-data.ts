@@ -47,6 +47,36 @@ export function buildHomepageStructuredData(
       "https://schema.org",
 
     "@graph": [
+      ...(site.key ===
+      "gps-maps"
+        ? [
+            {
+              "@type":
+                "MobileApplication",
+
+              "@id":
+                `${baseUrl}/#app`,
+
+              name:
+                "GPS Maps",
+
+              operatingSystem:
+                "Android",
+
+              applicationCategory:
+                "NavigationApplication",
+
+              description,
+
+              installUrl:
+                "https://play.google.com/store/apps/details?id=com.maps.gps.navigation.drivingdirections.live.earth.gpsnavigation&hl=en_IN",
+
+              url:
+                baseUrl,
+            },
+          ]
+        : []),
+
       {
         "@type":
           "WebSite",

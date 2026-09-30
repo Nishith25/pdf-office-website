@@ -107,7 +107,7 @@ describe(
             "components/cms/public/blocks/CardGridBlock.tsx",
           ),
         ).toContain(
-          'id="explore"',
+          'id="tools"',
         );
 
         expect(
@@ -115,7 +115,7 @@ describe(
             "components/cms/public/blocks/FeatureGridBlock.tsx",
           ),
         ).toContain(
-          'id="tools"',
+          'id="features"',
         );
 
         expect(
@@ -174,6 +174,152 @@ describe(
           script,
         ).toContain(
           "FINALIZE_GPS_SUBMISSION",
+        );
+      },
+    );
+  },
+);
+
+describe(
+  "GPS Maps Android app marketing",
+  () => {
+    it(
+      "uses real app marketing content",
+      () => {
+        const script =
+          source(
+            "scripts/finalize-gps-submission.ts",
+          );
+
+        expect(
+          script,
+        ).toContain(
+          "Navigate smarter. Wherever you go.",
+        );
+
+        expect(
+          script,
+        ).toContain(
+          "Get it on Google Play",
+        );
+
+        expect(
+          script,
+        ).toContain(
+          "Route Planner",
+        );
+
+        expect(
+          script,
+        ).toContain(
+          "Live Location Sharing",
+        );
+
+        expect(
+          script,
+        ).toContain(
+          "Offline Maps",
+        );
+
+        expect(
+          script,
+        ).toContain(
+          "Nearby Explore",
+        );
+
+        expect(
+          script,
+        ).toContain(
+          "Digital Compass",
+        );
+
+        expect(
+          script,
+        ).toContain(
+          "Multi-language Support",
+        );
+      },
+    );
+
+    it(
+      "removes the generic stats section from production",
+      () => {
+        const script =
+          source(
+            "scripts/finalize-gps-submission.ts",
+          );
+
+        expect(
+          script,
+        ).toMatch(
+          /type:\s*"stats"/,
+        );
+
+        expect(
+          script,
+        ).toMatch(
+          /visible:\s*false/,
+        );
+      },
+    );
+
+    it(
+      "describes the Android app to search engines",
+      () => {
+        const data =
+          source(
+            "lib/cms/public/structured-data.ts",
+          );
+
+        expect(
+          data,
+        ).toContain(
+          "MobileApplication",
+        );
+
+        expect(
+          data,
+        ).toContain(
+          "NavigationApplication",
+        );
+
+        expect(
+          data,
+        ).toContain(
+          "play.google.com/store/apps/details",
+        );
+      },
+    );
+  },
+);
+
+describe(
+  "GPS Maps screenshot-free marketing",
+  () => {
+    it(
+      "does not depend on app screenshots",
+      () => {
+        const script =
+          source(
+            "scripts/finalize-gps-submission.ts",
+          );
+
+        expect(
+          script,
+        ).not.toContain(
+          "/app-screens/",
+        );
+
+        expect(
+          script,
+        ).not.toContain(
+          "App Screens",
+        );
+
+        expect(
+          script,
+        ).toContain(
+          "More Tools",
         );
       },
     );

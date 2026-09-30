@@ -10,6 +10,10 @@ import {
   getPublicThemeCopy,
 } from "../../../../lib/site/public-theme-copy";
 
+import {
+  getSiteConfig,
+} from "../../../../lib/site/config";
+
 type HeroData =
   CmsStructuredBlockDataByType["hero"];
 
@@ -24,6 +28,76 @@ export default function HeroBlock({
 
   const copy =
     getPublicThemeCopy();
+
+  const site =
+    getSiteConfig();
+
+  const minimalGps =
+    site.key ===
+      "gps-maps";
+
+  if (minimalGps) {
+    return (
+      <section
+        className={
+          cmsPresentationClassName(
+            presentation,
+            "pdf-hero",
+          )
+        }
+      >
+        <div className="pdf-hero-inner gps-minimal-hero">
+          <div className="pdf-hero-copy">
+            {data.title && (
+              <h1 className="pdf-hero-title">
+                {
+                  data.title
+                }
+              </h1>
+            )}
+
+            {data.description && (
+              <p className="pdf-hero-description">
+                {
+                  data.description
+                }
+              </p>
+            )}
+
+            <div className="pdf-hero-actions">
+              {data.primaryCta.label &&
+                data.primaryCta.url && (
+                <a
+                  href={
+                    data.primaryCta.url
+                  }
+                  className="pdf-primary-button"
+                >
+                  {
+                    data.primaryCta.label
+                  }
+                </a>
+              )}
+
+              {data.secondaryCta.label &&
+                data.secondaryCta.url && (
+                <a
+                  href={
+                    data.secondaryCta.url
+                  }
+                  className="pdf-secondary-button"
+                >
+                  {
+                    data.secondaryCta.label
+                  }
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section

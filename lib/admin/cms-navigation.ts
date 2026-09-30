@@ -1,6 +1,7 @@
 export type CmsNavigationIcon =
   | "dashboard"
   | "pages"
+  | "blog"
   | "menus"
   | "media"
   | "appearance"
@@ -59,6 +60,17 @@ export const CMS_NAVIGATION:
 
           icon:
             "pages",
+        },
+
+        {
+          label:
+            "Blog",
+
+          href:
+            "/admin/blog",
+
+          icon:
+            "blog",
         },
 
         {

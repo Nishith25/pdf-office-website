@@ -342,6 +342,70 @@ const optionalUrl =
       z.literal(""),
     );
 
+export const cmsBlogPostSchema =
+  z.object({
+    title: z
+      .string()
+      .trim()
+      .min(1)
+      .max(160),
+
+    slug: z
+      .string()
+      .trim()
+      .min(1)
+      .max(160)
+      .regex(
+        /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+        "Blog slug must use lowercase letters, numbers and hyphens.",
+      ),
+
+    status:
+      cmsPageStatusSchema,
+
+    category: z
+      .string()
+      .trim()
+      .min(1)
+      .max(80),
+
+    author: z
+      .string()
+      .trim()
+      .min(1)
+      .max(120),
+
+    excerpt: z
+      .string()
+      .trim()
+      .max(420),
+
+    body: z
+      .string()
+      .max(100000),
+
+    coverImage:
+      optionalUrl,
+
+    featured:
+      z.boolean(),
+
+    seo:
+      cmsSeoSchema,
+
+    createdAt:
+      z.coerce.date(),
+
+    updatedAt:
+      z.coerce.date(),
+
+    publishedAt:
+      z.coerce
+        .date()
+        .nullable(),
+  });
+
+
 export const cmsSettingsSchema =
   z.object({
     key:
@@ -565,6 +629,7 @@ export const cmsActivitySchema =
       z.enum([
         "page",
         "block",
+        "post",
         "menu",
         "media",
         "settings",

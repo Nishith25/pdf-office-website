@@ -1,32 +1,30 @@
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  width="64"
-  height="64"
   viewBox="0 0 64 64"
 >
   <rect
     width="64"
     height="64"
-    rx="16"
-    fill="#2563EB"
+    rx="14"
+    fill="#111111"
   />
 
   <path
-    d="M32 10C21.5 10 13 18.5 13 29c0 13.8 19 26 19 26s19-12.2 19-26C51 18.5 42.5 10 32 10Z"
-    fill="#22C55E"
-  />
-
-  <circle
-    cx="32"
-    cy="28"
-    r="8"
+    d="M32 11C21.5 11 13 19.5 13 30c0 13.2 19 24 19 24s19-10.8 19-24C51 19.5 42.5 11 32 11Z"
     fill="#FFFFFF"
   />
 
   <circle
     cx="32"
-    cy="28"
+    cy="29"
+    r="8"
+    fill="#111111"
+  />
+
+  <circle
+    cx="32"
+    cy="29"
     r="3"
-    fill="#2563EB"
+    fill="#FFFFFF"
   />
 </svg>

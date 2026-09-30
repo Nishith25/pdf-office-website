@@ -10,6 +10,12 @@ import {
   getSiteConfig,
 } from "../lib/site/config";
 
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.maps.gps.navigation.drivingdirections.live.earth.gpsnavigation&hl=en_IN";
+
+const PRODUCTION_URL =
+  "https://gps-maps-website.vercel.app";
+
 const uri =
   process.env
     .MONGODB_URI;
@@ -30,19 +36,16 @@ if (
     "gps_maps_website"
 ) {
   throw new Error(
-    `REFUSED: expected gps-maps / gps_maps_website, received ${site.key} / ${site.databaseName}.`,
+    `REFUSED: ${site.key} / ${site.databaseName}`,
   );
 }
 
-const expectedUrl =
-  "https://gps-maps-website.vercel.app";
-
 if (
   site.siteUrl !==
-  expectedUrl
+  PRODUCTION_URL
 ) {
   throw new Error(
-    `REFUSED: SITE_URL must be ${expectedUrl}.`,
+    `REFUSED: SITE_URL must be ${PRODUCTION_URL}`,
   );
 }
 
@@ -53,32 +56,591 @@ const apply =
 
 const seo = {
   title:
-    "GPS Maps – Earth Maps, Route Planning & Location Tools",
+    "GPS Maps – Navigation, Offline Maps & Travel Tools",
 
   description:
-    "Explore places, plan routes and understand locations with GPS Maps, a clear mobile-friendly map and navigation experience.",
+    "Download GPS Maps for route planning, live location sharing, offline maps, nearby places, compass tools and everyday navigation.",
 
   keywords: [
     "GPS Maps",
-    "earth maps",
-    "route planning",
-    "navigation",
-    "location tools",
-    "place search",
-    "map exploration",
+    "GPS navigation",
+    "route planner",
+    "offline maps",
+    "live location sharing",
+    "nearby places",
+    "digital compass",
+    "navigation app",
   ],
 
   canonicalUrl:
-    expectedUrl,
+    PRODUCTION_URL,
 
   ogTitle:
-    "GPS Maps – Explore Places & Plan Routes",
+    "GPS Maps – Navigate Smarter",
 
   ogDescription:
-    "Explore maps, find places, plan routes and discover useful location tools with GPS Maps.",
+    "Routes, offline maps, live location sharing and useful travel tools in one Android app.",
 
   noIndex:
     false,
+};
+
+const heroData = {
+  eyebrow:
+    "",
+
+  title:
+    "Navigate smarter. Wherever you go.",
+
+  description:
+    "Routes, offline maps, live location sharing and useful travel tools in one app.",
+
+  badge:
+    "",
+
+  image:
+    "",
+
+  primaryCta: {
+    label:
+      "Get it on Google Play",
+
+    url:
+      PLAY_STORE_URL,
+  },
+
+  secondaryCta: {
+    label:
+      "See features",
+
+    url:
+      "/#features",
+  },
+
+  presentation: {
+    background:
+      "default",
+
+    width:
+      "wide",
+
+    spacing:
+      "spacious",
+
+    alignment:
+      "left",
+
+    variant:
+      "split",
+  },
+};
+
+const toolsData = {
+  title:
+    "More tools",
+
+  description:
+    "",
+
+  columns:
+    3,
+
+  cards: [
+    {
+      id:
+        "gps-tool-parking",
+
+      title:
+        "Parking Manager",
+
+      description:
+        "Save where you parked and make it easier to find your vehicle again.",
+
+      image:
+        "",
+
+      icon:
+        "",
+
+      badge:
+        "",
+
+      linkLabel:
+        "",
+
+      linkUrl:
+        "",
+    },
+
+    {
+      id:
+        "gps-tool-speedometer",
+
+      title:
+        "Digital Speedometer",
+
+      description:
+        "View your current travel speed in a simple driving-friendly display.",
+
+      image:
+        "",
+
+      icon:
+        "",
+
+      badge:
+        "",
+
+      linkLabel:
+        "",
+
+      linkUrl:
+        "",
+    },
+
+    {
+      id:
+        "gps-tool-location",
+
+      title:
+        "My Location & Address",
+
+      description:
+        "See your current position and quickly understand the address around you.",
+
+      image:
+        "",
+
+      icon:
+        "",
+
+      badge:
+        "",
+
+      linkLabel:
+        "",
+
+      linkUrl:
+        "",
+    },
+
+    {
+      id:
+        "gps-tool-weather",
+
+      title:
+        "Weather & Travel",
+
+      description:
+        "Check useful weather information before or during your journey.",
+
+      image:
+        "",
+
+      icon:
+        "",
+
+      badge:
+        "",
+
+      linkLabel:
+        "",
+
+      linkUrl:
+        "",
+    },
+
+    {
+      id:
+        "gps-tool-circles",
+
+      title:
+        "Private Circles",
+
+      description:
+        "Stay connected with selected family or friends through private location groups.",
+
+      image:
+        "",
+
+      icon:
+        "",
+
+      badge:
+        "",
+
+      linkLabel:
+        "",
+
+      linkUrl:
+        "",
+    },
+
+    {
+      id:
+        "gps-tool-geofence",
+
+      title:
+        "Geofencing Alerts",
+
+      description:
+        "Use location-based alerts for places that matter to you.",
+
+      image:
+        "",
+
+      icon:
+        "",
+
+      badge:
+        "",
+
+      linkLabel:
+        "",
+
+      linkUrl:
+        "",
+    },
+  ],
+
+  presentation: {
+    background:
+      "default",
+
+    width:
+      "wide",
+
+    spacing:
+      "normal",
+
+    alignment:
+      "left",
+
+    variant:
+      "minimal",
+  },
+};
+
+const featuresData = {
+  title:
+    "Features",
+
+  description:
+    "",
+
+  columns:
+    3,
+
+  items: [
+    {
+      id:
+        "gps-feature-route",
+
+      eyebrow:
+        "",
+
+      title:
+        "Route Planner",
+
+      description:
+        "Plan routes before you travel and keep the path ahead easy to understand.",
+
+      icon:
+        "",
+
+      image:
+        "",
+
+      badge:
+        "",
+
+      linkLabel:
+        "",
+
+      linkUrl:
+        "",
+    },
+
+    {
+      id:
+        "gps-feature-share",
+
+      eyebrow:
+        "",
+
+      title:
+        "Live Location Sharing",
+
+      description:
+        "Share your location with family and friends when you choose.",
+
+      icon:
+        "",
+
+      image:
+        "",
+
+      badge:
+        "",
+
+      linkLabel:
+        "",
+
+      linkUrl:
+        "",
+    },
+
+    {
+      id:
+        "gps-feature-offline",
+
+      eyebrow:
+        "",
+
+      title:
+        "Offline Maps",
+
+      description:
+        "Keep useful map access available when your connection is limited.",
+
+      icon:
+        "",
+
+      image:
+        "",
+
+      badge:
+        "",
+
+      linkLabel:
+        "",
+
+      linkUrl:
+        "",
+    },
+
+    {
+      id:
+        "gps-feature-nearby",
+
+      eyebrow:
+        "",
+
+      title:
+        "Nearby Explore",
+
+      description:
+        "Find useful places, attractions and everyday essentials around you.",
+
+      icon:
+        "",
+
+      image:
+        "",
+
+      badge:
+        "",
+
+      linkLabel:
+        "",
+
+      linkUrl:
+        "",
+    },
+
+    {
+      id:
+        "gps-feature-compass",
+
+      eyebrow:
+        "",
+
+      title:
+        "Digital Compass",
+
+      description:
+        "Use built-in compass guidance to understand direction and orientation.",
+
+      icon:
+        "",
+
+      image:
+        "",
+
+      badge:
+        "",
+
+      linkLabel:
+        "",
+
+      linkUrl:
+        "",
+    },
+
+    {
+      id:
+        "gps-feature-language",
+
+      eyebrow:
+        "",
+
+      title:
+        "Multi-language Support",
+
+      description:
+        "Use the app in the language that is most comfortable for you.",
+
+      icon:
+        "",
+
+      image:
+        "",
+
+      badge:
+        "",
+
+      linkLabel:
+        "",
+
+      linkUrl:
+        "",
+    },
+  ],
+
+  presentation: {
+    background:
+      "default",
+
+    width:
+      "wide",
+
+    spacing:
+      "normal",
+
+    alignment:
+      "left",
+
+    variant:
+      "icon-grid",
+  },
+};
+
+const faqData = {
+  title:
+    "Questions",
+
+  description:
+    "",
+
+  items: [
+    {
+      id:
+        "gps-faq-android",
+
+      question:
+        "Where can I download GPS Maps?",
+
+      answer:
+        "GPS Maps is available through Google Play for Android.",
+    },
+
+    {
+      id:
+        "gps-faq-offline",
+
+      question:
+        "Can I use offline maps?",
+
+      answer:
+        "The app includes offline map tools for situations where mobile connectivity is limited.",
+    },
+
+    {
+      id:
+        "gps-faq-sharing",
+
+      question:
+        "Can I share my location?",
+
+      answer:
+        "Yes. Live Location Sharing lets you share your location with people you choose.",
+    },
+
+    {
+      id:
+        "gps-faq-tools",
+
+      question:
+        "What other tools are included?",
+
+      answer:
+        "The app includes navigation, nearby discovery, compass tools, route planning and additional travel utilities.",
+    },
+  ],
+
+  presentation: {
+    background:
+      "default",
+
+    width:
+      "wide",
+
+    spacing:
+      "normal",
+
+    alignment:
+      "left",
+
+    variant:
+      "accordion",
+  },
+};
+
+const ctaData = {
+  eyebrow:
+    "",
+
+  title:
+    "Ready to navigate?",
+
+  description:
+    "Download GPS Maps on Google Play.",
+
+  image:
+    "",
+
+  primaryCta: {
+    label:
+      "Get it on Google Play",
+
+    url:
+      PLAY_STORE_URL,
+  },
+
+  secondaryCta: {
+    label:
+      "",
+
+    url:
+      "",
+  },
+
+  presentation: {
+    background:
+      "contrast",
+
+    width:
+      "wide",
+
+    spacing:
+      "spacious",
+
+    alignment:
+      "center",
+
+    variant:
+      "centered",
+  },
 };
 
 async function main() {
@@ -108,44 +670,9 @@ async function main() {
             "published",
         });
 
-    const settings =
-      await database
-        .collection(
-          CMS_COLLECTIONS.settings,
-        )
-        .findOne({
-          key:
-            "global",
-        });
-
-    const header =
-      await database
-        .collection(
-          CMS_COLLECTIONS.menus,
-        )
-        .findOne({
-          key:
-            "header",
-        });
-
-    const footer =
-      await database
-        .collection(
-          CMS_COLLECTIONS.menus,
-        )
-        .findOne({
-          key:
-            "footer",
-        });
-
-    if (
-      !homepage ||
-      !settings ||
-      !header ||
-      !footer
-    ) {
+    if (!homepage) {
       throw new Error(
-        "GPS CMS core records are incomplete.",
+        "Published GPS homepage not found.",
       );
     }
 
@@ -154,122 +681,47 @@ async function main() {
         ._id
         .toString();
 
-    const menuItems = [
-      {
-        id:
-          "nav-home",
+    const blocks =
+      await database
+        .collection(
+          CMS_COLLECTIONS.blocks,
+        )
+        .find({
+          pageId,
+        })
+        .sort({
+          order:
+            1,
+        })
+        .toArray();
 
-        label:
-          "Home",
-
-        type:
-          "page",
-
-        pageId,
-
-        customUrl:
-          "",
-
-        target:
-          "same-tab",
-
-        parentId:
-          null,
-
-        order:
-          1,
-
-        enabled:
-          true,
-      },
-
-      {
-        id:
-          "nav-explore",
-
-        label:
-          "Explore",
-
-        type:
-          "custom",
-
-        pageId:
-          null,
-
-        customUrl:
-          "/#explore",
-
-        target:
-          "same-tab",
-
-        parentId:
-          null,
-
-        order:
-          2,
-
-        enabled:
-          true,
-      },
-
-      {
-        id:
-          "nav-tools",
-
-        label:
-          "Location Tools",
-
-        type:
-          "custom",
-
-        pageId:
-          null,
-
-        customUrl:
-          "/#tools",
-
-        target:
-          "same-tab",
-
-        parentId:
-          null,
-
-        order:
-          3,
-
-        enabled:
-          true,
-      },
-
-      {
-        id:
-          "nav-faq",
-
-        label:
-          "FAQ",
-
-        type:
-          "custom",
-
-        pageId:
-          null,
-
-        customUrl:
-          "/#faq",
-
-        target:
-          "same-tab",
-
-        parentId:
-          null,
-
-        order:
-          4,
-
-        enabled:
-          true,
-      },
+    const requiredTypes = [
+      "hero",
+      "stats",
+      "cardGrid",
+      "featureGrid",
+      "faq",
+      "cta",
     ];
+
+    for (
+      const type
+      of requiredTypes
+    ) {
+      if (
+        !blocks.some(
+          (
+            block,
+          ) =>
+            block.type ===
+            type,
+        )
+      ) {
+        throw new Error(
+          `Required block missing: ${type}`,
+        );
+      }
+    }
 
     console.log("");
     console.log(
@@ -277,7 +729,7 @@ async function main() {
     );
 
     console.log(
-      "GPS Maps Final Submission",
+      "GPS Maps App Marketing Finalizer",
     );
 
     console.log(
@@ -293,15 +745,23 @@ async function main() {
     );
 
     console.log(
-      `Homepage: ${homepage.title}`,
+      `Production: ${site.siteUrl}`,
     );
 
     console.log(
-      `Canonical: ${seo.canonicalUrl}`,
+      "Hero: Navigate smarter. Wherever you go.",
     );
 
     console.log(
-      "Navigation: Home / Explore / Location Tools / FAQ",
+      "More tools: Parking / Speedometer / Location / Weather / Circles / Geofencing",
+    );
+
+    console.log(
+      "Features: 6 real app features",
+    );
+
+    console.log(
+      "Primary destination: Google Play",
     );
 
     if (!apply) {
@@ -323,7 +783,7 @@ async function main() {
       "FINALIZE_GPS_SUBMISSION"
     ) {
       throw new Error(
-        'GPS_FINALIZE_CONFIRM must exactly equal "FINALIZE_GPS_SUBMISSION".',
+        'GPS_FINALIZE_CONFIRM must equal "FINALIZE_GPS_SUBMISSION".',
       );
     }
 
@@ -379,8 +839,38 @@ async function main() {
         },
         {
           $set: {
+            "identity.tagline":
+              "Navigation • Maps • Travel Tools",
+
             "identity.faviconUrl":
-              `${expectedUrl}/gps-maps-icon.svg`,
+              `${PRODUCTION_URL}/gps-maps-icon.svg`,
+
+            "footer.text":
+              "GPS Maps for Android.",
+
+            "social.instagram":
+              "",
+
+            "social.facebook":
+              "https://www.facebook.com/GameNexa/",
+
+            "social.linkedin":
+              "https://www.linkedin.com/company/gamenexa/",
+
+            "social.youtube":
+              "https://www.youtube.com/c/GameNexaStudios",
+
+            "social.x":
+              "https://x.com/gamenexastudio?lang=en",
+
+            "externalLinks.primaryCtaLabel":
+              "Get the App",
+
+            "externalLinks.primaryCtaUrl":
+              PLAY_STORE_URL,
+
+            "externalLinks.googlePlayUrl":
+              PLAY_STORE_URL,
 
             "globalSeo.title":
               seo.title,
@@ -409,6 +899,302 @@ async function main() {
         },
       );
 
+    const blockCollection =
+      database.collection(
+        CMS_COLLECTIONS.blocks,
+      );
+
+    await blockCollection.updateOne(
+      {
+        pageId,
+        type:
+          "hero",
+      },
+      {
+        $set: {
+          data:
+            heroData,
+
+          order:
+            1,
+
+          visible:
+            true,
+
+          updatedAt:
+            now,
+        },
+      },
+    );
+
+    /*
+     * The old Fast / Smart / Global block
+     * is intentionally removed from the
+     * public marketing experience.
+     */
+    await blockCollection.updateOne(
+      {
+        pageId,
+        type:
+          "stats",
+      },
+      {
+        $set: {
+          visible:
+            false,
+
+          order:
+            2,
+
+          updatedAt:
+            now,
+        },
+      },
+    );
+
+    await blockCollection.updateOne(
+      {
+        pageId,
+        type:
+          "cardGrid",
+      },
+      {
+        $set: {
+          data:
+            toolsData,
+
+          order:
+            3,
+
+          visible:
+            true,
+
+          updatedAt:
+            now,
+        },
+      },
+    );
+
+    await blockCollection.updateOne(
+      {
+        pageId,
+        type:
+          "featureGrid",
+      },
+      {
+        $set: {
+          data:
+            featuresData,
+
+          order:
+            4,
+
+          visible:
+            true,
+
+          updatedAt:
+            now,
+        },
+      },
+    );
+
+    await blockCollection.updateOne(
+      {
+        pageId,
+        type:
+          "faq",
+      },
+      {
+        $set: {
+          data:
+            faqData,
+
+          order:
+            5,
+
+          visible:
+            true,
+
+          updatedAt:
+            now,
+        },
+      },
+    );
+
+    await blockCollection.updateOne(
+      {
+        pageId,
+        type:
+          "cta",
+      },
+      {
+        $set: {
+          data:
+            ctaData,
+
+          order:
+            6,
+
+          visible:
+            true,
+
+          updatedAt:
+            now,
+        },
+      },
+    );
+
+    const headerMenuItems = [
+      {
+        id:
+          "gps-nav-features",
+
+        label:
+          "Features",
+
+        type:
+          "custom",
+
+        pageId:
+          null,
+
+        customUrl:
+          "/#features",
+
+        target:
+          "same-tab",
+
+        parentId:
+          null,
+
+        order:
+          1,
+
+        enabled:
+          true,
+      },
+
+      {
+        id:
+          "gps-nav-tools",
+
+        label:
+          "More Tools",
+
+        type:
+          "custom",
+
+        pageId:
+          null,
+
+        customUrl:
+          "/#tools",
+
+        target:
+          "same-tab",
+
+        parentId:
+          null,
+
+        order:
+          2,
+
+        enabled:
+          true,
+      },
+
+      {
+        id:
+          "gps-nav-blog",
+
+        label:
+          "Blog",
+
+        type:
+          "custom",
+
+        pageId:
+          null,
+
+        customUrl:
+          "/blog",
+
+        target:
+          "same-tab",
+
+        parentId:
+          null,
+
+        order:
+          3,
+
+        enabled:
+          true,
+      },
+
+      {
+        id:
+          "gps-nav-faq",
+
+        label:
+          "FAQ",
+
+        type:
+          "custom",
+
+        pageId:
+          null,
+
+        customUrl:
+          "/#faq",
+
+        target:
+          "same-tab",
+
+        parentId:
+          null,
+
+        order:
+          4,
+
+        enabled:
+          true,
+      },
+    ];
+
+    const footerMenuItems = [
+      ...headerMenuItems,
+
+      {
+        id:
+          "gps-footer-gamenexa",
+
+        label:
+          "GameNexa",
+
+        type:
+          "custom",
+
+        pageId:
+          null,
+
+        customUrl:
+          "https://www.gamenexa.com/",
+
+        target:
+          "new-tab",
+
+        parentId:
+          null,
+
+        order:
+          5,
+
+        enabled:
+          true,
+      },
+    ];
+
     await database
       .collection(
         CMS_COLLECTIONS.menus,
@@ -421,7 +1207,7 @@ async function main() {
         {
           $set: {
             items:
-              menuItems,
+              headerMenuItems,
 
             updatedAt:
               now,
@@ -441,102 +1227,46 @@ async function main() {
         {
           $set: {
             items:
-              menuItems,
+              footerMenuItems,
 
             updatedAt:
               now,
           },
         },
       );
-
-    await database
-      .collection(
-        CMS_COLLECTIONS.blocks,
-      )
-      .updateOne(
-        {
-          pageId,
-
-          type:
-            "hero",
-        },
-        {
-          $set: {
-            "data.primaryCta.url":
-              "/#explore",
-
-            "data.secondaryCta.url":
-              "/#tools",
-
-            updatedAt:
-              now,
-          },
-        },
-      );
-
-    await database
-      .collection(
-        CMS_COLLECTIONS.blocks,
-      )
-      .updateOne(
-        {
-          pageId,
-
-          type:
-            "cta",
-        },
-        {
-          $set: {
-            "data.primaryCta.url":
-              "/#explore",
-
-            updatedAt:
-              now,
-          },
-        },
-      );
-
-    await database
-      .collection(
-        CMS_COLLECTIONS.activity,
-      )
-      .insertOne({
-        action:
-          "Finalized GPS Maps submission configuration",
-
-        entityType:
-          "system",
-
-        entityId:
-          pageId,
-
-        entityName:
-          "GPS Maps",
-
-        createdAt:
-          now,
-      });
 
     console.log("");
     console.log(
-      "✓ SEO metadata finalized",
+      "✓ Generic stats section hidden",
     );
 
     console.log(
-      "✓ Header/footer navigation finalized",
+      "✓ Hero converted to app download marketing",
     );
 
     console.log(
-      "✓ Homepage CTA links finalized",
+      "✓ Additional app tools configured",
     );
 
     console.log(
-      "✓ GPS favicon configured",
+      "✓ Real application features configured",
+    );
+
+    console.log(
+      "✓ FAQ converted to app questions",
+    );
+
+    console.log(
+      "✓ Every primary CTA points to Google Play",
+    );
+
+    console.log(
+      "✓ SEO converted from generic maps site to Android app marketing",
     );
 
     console.log("");
     console.log(
-      "GPS Maps submission configuration completed.",
+      "GPS Maps app marketing configuration completed.",
     );
   } finally {
     await client.close();

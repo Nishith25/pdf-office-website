@@ -91,9 +91,9 @@ export default function ExplainableCopy({
 
             <span
               aria-hidden="true"
-              className="gps-explainable-icon"
+              className="gps-explainable-info"
             >
-              +
+              i
             </span>
           </h3>
         ) : (
@@ -108,9 +108,9 @@ export default function ExplainableCopy({
 
             <span
               aria-hidden="true"
-              className="gps-explainable-icon"
+              className="gps-explainable-info"
             >
-              +
+              i
             </span>
           </span>
         )}

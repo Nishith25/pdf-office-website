@@ -39,7 +39,7 @@ export default function FeatureGridBlock({
 
   return (
     <section
-      id="tools"
+      id="features"
       className={
         cmsPresentationClassName(
           presentation,

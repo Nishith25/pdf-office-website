@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import {
   Activity,
+  BookOpen,
   FileText,
   ImageIcon,
   LayoutDashboard,
@@ -30,6 +31,9 @@ function getNavigationIcon(
   ) {
     case "pages":
       return FileText;
+
+    case "blog":
+      return BookOpen;
 
     case "menus":
       return MenuIcon;

@@ -186,6 +186,13 @@ export default function AdminShell({
                 </Link>
 
                 <Link
+                  href="/admin/blog"
+                  className="rounded-[8px] border border-[#E1E4E9] px-3 py-2 text-[10px] font-semibold text-[#59616E]"
+                >
+                  Blog
+                </Link>
+
+                <Link
                   href="/admin/media"
                   className="rounded-[8px] border border-[#E1E4E9] px-3 py-2 text-[10px] font-semibold text-[#59616E]"
                 >

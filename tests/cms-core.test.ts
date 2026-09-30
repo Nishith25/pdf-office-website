@@ -254,6 +254,9 @@ describe(
           settings:
             "cms_settings",
 
+          blogPosts:
+            "cms_blog_posts",
+
           activity:
             "cms_activity_log",
         });

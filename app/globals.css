@@ -4392,3 +4392,2011 @@ img {
 #start {
   scroll-margin-top: 96px;
 }
+
+
+/* =========================================================
+   GPS MAPS — FINAL MONOCHROME PRODUCT THEME
+   ========================================================= */
+
+[data-site-theme="gps-maps-navigation"] {
+  --cms-primary: #111111;
+  --cms-secondary: #111111;
+  --cms-accent: #111111;
+  --cms-background: #ffffff;
+  --cms-text: #111111;
+
+  background:
+    #ffffff;
+
+  color:
+    #111111;
+}
+
+
+/* ---------- GLOBAL ---------- */
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-public-main {
+  background:
+    #ffffff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-container {
+  max-width:
+    1180px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-section {
+  background:
+    #ffffff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-eyebrow {
+  display:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-section-description {
+  max-width:
+    620px;
+
+  color:
+    #666666;
+}
+
+
+/* ---------- HEADER ---------- */
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-site-header {
+  border-bottom:
+    1px solid #e8e8e8;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.96
+    );
+
+  box-shadow:
+    none;
+
+  backdrop-filter:
+    blur(12px);
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-site-header-inner {
+  min-height:
+    72px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-brand {
+  gap:
+    10px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-brand img {
+  width:
+    38px;
+
+  height:
+    38px;
+
+  border-radius:
+    9px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-navigation-link {
+  color:
+    #525252;
+
+  font-size:
+    13px;
+
+  font-weight:
+    500;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-navigation-link:hover {
+  color:
+    #111111;
+}
+
+
+/* ---------- HERO ---------- */
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-hero {
+  background:
+    #ffffff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-minimal-hero {
+  display:
+    block;
+
+  max-width:
+    1180px;
+
+  min-height:
+    600px;
+
+  margin:
+    0 auto;
+
+  padding:
+    150px 32px 120px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-minimal-hero
+.pdf-hero-copy {
+  max-width:
+    850px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-hero-title {
+  max-width:
+    850px;
+
+  margin:
+    0;
+
+  color:
+    #111111;
+
+  font-size:
+    clamp(
+      50px,
+      7vw,
+      92px
+    );
+
+  font-weight:
+    600;
+
+  line-height:
+    0.98;
+
+  letter-spacing:
+    -0.065em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-hero-description {
+  max-width:
+    590px;
+
+  margin-top:
+    32px;
+
+  color:
+    #5f5f5f;
+
+  font-size:
+    18px;
+
+  line-height:
+    1.7;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-hero-actions {
+  margin-top:
+    38px;
+
+  gap:
+    10px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-primary-button {
+  min-height:
+    48px;
+
+  border:
+    1px solid #111111;
+
+  border-radius:
+    9px;
+
+  background:
+    #111111;
+
+  box-shadow:
+    none;
+
+  color:
+    #ffffff;
+
+  font-size:
+    13px;
+
+  font-weight:
+    600;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-primary-button:hover {
+  background:
+    #2b2b2b;
+
+  transform:
+    none;
+
+  box-shadow:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-secondary-button {
+  min-height:
+    48px;
+
+  border:
+    1px solid #d8d8d8;
+
+  border-radius:
+    9px;
+
+  background:
+    #ffffff;
+
+  color:
+    #111111;
+
+  font-size:
+    13px;
+
+  font-weight:
+    600;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-secondary-button:hover {
+  border-color:
+    #111111;
+
+  background:
+    #ffffff;
+}
+
+
+/* ---------- SECTION TITLES ---------- */
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-section-title {
+  max-width:
+    720px;
+
+  color:
+    #111111;
+
+  font-size:
+    clamp(
+      34px,
+      4.5vw,
+      58px
+    );
+
+  font-weight:
+    600;
+
+  line-height:
+    1.05;
+
+  letter-spacing:
+    -0.05em;
+}
+
+
+/* ---------- STATS ---------- */
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-stats {
+  border-top:
+    1px solid #ededed;
+
+  border-bottom:
+    1px solid #ededed;
+
+  background:
+    #ffffff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-stats-title {
+  color:
+    #111111;
+
+  font-size:
+    12px;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    0;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-stats-grid {
+  gap:
+    0;
+
+  border-top:
+    1px solid #ededed;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-stat {
+  border:
+    0;
+
+  border-right:
+    1px solid #ededed;
+
+  border-radius:
+    0;
+
+  background:
+    transparent;
+
+  box-shadow:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-stat:last-child {
+  border-right:
+    0;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-stat-value {
+  color:
+    #111111;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-stat-label {
+  color:
+    #333333;
+}
+
+
+/* ---------- CARDS ---------- */
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-card-grid-list,
+[data-site-theme="gps-maps-navigation"]
+.pdf-feature-card-grid {
+  gap:
+    12px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-editorial-card,
+[data-site-theme="gps-maps-navigation"]
+.pdf-feature-card {
+  border:
+    1px solid #e5e5e5;
+
+  border-radius:
+    14px;
+
+  background:
+    #ffffff;
+
+  box-shadow:
+    none;
+
+  transition:
+    border-color 160ms ease;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-editorial-card:hover,
+[data-site-theme="gps-maps-navigation"]
+.pdf-feature-card:hover {
+  border-color:
+    #9a9a9a;
+
+  transform:
+    none;
+
+  box-shadow:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-card-index,
+[data-site-theme="gps-maps-navigation"]
+.pdf-item-badge,
+[data-site-theme="gps-maps-navigation"]
+.pdf-item-icon,
+[data-site-theme="gps-maps-navigation"]
+.pdf-feature-item-eyebrow {
+  display:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-card-title,
+[data-site-theme="gps-maps-navigation"]
+.pdf-feature-title {
+  color:
+    #111111;
+
+  font-size:
+    20px;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    -0.025em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-card-description,
+[data-site-theme="gps-maps-navigation"]
+.pdf-feature-description,
+[data-site-theme="gps-maps-navigation"]
+.pdf-stat-description {
+  color:
+    #666666;
+
+  font-size:
+    13px;
+
+  line-height:
+    1.65;
+}
+
+
+/* ---------- CLICK TO EXPLAIN ---------- */
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable {
+  width:
+    100%;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-summary {
+  cursor:
+    pointer;
+
+  list-style:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-summary::-webkit-details-marker {
+  display:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-title {
+  display:
+    flex;
+
+  width:
+    100%;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    20px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-info {
+  display:
+    inline-flex;
+
+  width:
+    20px;
+
+  height:
+    20px;
+
+  flex:
+    0 0 20px;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border:
+    1px solid #cfcfcf;
+
+  border-radius:
+    999px;
+
+  color:
+    #555555;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    12px;
+
+  font-weight:
+    700;
+
+  line-height:
+    1;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable[open]
+.gps-explainable-info {
+  border-color:
+    #111111;
+
+  background:
+    #111111;
+
+  color:
+    #ffffff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-panel {
+  margin-top:
+    14px;
+
+  padding:
+    14px 0 2px;
+
+  border:
+    0;
+
+  border-top:
+    1px solid #e5e5e5;
+
+  border-radius:
+    0;
+
+  background:
+    transparent;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-panel
+.pdf-stat-description,
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-panel
+.pdf-card-description,
+[data-site-theme="gps-maps-navigation"]
+.gps-explainable-panel
+.pdf-feature-description {
+  margin:
+    0;
+}
+
+
+/* ---------- FAQ ---------- */
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-faq-item {
+  border:
+    0;
+
+  border-bottom:
+    1px solid #e5e5e5;
+
+  border-radius:
+    0;
+
+  background:
+    transparent;
+
+  box-shadow:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-faq-item summary {
+  padding-left:
+    0;
+
+  padding-right:
+    0;
+
+  color:
+    #111111;
+
+  font-size:
+    15px;
+
+  font-weight:
+    600;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-faq-answer {
+  color:
+    #666666;
+}
+
+
+/* ---------- CTA ---------- */
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-cta {
+  background:
+    #111111;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-cta-inner {
+  border:
+    0;
+
+  border-radius:
+    0;
+
+  background:
+    #111111;
+
+  box-shadow:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-cta-title {
+  color:
+    #ffffff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-cta-description {
+  color:
+    #a8a8a8;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-cta
+.pdf-primary-button {
+  border-color:
+    #ffffff;
+
+  background:
+    #ffffff;
+
+  color:
+    #111111;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-footer {
+  border-top:
+    1px solid #242424;
+
+  background:
+    #111111;
+
+  color:
+    #ffffff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-footer
+.pdf-navigation-link {
+  color:
+    #9f9f9f;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-footer
+.pdf-navigation-link:hover {
+  color:
+    #ffffff;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (
+  max-width:
+    767px
+) {
+  [data-site-theme="gps-maps-navigation"]
+  .gps-minimal-hero {
+    min-height:
+      auto;
+
+    padding:
+      110px 20px 82px;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  .pdf-hero-title {
+    font-size:
+      48px;
+
+    line-height:
+      1;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  .pdf-hero-description {
+    margin-top:
+      24px;
+
+    font-size:
+      16px;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  .pdf-stat {
+    border-right:
+      0;
+
+    border-bottom:
+      1px solid #ededed;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  .pdf-stat:last-child {
+    border-bottom:
+      0;
+  }
+}
+
+
+/* GPS submission: keep the visible interface concise */
+
+[data-site-theme="gps-maps-navigation"]
+#explore
+> .pdf-container
+> .pdf-section-description,
+[data-site-theme="gps-maps-navigation"]
+#tools
+.pdf-container
+> div:first-child
+> .pdf-section-description,
+[data-site-theme="gps-maps-navigation"]
+#faq
+.pdf-section-description {
+  display:
+    none;
+}
+
+
+/* =========================================================
+   GPS MAPS — REAL APP SCREEN SHOWCASE
+   ========================================================= */
+
+[data-site-theme="gps-maps-navigation"]
+#screens {
+  border-top:
+    1px solid #eeeeee;
+
+  border-bottom:
+    1px solid #eeeeee;
+
+  background:
+    #fafafa;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#screens
+.pdf-container {
+  padding-top:
+    110px;
+
+  padding-bottom:
+    110px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#screens
+.pdf-section-title {
+  margin-bottom:
+    42px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#screens
+.pdf-card-grid-list {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    18px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#screens
+.pdf-editorial-card {
+  overflow:
+    hidden;
+
+  padding:
+    0;
+
+  border:
+    1px solid #e3e3e3;
+
+  border-radius:
+    20px;
+
+  background:
+    #ffffff;
+
+  box-shadow:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#screens
+.pdf-card-media {
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  justify-content:
+    center;
+
+  aspect-ratio:
+    9 / 17;
+
+  overflow:
+    hidden;
+
+  background:
+    #f3f3f3;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#screens
+.pdf-card-media img {
+  display:
+    block;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  object-fit:
+    cover;
+
+  object-position:
+    top center;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#screens
+.pdf-card-title {
+  padding:
+    18px 18px 20px;
+
+  font-size:
+    14px;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    -0.015em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#screens
+.gps-explainable-info {
+  display:
+    none;
+}
+
+
+/* =========================================================
+   GPS MAPS — REAL FEATURE LIST
+   ========================================================= */
+
+[data-site-theme="gps-maps-navigation"]
+#features {
+  background:
+    #ffffff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#features
+.pdf-container {
+  padding-top:
+    120px;
+
+  padding-bottom:
+    120px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#features
+.pdf-feature-card-grid {
+  margin-top:
+    50px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    0;
+
+  border-top:
+    1px solid #e5e5e5;
+
+  border-left:
+    1px solid #e5e5e5;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#features
+.pdf-feature-card {
+  min-height:
+    180px;
+
+  padding:
+    30px;
+
+  border:
+    0;
+
+  border-right:
+    1px solid #e5e5e5;
+
+  border-bottom:
+    1px solid #e5e5e5;
+
+  border-radius:
+    0;
+
+  background:
+    #ffffff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#features
+.pdf-feature-title {
+  font-size:
+    18px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#features
+.gps-explainable-panel {
+  padding-top:
+    14px;
+}
+
+
+/* =========================================================
+   GPS MAPS — SIMPLE FINAL CTA
+   ========================================================= */
+
+[data-site-theme="gps-maps-navigation"]
+#start {
+  padding:
+    0;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#start
+.pdf-cta-inner {
+  max-width:
+    none;
+
+  padding-top:
+    110px;
+
+  padding-bottom:
+    110px;
+}
+
+
+/* =========================================================
+   GPS MAPS — MOBILE APP SHOWCASE
+   ========================================================= */
+
+@media (
+  max-width:
+    900px
+) {
+  [data-site-theme="gps-maps-navigation"]
+  #screens
+  .pdf-card-grid-list {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      );
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  #features
+  .pdf-feature-card-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      );
+  }
+}
+
+@media (
+  max-width:
+    560px
+) {
+  [data-site-theme="gps-maps-navigation"]
+  #screens
+  .pdf-card-grid-list {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap:
+      10px;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  #screens
+  .pdf-editorial-card {
+    border-radius:
+      13px;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  #screens
+  .pdf-card-title {
+    padding:
+      12px;
+
+    font-size:
+      12px;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  #features
+  .pdf-feature-card-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  #features
+  .pdf-feature-card {
+    min-height:
+      auto;
+
+    padding:
+      24px 20px;
+  }
+}
+
+
+/* =========================================================
+   GPS MAPS — SIMPLE MORE TOOLS GRID
+   ========================================================= */
+
+[data-site-theme="gps-maps-navigation"]
+#tools {
+  border-top:
+    1px solid #ededed;
+
+  background:
+    #fafafa;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#tools
+.pdf-container {
+  padding-top:
+    110px;
+
+  padding-bottom:
+    110px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#tools
+.pdf-section-title {
+  margin-bottom:
+    46px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#tools
+.pdf-card-grid-list {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    0;
+
+  border-top:
+    1px solid #dedede;
+
+  border-left:
+    1px solid #dedede;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#tools
+.pdf-editorial-card {
+  min-height:
+    170px;
+
+  padding:
+    28px;
+
+  border:
+    0;
+
+  border-right:
+    1px solid #dedede;
+
+  border-bottom:
+    1px solid #dedede;
+
+  border-radius:
+    0;
+
+  background:
+    #fafafa;
+
+  box-shadow:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#tools
+.pdf-editorial-card:hover {
+  border-color:
+    #dedede;
+
+  background:
+    #ffffff;
+
+  transform:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#tools
+.pdf-card-title {
+  font-size:
+    18px;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    -0.025em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+#tools
+.pdf-card-index,
+[data-site-theme="gps-maps-navigation"]
+#tools
+.pdf-item-badge,
+[data-site-theme="gps-maps-navigation"]
+#tools
+.pdf-item-icon,
+[data-site-theme="gps-maps-navigation"]
+#tools
+.pdf-card-media {
+  display:
+    none;
+}
+
+
+/* Make the download action look deliberate */
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-site-header
+a[href*="play.google.com"] {
+  padding:
+    10px 16px;
+
+  border-radius:
+    8px;
+
+  background:
+    #111111;
+
+  color:
+    #ffffff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-site-header
+a[href*="play.google.com"]:hover {
+  background:
+    #2a2a2a;
+
+  color:
+    #ffffff;
+}
+
+
+/* Mobile */
+
+@media (
+  max-width:
+    760px
+) {
+  [data-site-theme="gps-maps-navigation"]
+  #tools
+  .pdf-card-grid-list {
+    grid-template-columns:
+      1fr;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  #tools
+  .pdf-editorial-card {
+    min-height:
+      auto;
+
+    padding:
+      24px 20px;
+  }
+}
+
+
+/* =========================================================
+   GPS MAPS — JOURNAL
+   ========================================================= */
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-wrap {
+  width:
+    min(
+      calc(
+        100% - 48px
+      ),
+      1180px
+    );
+
+  margin-inline:
+    auto;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-index {
+  background:
+    #ffffff;
+
+  color:
+    #111111;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-index-hero {
+  padding:
+    150px
+    0
+    90px;
+
+  border-bottom:
+    1px solid #e8e8e8;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-kicker {
+  margin:
+    0
+    0
+    22px;
+
+  color:
+    #777777;
+
+  font-size:
+    11px;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    0.08em;
+
+  text-transform:
+    uppercase;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-index-hero h1 {
+  max-width:
+    900px;
+
+  margin:
+    0;
+
+  font-size:
+    clamp(
+      58px,
+      8vw,
+      110px
+    );
+
+  font-weight:
+    600;
+
+  line-height:
+    0.94;
+
+  letter-spacing:
+    -0.065em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-index-hero
+> .gps-blog-wrap
+> p:last-child {
+  max-width:
+    620px;
+
+  margin:
+    32px
+    0
+    0;
+
+  color:
+    #666666;
+
+  font-size:
+    17px;
+
+  line-height:
+    1.7;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-list-section {
+  padding:
+    70px
+    0
+    120px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-categories {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    8px;
+
+  padding-bottom:
+    36px;
+
+  border-bottom:
+    1px solid #e8e8e8;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-categories a {
+  padding:
+    8px
+    12px;
+
+  border:
+    1px solid #dedede;
+
+  border-radius:
+    999px;
+
+  color:
+    #666666;
+
+  font-size:
+    11px;
+
+  font-weight:
+    600;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-categories a.is-active {
+  border-color:
+    #111111;
+
+  background:
+    #111111;
+
+  color:
+    #ffffff;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-list {
+  border-top:
+    0;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-card {
+  display:
+    grid;
+
+  padding:
+    42px
+    0;
+
+  border-bottom:
+    1px solid #e8e8e8;
+
+  gap:
+    22px;
+
+  grid-template-columns:
+    180px
+    minmax(
+      0,
+      1fr
+    )
+    150px;
+
+  align-items:
+    start;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-card-meta {
+  display:
+    grid;
+
+  gap:
+    7px;
+
+  color:
+    #757575;
+
+  font-size:
+    10px;
+
+  font-weight:
+    600;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.055em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-card h2 {
+  margin:
+    0;
+
+  font-size:
+    clamp(
+      26px,
+      3vw,
+      42px
+    );
+
+  font-weight:
+    600;
+
+  line-height:
+    1.05;
+
+  letter-spacing:
+    -0.045em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-card h2 a {
+  color:
+    #111111;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-card p {
+  max-width:
+    700px;
+
+  margin:
+    14px
+    0
+    0;
+
+  color:
+    #666666;
+
+  font-size:
+    14px;
+
+  line-height:
+    1.7;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-read-link {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    flex-end;
+
+  gap:
+    8px;
+
+  color:
+    #111111;
+
+  font-size:
+    12px;
+
+  font-weight:
+    600;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-empty {
+  padding:
+    80px
+    0;
+
+  color:
+    #777777;
+
+  font-size:
+    14px;
+}
+
+
+/* Article */
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-article {
+  background:
+    #ffffff;
+
+  color:
+    #111111;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-article-wrap {
+  width:
+    min(
+      calc(
+        100% - 48px
+      ),
+      900px
+    );
+
+  margin-inline:
+    auto;
+
+  padding:
+    120px
+    0
+    140px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-back {
+  display:
+    inline-flex;
+
+  margin-bottom:
+    70px;
+
+  color:
+    #666666;
+
+  font-size:
+    11px;
+
+  font-weight:
+    600;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-article-meta {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    8px
+    20px;
+
+  color:
+    #777777;
+
+  font-size:
+    10px;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    0.055em;
+
+  text-transform:
+    uppercase;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-article h1 {
+  margin:
+    28px
+    0
+    0;
+
+  font-size:
+    clamp(
+      48px,
+      7vw,
+      86px
+    );
+
+  font-weight:
+    600;
+
+  line-height:
+    0.98;
+
+  letter-spacing:
+    -0.06em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-article-deck {
+  max-width:
+    760px;
+
+  margin:
+    34px
+    0
+    0;
+
+  color:
+    #666666;
+
+  font-size:
+    19px;
+
+  line-height:
+    1.7;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-rule {
+  margin:
+    64px
+    0;
+
+  border-top:
+    1px solid #dedede;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-prose {
+  max-width:
+    760px;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-prose p {
+  margin:
+    0
+    0
+    28px;
+
+  color:
+    #3f3f3f;
+
+  font-size:
+    17px;
+
+  line-height:
+    1.9;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-prose h2 {
+  margin:
+    70px
+    0
+    24px;
+
+  font-size:
+    36px;
+
+  font-weight:
+    600;
+
+  line-height:
+    1.08;
+
+  letter-spacing:
+    -0.04em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-prose h3 {
+  margin:
+    50px
+    0
+    20px;
+
+  font-size:
+    25px;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    -0.03em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-prose ul {
+  margin:
+    0
+    0
+    34px;
+
+  padding-left:
+    20px;
+
+  color:
+    #3f3f3f;
+
+  font-size:
+    16px;
+
+  line-height:
+    1.9;
+
+  list-style:
+    disc;
+}
+
+@media (
+  max-width:
+    760px
+) {
+  [data-site-theme="gps-maps-navigation"]
+  .gps-blog-wrap,
+  [data-site-theme="gps-maps-navigation"]
+  .gps-blog-article-wrap {
+    width:
+      min(
+        calc(
+          100% - 40px
+        ),
+        900px
+      );
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  .gps-blog-index-hero {
+    padding:
+      100px
+      0
+      60px;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  .gps-blog-index-hero h1 {
+    font-size:
+      54px;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  .gps-blog-card {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      18px;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  .gps-blog-read-link {
+    justify-content:
+      flex-start;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  .gps-blog-article-wrap {
+    padding:
+      90px
+      0;
+  }
+
+  [data-site-theme="gps-maps-navigation"]
+  .gps-blog-back {
+    margin-bottom:
+      50px;
+  }
+}
+
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-categories span {
+  padding:
+    8px 12px;
+
+  border:
+    1px solid #dedede;
+
+  border-radius:
+    999px;
+
+  color:
+    #666666;
+
+  font-size:
+    11px;
+
+  font-weight:
+    600;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.gps-blog-categories span.is-active {
+  border-color:
+    #111111;
+
+  background:
+    #111111;
+
+  color:
+    #ffffff;
+}
+
+
+/* =========================================================
+   GPS MAPS — FINAL MONOCHROME BRAND OVERRIDES
+   ========================================================= */
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-site-header
+.pdf-brand-mark,
+[data-site-theme="gps-maps-navigation"]
+.pdf-site-header
+.pdf-brand-tagline {
+  display:
+    none !important;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-site-header
+.pdf-brand {
+  gap:
+    0;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-site-header
+.pdf-brand-name {
+  color:
+    #111111;
+
+  font-size:
+    18px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    -0.03em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-footer
+.pdf-brand-mark {
+  display:
+    none;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-footer-brand-name {
+  font-size:
+    18px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    -0.025em;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-footer {
+  background:
+    #111111;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-footer a {
+  transition:
+    opacity 150ms ease;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-footer a:hover {
+  opacity:
+    0.65;
+}
