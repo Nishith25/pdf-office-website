@@ -104,9 +104,11 @@ export default function GpsHomeExperience({
       <section className="gpsx-hero">
         <div className="gpsx-shell gpsx-hero-layout">
           <div className="gpsx-hero-copy">
-            <p className="gpsx-label">
-              {hero?.eyebrow || "GPS Maps"}
-            </p>
+            {hero?.eyebrow && (
+              <p className="gpsx-label">
+                {hero.eyebrow}
+              </p>
+            )}
 
             <h1>
               {hero?.title ||
