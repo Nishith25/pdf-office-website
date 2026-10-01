@@ -159,6 +159,21 @@ export const cmsAppearanceEditorSchema =
       .trim()
       .max(500),
 
+    exploreLabel: z
+      .string()
+      .trim()
+      .max(80),
+
+    contactLabel: z
+      .string()
+      .trim()
+      .max(80),
+
+    connectLabel: z
+      .string()
+      .trim()
+      .max(80),
+
     copyright: z
       .string()
       .trim()
@@ -435,6 +450,24 @@ export function readCmsAppearanceFromFormData(
         formData,
         "footerText",
       ),
+
+    exploreLabel:
+      readText(
+        formData,
+        "exploreLabel",
+      ) || "Explore",
+
+    contactLabel:
+      readText(
+        formData,
+        "contactLabel",
+      ) || "Contact",
+
+    connectLabel:
+      readText(
+        formData,
+        "connectLabel",
+      ) || "Connect",
 
     copyright:
       readText(
@@ -783,6 +816,15 @@ export function buildCmsSettingsFromAppearance(
 
       text:
         parsed.footerText,
+
+      exploreLabel:
+        parsed.exploreLabel,
+
+      contactLabel:
+        parsed.contactLabel,
+
+      connectLabel:
+        parsed.connectLabel,
 
       copyright:
         parsed.copyright,

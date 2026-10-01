@@ -10,6 +10,12 @@ import {
   LayoutDashboard,
   Menu as MenuIcon,
   Palette,
+  Home,
+  Sparkles,
+  Wrench,
+  HelpCircle,
+  Search,
+  Settings,
 } from "lucide-react";
 
 import {
@@ -23,12 +29,9 @@ import {
 } from "../../lib/admin/cms-navigation";
 
 function getNavigationIcon(
-  icon:
-    CmsNavigationIcon,
+  icon: CmsNavigationIcon,
 ) {
-  switch (
-    icon
-  ) {
+  switch (icon) {
     case "pages":
       return FileText;
 
@@ -47,6 +50,14 @@ function getNavigationIcon(
     case "activity":
       return Activity;
 
+    case "homepage":
+      return Home;
+case "seo":
+      return Search;
+
+    case "settings":
+      return Settings;
+
     case "dashboard":
     default:
       return LayoutDashboard;
@@ -61,25 +72,17 @@ export default function AdminSidebarNavigation() {
     <nav className="flex-1 overflow-y-auto px-3 py-4">
       <div className="space-y-6">
         {CMS_NAVIGATION.map(
-          (
-            group,
-          ) => (
+          (group) => (
             <section
-              key={
-                group.label
-              }
+              key={group.label}
             >
               <p className="px-3 pb-2 text-[9px] font-bold uppercase tracking-[0.15em] text-[#A1A6B0]">
-                {
-                  group.label
-                }
+                {group.label}
               </p>
 
               <div className="space-y-1">
                 {group.items.map(
-                  (
-                    item,
-                  ) => {
+                  (item) => {
                     const Icon =
                       getNavigationIcon(
                         item.icon,
@@ -93,12 +96,8 @@ export default function AdminSidebarNavigation() {
 
                     return (
                       <Link
-                        key={
-                          item.href
-                        }
-                        href={
-                          item.href
-                        }
+                        key={item.href}
+                        href={item.href}
                         aria-current={
                           active
                             ? "page"
@@ -119,9 +118,7 @@ export default function AdminSidebarNavigation() {
                         />
 
                         <span>
-                          {
-                            item.label
-                          }
+                          {item.label}
                         </span>
                       </Link>
                     );

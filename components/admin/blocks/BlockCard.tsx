@@ -25,6 +25,10 @@ import {
   getCmsBlockDefinition,
 } from "../../../lib/cms/core/block-registry";
 
+import {
+  getGpsHomepageBlockLabel,
+} from "../../../lib/admin/gps-block-label";
+
 import type {
   CmsBlockType,
 } from "../../../lib/cms/core/types";
@@ -66,6 +70,9 @@ type Props = {
 
   isLast:
     boolean;
+
+  useGpsLabels?:
+    boolean;
 };
 
 export default function BlockCard({
@@ -73,11 +80,29 @@ export default function BlockCard({
   block,
   isFirst,
   isLast,
+  useGpsLabels = false,
 }: Props) {
   const definition =
     getCmsBlockDefinition(
       block.type,
     );
+
+  const displayDefinition =
+    useGpsLabels
+      ? getGpsHomepageBlockLabel({
+          type:
+            block.type,
+
+          data:
+            block.data,
+        })
+      : {
+          label:
+            definition.label,
+
+          description:
+            definition.description,
+        };
 
   const [
     structuredData,
@@ -133,13 +158,13 @@ export default function BlockCard({
 
           <h3 className="mt-2 text-sm font-bold text-[#282D37]">
             {
-              definition.label
+              displayDefinition.label
             }
           </h3>
 
           <p className="mt-1 max-w-xl text-[9px] leading-relaxed text-[#9298A3]">
             {
-              definition.description
+              displayDefinition.description
             }
           </p>
         </div>

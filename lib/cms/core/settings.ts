@@ -77,6 +77,15 @@ export function createDefaultCmsSettings(): CmsSettings {
       text:
         "",
 
+      exploreLabel:
+        "Explore",
+
+      contactLabel:
+        "Contact",
+
+      connectLabel:
+        "Connect",
+
       copyright:
         "",
 

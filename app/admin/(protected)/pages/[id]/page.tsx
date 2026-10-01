@@ -28,6 +28,10 @@ import {
 } from "../../../../../lib/repositories/cms-pages";
 
 import {
+  getSiteConfig,
+} from "../../../../../lib/site/config";
+
+import {
   duplicateCmsPageAction,
   publishCmsPageAction,
   setCmsHomepageAction,
@@ -69,6 +73,13 @@ export default async function CmsPageEditor({
   if (!page) {
     notFound();
   }
+
+  const site =
+    getSiteConfig();
+
+  const useGpsLabels =
+    site.key === "gps-maps" &&
+    page.isHomepage;
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -241,11 +252,15 @@ export default async function CmsPageEditor({
         <div className="space-y-4">
           <div>
             <h2 className="text-base font-bold">
-              Page Builder
+              {page.isHomepage
+                ? "GPS Homepage Builder"
+                : "Page Builder"}
             </h2>
 
             <p className="mt-1 text-[10px] text-[#8E949F]">
-              Blocks are rendered from top to bottom.
+              {page.isHomepage
+                ? "Edit, reorder, show or hide the sections displayed on the GPS Maps homepage."
+                : "Blocks are rendered from top to bottom."}
             </p>
           </div>
 
@@ -297,6 +312,9 @@ export default async function CmsPageEditor({
                     index ===
                     blocks.length -
                       1
+                  }
+                  useGpsLabels={
+                    useGpsLabels
                   }
                 />
               ),

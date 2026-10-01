@@ -1,101 +1,50 @@
 import {
-  Settings,
+  LockKeyhole,
 } from "lucide-react";
 
 import PasswordEditor from "../../../../components/admin/settings/PasswordEditor";
-import SiteSettingsEditor from "../../../../components/admin/settings/SiteSettingsEditor";
 
 import {
-  createSiteSettingsEditorState,
-} from "../../../../lib/admin/settings-editor";
-
-import {
-  getCmsSettings,
-} from "../../../../lib/repositories/cms-settings";
+  getSiteConfig,
+} from "../../../../lib/site/config";
 
 export const dynamic =
   "force-dynamic";
 
-export const metadata = {
-  title:
-    "Settings | PDF Office Admin",
-};
+export function generateMetadata() {
+  const site =
+    getSiteConfig();
 
-export default async function AdminSettingsPage() {
-  const settings =
-    await getCmsSettings();
+  return {
+    title:
+      `Admin Security | ${site.shortName} CMS`,
+  };
+}
 
-  const initialValue =
-    createSiteSettingsEditorState({
-      brandName:
-        settings.identity.siteName,
-
-      shortName:
-        settings.identity.shortName,
-
-      playStoreUrl:
-        settings.externalLinks.googlePlayUrl,
-
-      siteUrl:
-        settings.identity.siteUrl,
-
-      appIconUrl:
-        settings.identity.logoUrl,
-
-      footerText:
-        settings.footer.text,
-
-      privacyUrl:
-        "",
-
-      termsUrl:
-        "",
-
-      instagramUrl:
-        settings.social.instagram,
-
-      facebookUrl:
-        settings.social.facebook,
-
-      linkedinUrl:
-        settings.social.linkedin,
-
-      youtubeUrl:
-        settings.social.youtube,
-
-      xUrl:
-        settings.social.x,
-    });
-
+export default function AdminSettingsPage() {
   return (
-    <div className="mx-auto max-w-[1100px]">
+    <div className="mx-auto max-w-[800px]">
       <div className="mb-7 border-b border-[#E3E5E9] pb-6">
         <div className="flex items-center gap-2">
-          <Settings className="h-4 w-4 text-[#3157E7]" />
+          <LockKeyhole className="h-4 w-4 text-[#3157E7]" />
 
           <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#3157E7]">
-            Settings
+            Admin Security
           </p>
         </div>
 
         <h1 className="mt-3 text-3xl font-semibold tracking-[-0.045em] text-[#181B23] sm:text-4xl">
-          Website settings
+          Administrator security
         </h1>
 
         <p className="mt-2 max-w-2xl text-sm leading-6 text-[#747B88]">
-          Manage global website information and administrator security.
+          Manage the password used to access the GPS Maps CMS.
+          Website content and branding are managed from Homepage
+          and Appearance.
         </p>
       </div>
 
-      <div className="space-y-7">
-        <SiteSettingsEditor
-          initialValue={
-            initialValue
-          }
-        />
-
-        <PasswordEditor />
-      </div>
+      <PasswordEditor />
     </div>
   );
 }

@@ -15,6 +15,41 @@ export function buildCmsThemeStyle(
   theme:
     CmsTheme,
 ): CmsThemeStyle {
+  const radius =
+    theme.radiusScale === "none"
+      ? "0px"
+      : theme.radiusScale === "small"
+        ? "8px"
+        : theme.radiusScale === "large"
+          ? "28px"
+          : "16px";
+
+  const buttonRadius =
+    theme.buttonStyle === "square"
+      ? "0px"
+      : theme.buttonStyle === "pill"
+        ? "999px"
+        : "12px";
+
+  const containerMax =
+    theme.containerWidth === "narrow"
+      ? "960px"
+      : theme.containerWidth === "wide"
+        ? "1360px"
+        : "1200px";
+
+  const headingFont =
+    theme.headingFont === "serif"
+      ? "Georgia, 'Times New Roman', serif"
+      : theme.headingFont === "display"
+        ? "Arial Black, Arial, sans-serif"
+        : "Arial, Helvetica, sans-serif";
+
+  const bodyFont =
+    theme.bodyFont === "serif"
+      ? "Georgia, 'Times New Roman', serif"
+      : "Arial, Helvetica, sans-serif";
+
   return {
     "--cms-primary":
       theme.primaryColor,
@@ -30,6 +65,21 @@ export function buildCmsThemeStyle(
 
     "--cms-text":
       theme.textColor,
+
+    "--cms-radius":
+      radius,
+
+    "--cms-button-radius":
+      buttonRadius,
+
+    "--cms-container-max":
+      containerMax,
+
+    "--cms-heading-font":
+      headingFont,
+
+    "--cms-body-font":
+      bodyFont,
   };
 }
 

@@ -98,6 +98,15 @@ type AppearanceValues = {
   footerText:
     string;
 
+  exploreLabel:
+    string;
+
+  contactLabel:
+    string;
+
+  connectLabel:
+    string;
+
   copyright:
     string;
 
@@ -702,6 +711,48 @@ export default function AppearanceEditor({
                 initial.footerText
               }
               className={textareaClass}
+            />
+          </label>
+
+          <label>
+            <span className={labelClass}>
+              Explore Heading
+            </span>
+
+            <input
+              name="exploreLabel"
+              defaultValue={
+                initial.exploreLabel
+              }
+              className={inputClass}
+            />
+          </label>
+
+          <label>
+            <span className={labelClass}>
+              Contact Heading
+            </span>
+
+            <input
+              name="contactLabel"
+              defaultValue={
+                initial.contactLabel
+              }
+              className={inputClass}
+            />
+          </label>
+
+          <label>
+            <span className={labelClass}>
+              Connect Heading
+            </span>
+
+            <input
+              name="connectLabel"
+              defaultValue={
+                initial.connectLabel
+              }
+              className={inputClass}
             />
           </label>
 

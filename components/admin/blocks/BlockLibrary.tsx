@@ -7,6 +7,10 @@ import {
 } from "../../../lib/cms/core/block-registry";
 
 import {
+  getSiteConfig,
+} from "../../../lib/site/config";
+
+import {
   addCmsBlockAction,
 } from "../../../app/admin/(protected)/pages/actions";
 
@@ -16,6 +20,29 @@ export default function BlockLibrary({
   pageId:
     string;
 }) {
+  const site =
+    getSiteConfig();
+
+  const definitions =
+    site.key === "gps-maps"
+      ? CMS_BLOCK_REGISTRY.filter(
+          (definition) =>
+            [
+              "hero",
+              "richText",
+              "buttonGroup",
+              "imageText",
+              "featureGrid",
+              "cardGrid",
+              "stats",
+              "faq",
+              "cta",
+            ].includes(
+              definition.type,
+            ),
+        )
+      : CMS_BLOCK_REGISTRY;
+
   return (
     <section className="rounded-[16px] border border-[#E1E4E9] bg-white p-5">
       <div>
@@ -29,7 +56,7 @@ export default function BlockLibrary({
       </div>
 
       <div className="mt-5 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
-        {CMS_BLOCK_REGISTRY.map(
+        {definitions.map(
           (
             definition,
           ) => (

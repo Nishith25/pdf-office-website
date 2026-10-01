@@ -140,13 +140,13 @@ describe(
         expect(
           experience,
         ).toContain(
-          "Recent from",
+          "richTextBlocks",
         );
 
         expect(
           experience,
         ).toContain(
-          "the journal.",
+          "journal?.title",
         );
 
         expect(

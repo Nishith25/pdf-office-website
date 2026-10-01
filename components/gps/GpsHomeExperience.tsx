@@ -66,6 +66,18 @@ export default function GpsHomeExperience({
       normalizeCmsBlockData("cta", block.data),
     );
 
+  const richTextBlocks = blocks
+    .filter((block) => block.type === "richText")
+    .map((block) =>
+      normalizeCmsBlockData("richText", block.data),
+    );
+
+  const buttonGroupBlocks = blocks
+    .filter((block) => block.type === "buttonGroup")
+    .map((block) =>
+      normalizeCmsBlockData("buttonGroup", block.data),
+    );
+
   const hero = heroBlocks[0];
   const navigation = imageTextBlocks[0];
 
@@ -81,6 +93,14 @@ export default function GpsHomeExperience({
 
   const faq = faqBlocks[0];
   const cta = ctaBlocks[0];
+  const journal =
+    richTextBlocks[0];
+
+  const journalActions =
+    buttonGroupBlocks[0];
+
+  const journalButton =
+    journalActions?.buttons[0];
 
   const playStoreUrl =
     settings.externalLinks.googlePlayUrl ||
@@ -110,10 +130,11 @@ export default function GpsHomeExperience({
               </p>
             )}
 
-            <h1>
-              {hero?.title ||
-                "Navigate smarter. Wherever you go."}
-            </h1>
+            {hero?.title && (
+              <h1>
+                {hero.title}
+              </h1>
+            )}
 
             <p className="gpsx-hero-description">
               {hero?.description || ""}
@@ -128,7 +149,7 @@ export default function GpsHomeExperience({
                   className="gpsx-button gpsx-button-dark"
                 >
                   {hero?.primaryCta.label ||
-                    "Get GPS Maps"}
+                    settings.externalLinks.primaryCtaLabel}
 
                   <span aria-hidden="true">
                     ↗
@@ -177,9 +198,11 @@ export default function GpsHomeExperience({
           >
             <div className="gpsx-shell">
               <div className="gpsx-section-intro gpsx-section-intro-inline">
-                <p className="gpsx-label">
-                  The app
-                </p>
+                {coreFeatures.items[0]?.eyebrow && (
+                  <p className="gpsx-label">
+                    {coreFeatures.items[0].eyebrow}
+                  </p>
+                )}
 
                 <div>
                   <h2>
@@ -359,9 +382,11 @@ export default function GpsHomeExperience({
           >
             <div className="gpsx-shell gpsx-product-story-grid">
               <div className="gpsx-product-story-copy">
-                <p className="gpsx-label">
-                  Offline Maps
-                </p>
+                {offlineMaps.items[0]?.eyebrow && (
+                  <p className="gpsx-label">
+                    {offlineMaps.items[0].eyebrow}
+                  </p>
+                )}
 
                 <h2>
                   {offlineMaps.title}
@@ -418,8 +443,7 @@ export default function GpsHomeExperience({
                         </strong>
 
                         <small>
-                          {item.badge ||
-                            "READY"}
+                          {item.badge}
                         </small>
                       </div>
                     ),
@@ -439,9 +463,11 @@ export default function GpsHomeExperience({
             <div className="gpsx-shell">
               <div className="gpsx-weather-heading">
                 <div>
-                  <p className="gpsx-label">
-                    Weather intelligence
-                  </p>
+                  {weather.cards[0]?.badge && (
+                    <p className="gpsx-label">
+                      {weather.cards[0].badge}
+                    </p>
+                  )}
 
                   <h2>
                     {weather.title}
@@ -495,9 +521,11 @@ export default function GpsHomeExperience({
           >
             <div className="gpsx-shell">
               <div className="gpsx-location-heading">
-                <p className="gpsx-label gpsx-label-light">
-                  Location & Safety
-                </p>
+                {safety.items[0]?.eyebrow && (
+                  <p className="gpsx-label gpsx-label-light">
+                    {safety.items[0].eyebrow}
+                  </p>
+                )}
 
                 <h2>
                   {safety.title}
@@ -544,9 +572,11 @@ export default function GpsHomeExperience({
           >
             <div className="gpsx-shell">
               <div className="gpsx-tool-heading">
-                <p className="gpsx-label">
-                  Map tools
-                </p>
+                {tools.cards[0]?.badge && (
+                  <p className="gpsx-label">
+                    {tools.cards[0].badge}
+                  </p>
+                )}
 
                 <div>
                   <h2>
@@ -603,26 +633,48 @@ export default function GpsHomeExperience({
           <div className="gpsx-shell">
             <div className="gpsx-journal-heading">
               <div>
-                <p className="gpsx-label">
-                  Journal
-                </p>
+                {journal?.eyebrow && (
+                  <p className="gpsx-label">
+                    {journal.eyebrow}
+                  </p>
+                )}
 
-                <h2>
-                  Recent from
-                  <br />
-                  the journal.
-                </h2>
+                {journal?.title && (
+                  <h2>
+                    {journal.title}
+                  </h2>
+                )}
+
+                {journal?.body && (
+                  <p className="gpsx-cms-section-description">
+                    {journal.body}
+                  </p>
+                )}
               </div>
 
-              <Link
-                href="/blog"
-                className="gpsx-text-link"
-              >
-                View all articles
-                <span aria-hidden="true">
-                  →
-                </span>
-              </Link>
+              {journalButton?.label &&
+                journalButton.url && (
+                  <Link
+                    href={journalButton.url}
+                    className="gpsx-text-link"
+                    target={
+                      journalButton.target === "new-tab"
+                        ? "_blank"
+                        : undefined
+                    }
+                    rel={
+                      journalButton.target === "new-tab"
+                        ? "noreferrer"
+                        : undefined
+                    }
+                  >
+                    {journalButton.label}
+
+                    <span aria-hidden="true">
+                      →
+                    </span>
+                  </Link>
+                )}
             </div>
 
             <div className="gpsx-journal-list">
@@ -689,10 +741,6 @@ export default function GpsHomeExperience({
           >
             <div className="gpsx-shell gpsx-faq-layout">
               <div>
-                <p className="gpsx-label">
-                  FAQ
-                </p>
-
                 <h2>
                   {faq.title}
                 </h2>
@@ -765,7 +813,7 @@ export default function GpsHomeExperience({
                 className="gpsx-button gpsx-button-light"
               >
                 {cta.primaryCta.label ||
-                  "Get it on Google Play"}
+                  settings.externalLinks.primaryCtaLabel}
 
                 <span aria-hidden="true">
                   ↗

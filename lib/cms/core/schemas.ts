@@ -506,6 +506,27 @@ export const cmsSettingsSchema =
           .trim()
           .max(500),
 
+        exploreLabel:
+          z
+            .string()
+            .trim()
+            .max(80)
+            .default("Explore"),
+
+        contactLabel:
+          z
+            .string()
+            .trim()
+            .max(80)
+            .default("Contact"),
+
+        connectLabel:
+          z
+            .string()
+            .trim()
+            .max(80)
+            .default("Connect"),
+
         copyright:
           z
             .string()

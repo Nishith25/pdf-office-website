@@ -89,13 +89,35 @@ export default async function CmsDashboardPage() {
   const quickActions = [
     {
       label:
-        "View Pages",
+        "Edit Homepage",
 
       description:
-        "Manage website pages and content.",
+        "Manage the GPS Maps homepage sections and content.",
 
       href:
-        "/admin/pages",
+        "/admin/homepage",
+    },
+
+    {
+      label:
+        "Appearance",
+
+      description:
+        "Manage branding, header, footer and global site settings.",
+
+      href:
+        "/admin/appearance",
+    },
+
+    {
+      label:
+        "SEO",
+
+      description:
+        "Manage GPS Maps search and social metadata.",
+
+      href:
+        "/admin/seo",
     },
 
     {
@@ -103,21 +125,10 @@ export default async function CmsDashboardPage() {
         "Media Library",
 
       description:
-        "Manage uploaded website assets.",
+        "Manage uploaded website images and assets.",
 
       href:
         "/admin/media",
-    },
-
-    {
-      label:
-        "Activity",
-
-      description:
-        "Review recent CMS changes.",
-
-      href:
-        "/admin/activity",
     },
   ];
 

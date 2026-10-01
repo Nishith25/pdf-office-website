@@ -844,7 +844,10 @@ img {
   width:
     min(
       100% - 40px,
-      1200px
+      var(
+        --cms-container-max,
+        1200px
+      )
     );
 
   margin-inline: auto;
@@ -6409,22 +6412,34 @@ a[href*="play.google.com"]:hover {
 
 [data-site-theme="gps-maps-navigation"] {
   --gpsx-black:
-    #0a0a0a;
+    var(--cms-secondary, #0a0a0a);
 
   --gpsx-ink:
-    #141414;
+    var(--cms-text, #141414);
 
   --gpsx-muted:
-    #6d6d69;
+    color-mix(
+      in srgb,
+      var(--cms-text, #141414) 58%,
+      var(--cms-background, #fbfaf6)
+    );
 
   --gpsx-line:
-    #ddddda;
+    color-mix(
+      in srgb,
+      var(--cms-text, #141414) 16%,
+      var(--cms-background, #fbfaf6)
+    );
 
   --gpsx-soft:
-    #f4f3ee;
+    color-mix(
+      in srgb,
+      var(--cms-primary, #111111) 5%,
+      var(--cms-background, #fbfaf6)
+    );
 
   --gpsx-paper:
-    #fbfaf6;
+    var(--cms-background, #fbfaf6);
 
   background:
     var(
@@ -14055,4 +14070,30 @@ small {
   .gpsx-cms-weather-grid {
     grid-template-columns: 1fr;
   }
+}
+
+
+[data-site-theme="gps-maps-navigation"] .gpsx-home {
+  font-family:
+    var(--cms-body-font);
+}
+
+[data-site-theme="gps-maps-navigation"] .gpsx-home h1,
+[data-site-theme="gps-maps-navigation"] .gpsx-home h2,
+[data-site-theme="gps-maps-navigation"] .gpsx-home h3,
+[data-site-theme="gps-maps-navigation"] .gpsx-home strong {
+  font-family:
+    var(--cms-heading-font);
+}
+
+[data-site-theme="gps-maps-navigation"] .gpsx-button {
+  border-radius:
+    var(--cms-button-radius);
+}
+
+[data-site-theme="gps-maps-navigation"] .gpsx-route-card,
+[data-site-theme="gps-maps-navigation"] .gpsx-cms-weather-card,
+[data-site-theme="gps-maps-navigation"] .gpsx-location-card {
+  border-radius:
+    var(--cms-radius);
 }

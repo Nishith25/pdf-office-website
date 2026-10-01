@@ -212,7 +212,7 @@ export default function PublicFooter({
           0 && (
           <div>
             <p className="pdf-footer-heading">
-              Explore
+              {footer.exploreLabel}
             </p>
 
             <PublicNavigation
@@ -227,7 +227,7 @@ export default function PublicFooter({
         {hasContact && (
           <div>
             <p className="pdf-footer-heading">
-              Contact
+              {footer.contactLabel}
             </p>
 
             <div className="grid gap-3 text-[13px]">
@@ -265,7 +265,7 @@ export default function PublicFooter({
         {hasConnect && (
           <div>
             <p className="pdf-footer-heading">
-              Connect
+              {footer.connectLabel}
             </p>
 
             <div className="grid gap-3 text-[13px]">

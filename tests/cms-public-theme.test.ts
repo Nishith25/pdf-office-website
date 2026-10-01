@@ -60,6 +60,21 @@ describe(
 
           "--cms-text":
             "#111111",
+
+          "--cms-radius":
+            "16px",
+
+          "--cms-button-radius":
+            "12px",
+
+          "--cms-container-max":
+            "1200px",
+
+          "--cms-heading-font":
+            "Arial, Helvetica, sans-serif",
+
+          "--cms-body-font":
+            "Arial, Helvetica, sans-serif",
         });
       },
     );

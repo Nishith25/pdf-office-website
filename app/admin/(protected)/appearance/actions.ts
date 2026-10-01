@@ -138,6 +138,14 @@ export async function saveCmsAppearanceAction(
   }
 
   revalidatePath(
+    "/",
+  );
+
+  revalidatePath(
+    "/blog",
+  );
+
+  revalidatePath(
     "/admin",
   );
 

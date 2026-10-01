@@ -5,164 +5,125 @@ export type CmsNavigationIcon =
   | "menus"
   | "media"
   | "appearance"
-  | "activity";
+  | "activity"
+  | "homepage"
+  | "seo"
+  | "settings";
 
 export type CmsNavigationItem = {
-  label:
-    string;
-
-  href:
-    string;
-
-  icon:
-    CmsNavigationIcon;
+  label: string;
+  href: string;
+  icon: CmsNavigationIcon;
 };
 
 export type CmsNavigationGroup = {
-  label:
-    string;
-
-  items:
-    CmsNavigationItem[];
+  label: string;
+  items: CmsNavigationItem[];
 };
 
 export const CMS_NAVIGATION:
   CmsNavigationGroup[] = [
     {
-      label:
-        "Overview",
+      label: "Overview",
 
       items: [
         {
-          label:
-            "Dashboard",
-
-          href:
-            "/admin",
-
-          icon:
-            "dashboard",
+          label: "Dashboard",
+          href: "/admin",
+          icon: "dashboard",
         },
       ],
     },
 
     {
-      label:
-        "Content",
+      label: "Website",
 
       items: [
         {
-          label:
-            "Pages",
-
-          href:
-            "/admin/pages",
-
-          icon:
-            "pages",
+          label: "Homepage",
+          href: "/admin/homepage",
+          icon: "homepage",
         },
 
         {
-          label:
-            "Blog",
-
-          href:
-            "/admin/blog",
-
-          icon:
-            "blog",
+          label: "Pages",
+          href: "/admin/pages",
+          icon: "pages",
         },
 
         {
-          label:
-            "Menus",
+          label: "Blog",
+          href: "/admin/blog",
+          icon: "blog",
+        },
 
-          href:
-            "/admin/menus",
-
-          icon:
-            "menus",
+        {
+          label: "Menus",
+          href: "/admin/menus",
+          icon: "menus",
         },
       ],
     },
 
     {
-      label:
-        "Assets",
+      label: "Assets",
 
       items: [
         {
-          label:
-            "Media",
-
-          href:
-            "/admin/media",
-
-          icon:
-            "media",
+          label: "Media",
+          href: "/admin/media",
+          icon: "media",
         },
       ],
     },
 
     {
-      label:
-        "Appearance",
+      label: "Website Settings",
 
       items: [
         {
-          label:
-            "Appearance",
+          label: "SEO",
+          href: "/admin/seo",
+          icon: "seo",
+        },
 
-          href:
-            "/admin/appearance",
-
-          icon:
-            "appearance",
+        {
+          label: "Appearance",
+          href: "/admin/appearance",
+          icon: "appearance",
         },
       ],
     },
 
     {
-      label:
-        "System",
+      label: "System",
 
       items: [
         {
-          label:
-            "Activity",
+          label: "Admin Security",
+          href: "/admin/settings",
+          icon: "settings",
+        },
 
-          href:
-            "/admin/activity",
-
-          icon:
-            "activity",
+        {
+          label: "Activity",
+          href: "/admin/activity",
+          icon: "activity",
         },
       ],
     },
   ];
 
 export function isCmsNavigationItemActive(
-  pathname:
-    string,
-
-  href:
-    string,
+  pathname: string,
+  href: string,
 ): boolean {
-  if (
-    href ===
-    "/admin"
-  ) {
-    return (
-      pathname ===
-      "/admin"
-    );
+  if (href === "/admin") {
+    return pathname === "/admin";
   }
 
   return (
-    pathname ===
-      href ||
-    pathname.startsWith(
-      `${href}/`,
-    )
+    pathname === href ||
+    pathname.startsWith(`${href}/`)
   );
 }

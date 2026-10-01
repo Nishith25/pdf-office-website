@@ -53,13 +53,13 @@ export default async function AppearancePage({
         </p>
 
         <h1 className="mt-2 text-2xl font-bold tracking-[-0.03em]">
-          Site Appearance
+          Website Settings & Appearance
         </h1>
 
         <p className="mt-2 max-w-2xl text-[11px] leading-5 text-[#7D8591]">
-          Manage your website identity, header and footer,
-          global SEO defaults, external links, and reusable
-          theme settings.
+          Control GPS Maps branding, logo, contact details,
+          social profiles, header and footer, Play Store links,
+          global SEO and visual appearance from one place.
         </p>
       </div>
 
@@ -154,6 +154,18 @@ export default async function AppearancePage({
             footerText:
               settings.footer
                 .text,
+
+            exploreLabel:
+              settings.footer
+                .exploreLabel,
+
+            contactLabel:
+              settings.footer
+                .contactLabel,
+
+            connectLabel:
+              settings.footer
+                .connectLabel,
 
             copyright:
               settings.footer
