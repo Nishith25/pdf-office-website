@@ -14097,3 +14097,33 @@ small {
   border-radius:
     var(--cms-radius);
 }
+
+/* GPS header logo — show CMS-selected site logo */
+[data-site-theme="gps-maps-navigation"]
+.pdf-site-header
+.pdf-brand-mark {
+  display: grid !important;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: transparent;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-site-header
+.pdf-brand-mark img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+[data-site-theme="gps-maps-navigation"]
+.pdf-site-header
+.pdf-brand {
+  gap: 10px !important;
+  align-items: center;
+}
+

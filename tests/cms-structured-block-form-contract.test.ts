@@ -35,7 +35,13 @@ describe(
         expect(
           blockCardSource,
         ).toContain(
-          "stringifyCmsStructuredBlockPayload",
+          "JSON.stringify",
+        );
+
+        expect(
+          blockCardSource,
+        ).toContain(
+          "structuredData",
         );
 
         expect(

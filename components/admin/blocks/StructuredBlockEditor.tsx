@@ -15,10 +15,6 @@ import {
   updateCmsStructuredRepeaterItemField,
 } from "../../../lib/admin/cms-structured-block-mutations";
 
-import {
-  getCmsStructuredEditorData,
-} from "../../../lib/admin/cms-structured-block-editor";
-
 import type {
   CmsBlockType,
 } from "../../../lib/cms/core/types";
@@ -903,17 +899,8 @@ export default function StructuredBlockEditor({
   data,
   onChange,
 }: StructuredBlockEditorProps) {
-  const normalized =
-    getCmsStructuredEditorData(
-      type,
-      data,
-    );
-
   const editorData =
-    normalized as unknown as Record<
-      string,
-      unknown
-    >;
+    data;
 
   function update(
     path:

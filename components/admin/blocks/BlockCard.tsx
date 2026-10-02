@@ -18,7 +18,6 @@ import StructuredBlockEditor from "./StructuredBlockEditor";
 
 import {
   getCmsStructuredEditorData,
-  stringifyCmsStructuredBlockPayload,
 } from "../../../lib/admin/cms-structured-block-editor";
 
 import {
@@ -127,8 +126,7 @@ export default function BlockCard({
     });
 
   const blockPayload =
-    stringifyCmsStructuredBlockPayload(
-      block.type,
+    JSON.stringify(
       structuredData,
     );
 
